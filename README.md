@@ -9,7 +9,7 @@ Fully written in Rust, this library covers the whole PokeApi REST api v2.
 Adds the following in the dependencies of your Cargo.toml :
 
 ```toml
-rustemon = "0.1.0"
+rustemon = "0.1.1"
 ```
 
 ### How to use it ?
@@ -49,8 +49,8 @@ rustemon::api::endpoint::evolution::evolution_chain
 
 For each endpoints, 4 call are defined :
 
-* get_windowed_results : without parameters, calls the endpoint without any informations to retrieve the first page of the paginted response for the endpoint. As defined [here](https://pokeapi.co/docs/v2#resource-listspagination-section),
-* get_windowed_results_with_param : allows you to modify the parameters for the paginated query,
+* get_page : without parameters, calls the endpoint without any informations to retrieve the first page of the paginated response for the endpoint. As defined [here](https://pokeapi.co/docs/v2#resource-listspagination-section),
+* get_page_with_param : allows you to modify the parameters for the paginated query,
 * get_by_id : calls the endpoint using the id of the targeted resource,
 * get_by_name : calls the endpoint using the name of the targeted resource.
 
@@ -61,7 +61,7 @@ Every endpoints are genereted by a custom macro that you will find [here](src/ap
 
 ### License
 
-The license of the library can be found [here](LICENSE.md).
+The license of the library can be found [here](LICENSE).
 
 ### Further improvements
 
