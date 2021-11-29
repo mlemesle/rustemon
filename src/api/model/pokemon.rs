@@ -1081,5 +1081,5 @@ pub struct TypeRelationsPast {
     /// The last generation in which the referenced type had the listed damage relations.
     pub generation: Option<NamedApiResource>,
     /// The damage relations the referenced type had up to and including the listed generation.
-    pub damage_relations: Option<Vec<TypeRelations>>,
+    pub damage_relations: Option<TypeRelations>,
 }
