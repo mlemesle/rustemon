@@ -7,10 +7,10 @@ use super::resource::{Name, NamedApiResource};
 pub struct EvolutionChain {
     /// The identifier for this resource.
     pub id: Option<i64>,
-    /// The item that a Pokémon would be holding when mating that would trigger the egg 
+    /// The item that a Pokémon would be holding when mating that would trigger the egg
     /// hatching a baby Pokémon rather than a basic Pokémon.
     pub baby_trigger_item: Option<NamedApiResource>,
-    /// The base chain link object. Each link contains evolution details for a Pokémon in the chain. 
+    /// The base chain link object. Each link contains evolution details for a Pokémon in the chain.
     /// Each link references the next Pokémon in the natural evolution order.
     pub chain: Option<ChainLink>,
 }
@@ -37,13 +37,13 @@ pub struct EvolutionDetail {
     pub trigger: Option<NamedApiResource>,
     /// The id of the gender of the evolving Pokémon species must be in order to evolve into this Pokémon species.
     pub gender: Option<i64>,
-    /// The item the evolving Pokémon species must be holding during the evolution trigger event 
+    /// The item the evolving Pokémon species must be holding during the evolution trigger event
     /// to evolve into this Pokémon species.
     pub held_item: Option<NamedApiResource>,
-    /// The move that must be known by the evolving Pokémon species during the evolution trigger event 
+    /// The move that must be known by the evolving Pokémon species during the evolution trigger event
     /// in order to evolve into this Pokémon species.
     pub known_move: Option<NamedApiResource>,
-    /// The evolving Pokémon species must know a move with this type during the evolution trigger event 
+    /// The evolving Pokémon species must know a move with this type during the evolution trigger event
     /// in order to evolve into this Pokémon species.
     pub known_move_type: Option<NamedApiResource>,
     /// The location the evolution must be triggered at.
@@ -58,13 +58,13 @@ pub struct EvolutionDetail {
     pub min_affection: Option<i64>,
     /// Whether or not it must be raining in the overworld to cause evolution this Pokémon species.
     pub needs_overworld_rain: Option<bool>,
-    /// The Pokémon species that must be in the players party in order for the evolving Pokémon species 
+    /// The Pokémon species that must be in the players party in order for the evolving Pokémon species
     /// to evolve into this Pokémon species.
     pub party_species: Option<NamedApiResource>,
-    /// The player must have a Pokémon of this type in their party during the evolution trigger event 
+    /// The player must have a Pokémon of this type in their party during the evolution trigger event
     /// in order for the evolving Pokémon species to evolve into this Pokémon species.
     pub party_type: Option<NamedApiResource>,
-    /// The required relation between the Pokémon's Attack and Defense stats. 
+    /// The required relation between the Pokémon's Attack and Defense stats.
     /// 1 means Attack > Defense. 0 means Attack = Defense. -1 means Attack < Defense.
     pub relative_physical_stats: Option<i64>,
     /// The required time of day. Day or night.

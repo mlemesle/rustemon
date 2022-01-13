@@ -4,17 +4,17 @@
 /// stat enhancement, and even damage negation when eaten by Pokémon.
 /// Check out [Bulbapedia](http:///bulbapedia.bulbagarden.net/wiki/Berry) for greater detail.
 pub mod berry {
-    crate::api::endpoint::endpoint::endpoint!(crate::api::model::berries::Berry; for "berry");
+    crate::blocking::endpoint!(crate::model::berries::Berry; for "berry");
 }
 
-/// Berries can be soft or hard. 
+/// Berries can be soft or hard.
 /// Check out [Bulbapedia](https:///bulbapedia.bulbagarden.net/wiki/Category:Berries_by_firmness) for greater detail.
 pub mod berry_firmness {
-    crate::api::endpoint::endpoint::endpoint!(crate::api::model::berries::BerryFirmness; for "berry-firmness");
+    crate::blocking::endpoint!(crate::model::berries::BerryFirmness; for "berry-firmness");
 }
 
-/// Flavors determine whether a Pokémon will benefit or suffer from eating a berry based on their nature. 
+/// Flavors determine whether a Pokémon will benefit or suffer from eating a berry based on their nature.
 /// Check out [Bulbapedia](http:///bulbapedia.bulbagarden.net/wiki/Flavor) for greater detail.
 pub mod berry_flavor {
-    crate::api::endpoint::endpoint::endpoint!(crate::api::model::berries::BerryFlavor; for "berry-flavor");
+    crate::blocking::endpoint!(crate::model::berries::BerryFlavor; for "berry-flavor");
 }
