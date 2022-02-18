@@ -23,7 +23,7 @@ pub struct ChainLink {
     /// The Pokémon species at this point in the evolution chain.
     pub species: Option<NamedApiResource>,
     /// All details regarding the specific details of the referenced Pokémon species evolution.
-    pub evolution_details: Option<EvolutionDetail>,
+    pub evolution_details: Option<Vec<EvolutionDetail>>,
     /// A List of chain objects.
     pub evolves_to: Option<Vec<ChainLink>>,
 }
