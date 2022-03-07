@@ -52,17 +52,17 @@ macro_rules! endpoint {
                 const SUB_ENDPOINT: &str = stringify!($sub);
 
                 #[cached(result = true, time = 86400)]
-                pub async fn get_by_id(id: i64) -> Result<$type, reqwest::Error> {
+                pub async fn get_by_id(id: i64) -> Result<$sub_type, reqwest::Error> {
                     let sub_path = format!("{}/{}", id, SUB_ENDPOINT);
                     let url = Url::parse(ENDPOINT).unwrap().join(&sub_path).unwrap();
-                    reqwest::get(url).await?.json::<$type>().await
+                    reqwest::get(url).await?.json::<$sub_type>().await
                 }
 
                 #[cached(result = true, time = 86400)]
-                pub async fn get_by_name(name: &'static str) -> Result<$type, reqwest::Error> {
+                pub async fn get_by_name(name: &'static str) -> Result<$sub_type, reqwest::Error> {
                     let sub_path = format!("{}/{}", name, SUB_ENDPOINT);
                     let url = Url::parse(ENDPOINT).unwrap().join(&sub_path).unwrap();
-                    reqwest::get(url).await?.json::<$type>().await
+                    reqwest::get(url).await?.json::<$sub_type>().await
                 }
             }
         )+
