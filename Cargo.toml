@@ -1,14 +1,15 @@
 [package]
 description = "Library wrapping the awesome PokeAPI"
-documentation = "https://github.com/mlemesle/rustemon/blob/main/README.md"
+documentation = "https://docs.rs/rustemon/latest/rustemon/"
 edition = "2021"
 homepage = "https://github.com/mlemesle/rustemon"
 keywords = ["pokeapi", "pokemon", "wrapper", "http", "rest"]
+license = "MIT"
 license-file = "LICENSE"
 name = "rustemon"
 readme = "README.md"
 repository = "https://github.com/mlemesle/rustemon"
-version = "1.0.1"
+version = "1.0.2"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -19,4 +20,4 @@ serde = {version = "1", features = ["derive"]}
 serde_json = "1"
 
 [dev-dependencies]
-tokio = { version = "1", features= ["full"] }
+tokio = {version = "1", features = ["full"]}
