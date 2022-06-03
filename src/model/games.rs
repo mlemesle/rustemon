@@ -1,6 +1,11 @@
 //! Games group models
 
-use super::resource::{Description, Name, NamedApiResource};
+use super::{
+    locations::Region,
+    moves::{Move, MoveLearnMethod},
+    pokemon::{Ability, PokemonSpecies, Type},
+    resource::{Description, Name, NamedApiResource},
+};
 
 /// [Generation official documentation]
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
@@ -10,19 +15,19 @@ pub struct Generation {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of abilities that were introduced in this generation.
-    pub abilities: Option<Vec<NamedApiResource>>,
+    pub abilities: Option<Vec<NamedApiResource<Ability>>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// The main region travelled in this generation.
-    pub main_region: Option<NamedApiResource>,
+    pub main_region: Option<NamedApiResource<Region>>,
     /// A list of moves that were introduced in this generation.
-    pub moves: Option<Vec<NamedApiResource>>,
+    pub moves: Option<Vec<NamedApiResource<Move>>>,
     /// A list of Pokémon species that were introduced in this generation.
-    pub pokemon_species: Option<Vec<NamedApiResource>>,
+    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
     /// A list of types that were introduced in this generation.
-    pub types: Option<Vec<NamedApiResource>>,
+    pub types: Option<Vec<NamedApiResource<Type>>>,
     /// A list of version groups that were introduced in this generation.
-    pub version_groups: Option<Vec<NamedApiResource>>,
+    pub version_groups: Option<Vec<NamedApiResource<VersionGroup>>>,
 }
 
 /// [Pokedex official documentation](https:///pokeapi.co/docs/v2#pokedex)
@@ -41,9 +46,9 @@ pub struct Pokedex {
     /// A list of Pokémon catalogued in this Pokédex and their indexes.
     pub pokemon_entries: Option<Vec<PokemonEntry>>,
     /// The region this Pokédex catalogues Pokémon for.
-    pub region: Option<NamedApiResource>,
+    pub region: Option<NamedApiResource<Region>>,
     /// A list of version groups this Pokédex is relevant to.
-    pub version_groups: Option<Vec<NamedApiResource>>,
+    pub version_groups: Option<Vec<NamedApiResource<VersionGroup>>>,
 }
 
 /// [PokemonEntry official documentation](https:///pokeapi.co/docs/v2#pokemonentry)
@@ -52,7 +57,7 @@ pub struct PokemonEntry {
     /// The index of this Pokémon species entry within the Pokédex.
     pub entry_number: Option<i64>,
     /// The Pokémon species being encountered.
-    pub pokemon_species: Option<NamedApiResource>,
+    pub pokemon_species: Option<NamedApiResource<PokemonSpecies>>,
 }
 
 /// [Version offcial documentation](https:///pokeapi.co/docs/v2#version)
@@ -65,7 +70,7 @@ pub struct Version {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// The version group this version belongs to.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [VersionGroup official documentation](https:///pokeapi.co/docs/v2#versiongroup)
@@ -78,13 +83,13 @@ pub struct VersionGroup {
     /// Order for sorting. Almost by date of release, except similar versions are grouped together.
     pub order: Option<i64>,
     /// The generation this version was introduced in.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// A list of methods in which Pokémon can learn moves in this version group.
-    pub move_learn_methods: Option<Vec<NamedApiResource>>,
+    pub move_learn_methods: Option<Vec<NamedApiResource<MoveLearnMethod>>>,
     /// A list of Pokédexes introduces in this version group.
-    pub pokedexes: Option<Vec<NamedApiResource>>,
+    pub pokedexes: Option<Vec<NamedApiResource<Pokedex>>>,
     /// A list of regions that can be visited in this version group.
-    pub regions: Option<Vec<NamedApiResource>>,
+    pub regions: Option<Vec<NamedApiResource<Region>>>,
     /// The versions this version group owns.
-    pub versions: Option<Vec<NamedApiResource>>,
+    pub versions: Option<Vec<NamedApiResource<Version>>>,
 }

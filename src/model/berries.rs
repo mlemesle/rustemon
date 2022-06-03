@@ -1,6 +1,11 @@
 //! Berries group models
 
-use super::resource::{Name, NamedApiResource};
+use super::{
+    contests::ContestType,
+    items::Item,
+    pokemon::Type,
+    resource::{Name, NamedApiResource},
+};
 
 /// [Berry official documentation](https:///pokeapi.co/docs/v2#berry)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
@@ -24,14 +29,14 @@ pub struct Berry {
     /// A higher rate means the soil dries more quickly.
     pub soil_dryness: Option<i64>,
     /// The firmness of this berry, used in making Pokéblocks or Poffins.
-    pub firmness: Option<NamedApiResource>,
+    pub firmness: Option<NamedApiResource<BerryFirmness>>,
     /// A list of references to each flavor a berry can have and the potency
     /// of each of those flavors in regard to this berry.
     pub flavors: Option<Vec<BerryFlavorMap>>,
     /// Berries are actually items. This is a reference to the item specific data for this berry.
-    pub item: Option<NamedApiResource>,
+    pub item: Option<NamedApiResource<Item>>,
     /// The type inherited by "Natural Gift" when used with this Berry.
-    pub natural_gift_type: Option<NamedApiResource>,
+    pub natural_gift_type: Option<NamedApiResource<Type>>,
 }
 
 /// [BerryFlavorMap official documentation](https:///pokeapi.co/docs/v2#berryflavormap)
@@ -40,7 +45,7 @@ pub struct BerryFlavorMap {
     /// How powerful the referenced flavor is for this berry.
     pub potency: Option<i64>,
     /// The referenced berry flavor.
-    pub flavor: Option<NamedApiResource>,
+    pub flavor: Option<NamedApiResource<BerryFlavor>>,
 }
 
 /// [BerryFirmness official documentation](https:///pokeapi.co/docs/v2#berryfirmness)
@@ -51,7 +56,7 @@ pub struct BerryFirmness {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of the berries with this firmness.
-    pub berries: Option<Vec<NamedApiResource>>,
+    pub berries: Option<Vec<NamedApiResource<Berry>>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }
@@ -66,7 +71,7 @@ pub struct BerryFlavor {
     /// A list of the berries with this flavor.
     pub berries: Option<Vec<FlavorBerryMap>>,
     /// The contest type that correlates with this berry flavor.
-    pub contest_type: Option<NamedApiResource>,
+    pub contest_type: Option<NamedApiResource<ContestType>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }
@@ -77,5 +82,5 @@ pub struct FlavorBerryMap {
     /// How powerful the referenced flavor is for this berry.
     pub potency: Option<i64>,
     /// The berry with the referenced flavor.
-    pub berry: Option<NamedApiResource>,
+    pub berry: Option<NamedApiResource<Berry>>,
 }

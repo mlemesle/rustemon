@@ -1,6 +1,11 @@
 //! Locations group models
 
-use super::resource::{GenerationGameIndex, Name, NamedApiResource, VersionEncounterDetail};
+use super::{
+    encounters::EncounterMethod,
+    games::{Generation, Pokedex, Version, VersionGroup},
+    pokemon::{Pokemon, PokemonSpecies},
+    resource::{GenerationGameIndex, Name, NamedApiResource, VersionEncounterDetail},
+};
 
 /// [Location official documentation](https://pokeapi.co/docs/v2#location)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
@@ -10,13 +15,13 @@ pub struct Location {
     /// The name for this resource.
     pub name: Option<String>,
     /// The region this location can be found in.
-    pub region: Option<NamedApiResource>,
+    pub region: Option<NamedApiResource<Region>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of game indices relevent to this location by generation.
     pub game_indices: Option<Vec<GenerationGameIndex>>,
     /// Areas that can be found within this location.
-    pub areas: Option<Vec<NamedApiResource>>,
+    pub areas: Option<Vec<NamedApiResource<LocationArea>>>,
 }
 
 /// [LocationArea official documentation](https://pokeapi.co/docs/v2#locationarea)
@@ -44,7 +49,7 @@ pub struct LocationArea {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct EncounterMethodRate {
     /// The method in which Pokémon may be encountered in an area.
-    pub encounter_method: Option<NamedApiResource>,
+    pub encounter_method: Option<NamedApiResource<EncounterMethod>>,
     /// The chance of the encounter to occur on a version of the game.
     pub version_details: Option<Vec<EncounterVersionDetails>>,
 }
@@ -55,14 +60,14 @@ pub struct EncounterVersionDetails {
     /// The chance of an encounter to occur.
     pub rate: Option<i64>,
     /// The version of the game in which the encounter can occur with the given chance.
-    pub version: Option<NamedApiResource>,
+    pub version: Option<NamedApiResource<Version>>,
 }
 
 /// [PokemonEncounter official documentation](https://pokeapi.co/docs/v2#pokemonencounter)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonEncounter {
     /// The Pokémon being encountered.
-    pub pokemon: Option<NamedApiResource>,
+    pub pokemon: Option<NamedApiResource<Pokemon>>,
     /// A list of versions and encounters with Pokémon that might happen in the referenced location area.
     pub version_details: Option<Vec<VersionEncounterDetail>>,
 }
@@ -88,7 +93,7 @@ pub struct PalParkEncounterSpecies {
     /// The base rate for encountering this Pokémon in this pal park area.
     pub rate: Option<i64>,
     /// The Pokémon species being encountered.
-    pub pokemon_species: Option<NamedApiResource>,
+    pub pokemon_species: Option<NamedApiResource<PokemonSpecies>>,
 }
 
 /// [Region official documentation](https://pokeapi.co/docs/v2#region)
@@ -97,15 +102,15 @@ pub struct Region {
     /// The identifier for this resource.
     pub id: Option<i64>,
     /// A list of locations that can be found in this region.
-    pub locations: Option<Vec<NamedApiResource>>,
+    pub locations: Option<Vec<NamedApiResource<Location>>>,
     /// The name for this resource.
     pub name: Option<String>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// The generation this region was introduced in.
-    pub main_generation: Option<NamedApiResource>,
+    pub main_generation: Option<NamedApiResource<Generation>>,
     /// A list of pokédexes that catalogue Pokémon in this region.
-    pub pokedexes: Option<Vec<NamedApiResource>>,
+    pub pokedexes: Option<Vec<NamedApiResource<Pokedex>>>,
     /// A list of version groups where this region can be visited.
-    pub version_groups: Option<Vec<NamedApiResource>>,
+    pub version_groups: Option<Vec<NamedApiResource<VersionGroup>>>,
 }

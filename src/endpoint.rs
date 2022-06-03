@@ -1,39 +1,57 @@
 macro_rules! endpoint {
     ($type:ty; for $name:literal) => {
-        use cached::proc_macro::cached;
         use reqwest::Url;
 
         use crate::model::resource::NamedApiResourceList;
+        use crate::client::RustemonClient;
 
         const ENDPOINT: &str = concat!("https:///pokeapi.co/api/v2/", $name, "/");
 
-        #[cached(size = 1, result = true, time = 86400)]
-        pub async fn get_page() -> Result<NamedApiResourceList, reqwest::Error> {
-            reqwest::get(ENDPOINT).await?.json::<NamedApiResourceList>().await
+        /// Returns the default page regarding the resource.
+        pub async fn get_page(rustemon_client: &RustemonClient) -> Result<NamedApiResourceList<$type>, anyhow::Error> {
+            let url = Url::parse(ENDPOINT).unwrap();
+            rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await
         }
 
+        /// Returns the page targeted by the parameters.
+        ///
+        /// # Arguments
+        ///
+        /// `offset` - The offset to start retrieving the data from.
+        /// `limit` - Maximum number of elements returned by the call.
         pub async fn get_page_with_param(
             offset: i64,
             limit: i64,
-        ) -> Result<NamedApiResourceList, reqwest::Error> {
+            rustemon_client: &RustemonClient
+        ) -> Result<NamedApiResourceList<$type>, anyhow::Error> {
             let url = Url::parse_with_params(
                 ENDPOINT,
                 &[("limit", limit.to_string()), ("offset", offset.to_string())],
             )
             .unwrap();
-            reqwest::get(url).await?.json::<NamedApiResourceList>().await
+            rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await
         }
 
-        #[cached(result = true, time = 86400)]
-        pub async fn get_by_id(id: i64) -> Result<$type, reqwest::Error> {
+        /// Returns the resource, using its id.
+        ///
+        /// # Arguments
+        ///
+        /// `id` - The unique ID of the resource to get.
+        /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+        pub async fn get_by_id(id: i64, rustemon_client: &RustemonClient) -> Result<$type, anyhow::Error> {
             let url = Url::parse(ENDPOINT).unwrap().join(&id.to_string()).unwrap();
-            reqwest::get(url).await?.json::<$type>().await
+            rustemon_client.get_by_url::<$type>(url).await
         }
 
-        #[cached(result = true, time = 86400)]
-        pub async fn get_by_name(name: &'static str) -> Result<$type, reqwest::Error> {
+        /// Returns the resource, using its name.
+        ///
+        /// # Arguments
+        ///
+        /// `name` - The name of the resource to get.
+        /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+        pub async fn get_by_name(name: &str, rustemon_client: &RustemonClient) -> Result<$type, anyhow::Error> {
             let url = Url::parse(ENDPOINT).unwrap().join(name).unwrap();
-            reqwest::get(url).await?.json::<$type>().await
+            rustemon_client.get_by_url::<$type>(url).await
         }
     };
 
@@ -44,25 +62,35 @@ macro_rules! endpoint {
         $(
             pub mod $sub {
 
-                use cached::proc_macro::cached;
                 use reqwest::Url;
+                use crate::client::RustemonClient;
 
                 use super::ENDPOINT;
 
                 const SUB_ENDPOINT: &str = stringify!($sub);
 
-                #[cached(result = true, time = 86400)]
-                pub async fn get_by_id(id: i64) -> Result<$sub_type, reqwest::Error> {
+                /// Returns the resource, using its id.
+                ///
+                /// # Arguments
+                ///
+                /// `id` - The unique ID of the resource to get.
+                /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+                pub async fn get_by_id(id: i64, rustemon_client: &RustemonClient) -> Result<$sub_type, anyhow::Error> {
                     let sub_path = format!("{}/{}", id, SUB_ENDPOINT);
                     let url = Url::parse(ENDPOINT).unwrap().join(&sub_path).unwrap();
-                    reqwest::get(url).await?.json::<$sub_type>().await
+                    rustemon_client.get_by_url::<$sub_type>(url).await
                 }
 
-                #[cached(result = true, time = 86400)]
-                pub async fn get_by_name(name: &'static str) -> Result<$sub_type, reqwest::Error> {
+                /// Returns the resource, using its name.
+                ///
+                /// # Arguments
+                ///
+                /// `name` - The name of the resource to get.
+                /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+                pub async fn get_by_name(name: &'static str, rustemon_client: &RustemonClient) -> Result<$sub_type, anyhow::Error> {
                     let sub_path = format!("{}/{}", name, SUB_ENDPOINT);
                     let url = Url::parse(ENDPOINT).unwrap().join(&sub_path).unwrap();
-                    reqwest::get(url).await?.json::<$sub_type>().await
+                    rustemon_client.get_by_url::<$sub_type>(url).await
                 }
             }
         )+

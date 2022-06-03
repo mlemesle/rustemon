@@ -1,8 +1,16 @@
 //! Pokemon group models
 
-use super::resource::{
-    ApiResource, Description, Effect, FlavorText, GenerationGameIndex, Name, NamedApiResource,
-    VerboseEffect, VersionEncounterDetail, VersionGameIndex,
+use super::{
+    berries::BerryFlavor,
+    games::{Generation, Version, VersionGroup},
+    items::Item,
+    locations::{LocationArea, PalParkArea},
+    moves::{Move, MoveBattleStyle, MoveDamageClass, MoveLearnMethod},
+    resource::{
+        ApiResource, Description, Effect, FlavorText, GenerationGameIndex, Name, NamedApiResource,
+        VerboseEffect, VersionEncounterDetail, VersionGameIndex,
+    },
+    utility::Language,
 };
 
 /// [Ability official documentation](https://pokeapi.co/docs/v2#ability)
@@ -15,7 +23,7 @@ pub struct Ability {
     /// Whether or not this ability originated in the main series of the video games.
     pub is_main_series: Option<bool>,
     /// The generation this ability originated in.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// The effect of this ability listed in different languages.
@@ -34,7 +42,7 @@ pub struct AbilityEffectChange {
     /// The previous effect of this ability listed in different languages.
     pub effect_entries: Option<Vec<Effect>>,
     /// The version group in which the previous effect of this ability originated.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [AbilityFlavorText official documentation](https://pokeapi.co/docs/v2#abilityflavortext)
@@ -43,9 +51,9 @@ pub struct AbilityFlavorText {
     /// The localized name for an API resource in a specific language.
     pub flavor_text: Option<String>,
     /// The language this text resource is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
     /// The version group that uses this flavor text.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [AbilityPokemon official documentation](https://pokeapi.co/docs/v2#abilitypokemon)
@@ -57,7 +65,7 @@ pub struct AbilityPokemon {
     /// This is the slot of this ability for the referenced pokemon.
     pub slot: Option<i64>,
     /// The Pokémon this ability could belong to.
-    pub pokemon: Option<NamedApiResource>,
+    pub pokemon: Option<NamedApiResource<Pokemon>>,
 }
 
 /// [Characteristic official documentation](https://pokeapi.co/docs/v2#characteristic)
@@ -73,7 +81,7 @@ pub struct Characteristic {
     /// The description of this resource listed in different languages.
     pub descriptions: Option<Vec<Description>>,
     /// The highest stat referenced by this characteristic.
-    pub highest_stat: Option<NamedApiResource>,
+    pub highest_stat: Option<NamedApiResource<Stat>>,
 }
 
 /// [EggGroup official documentation](https://pokeapi.co/docs/v2#egggroup)
@@ -86,7 +94,7 @@ pub struct EggGroup {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of all Pokémon species that are members of this egg group.
-    pub pokemon_species: Option<Vec<NamedApiResource>>,
+    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
 }
 
 /// [Gender official documentation](https://pokeapi.co/docs/v2#gender)
@@ -99,7 +107,7 @@ pub struct Gender {
     /// A list of Pokémon species that can be this gender and how likely it is that they will be.
     pub pokemon_species_details: Option<Vec<PokemonSpeciesGender>>,
     /// A list of Pokémon species that required this gender in order for a Pokémon to evolve into them.
-    pub required_for_evolution: Option<Vec<NamedApiResource>>,
+    pub required_for_evolution: Option<Vec<NamedApiResource<PokemonSpecies>>>,
 }
 
 /// [PokemonSpeciesGender official documentation](https://pokeapi.co/docs/v2#pokemonspeciesgender)
@@ -108,7 +116,7 @@ pub struct PokemonSpeciesGender {
     /// The chance of this Pokémon being female, in eighths; or -1 for genderless.
     pub rate: Option<i64>,
     /// A Pokémon species that can be the referenced gender.
-    pub pokemon_species: Option<NamedApiResource>,
+    pub pokemon_species: Option<NamedApiResource<PokemonSpecies>>,
 }
 
 /// [GrowthRate official documentation](https://pokeapi.co/docs/v2#growthrate)
@@ -125,7 +133,7 @@ pub struct GrowthRate {
     /// A list of levels and the amount of experienced needed to atain them based on this growth rate.
     pub levels: Option<Vec<GrowthRateExperienceLevel>>,
     /// A list of Pokémon species that gain levels at this growth rate.
-    pub pokemon_species: Option<Vec<NamedApiResource>>,
+    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
 }
 
 /// [GrowthRateExperienceLevel official documentation](https://pokeapi.co/docs/v2#growthrateexperiencelevel)
@@ -145,13 +153,13 @@ pub struct Nature {
     /// The name for this resource.
     pub name: Option<String>,
     /// The stat decreased by 10% in Pokémon with this nature.
-    pub decreased_stat: Option<NamedApiResource>,
+    pub decreased_stat: Option<NamedApiResource<Stat>>,
     /// The stat increased by 10% in Pokémon with this nature.
-    pub increased_stat: Option<NamedApiResource>,
+    pub increased_stat: Option<NamedApiResource<Stat>>,
     /// The flavor hated by Pokémon with this nature.
-    pub hates_flavor: Option<NamedApiResource>,
+    pub hates_flavor: Option<NamedApiResource<BerryFlavor>>,
     /// The flavor liked by Pokémon with this nature.
-    pub likes_flavor: Option<NamedApiResource>,
+    pub likes_flavor: Option<NamedApiResource<BerryFlavor>>,
     /// A list of Pokéathlon stats this nature effects and how much it effects them.
     pub pokeathlon_stat_changes: Option<Vec<NatureStatChange>>,
     /// A list of battle styles and how likely a Pokémon with this nature is to use them in the Battle Palace or Battle Tent.
@@ -166,7 +174,7 @@ pub struct NatureStatChange {
     /// The amount of change.
     pub max_change: Option<i64>,
     /// The stat being affected.
-    pub pokeathlon_stat: Option<NamedApiResource>,
+    pub pokeathlon_stat: Option<NamedApiResource<PokeathlonStat>>,
 }
 
 /// [MoveBattleStylePreference official documentation](https://pokeapi.co/docs/v2#movebattlestylepreference)
@@ -177,7 +185,7 @@ pub struct MoveBattleStylePreference {
     /// Chance of using the move, in percent, if HP is over one half.
     pub high_hp_preference: Option<i64>,
     /// The move battle style.
-    pub move_battle_style: Option<NamedApiResource>,
+    pub move_battle_style: Option<NamedApiResource<MoveBattleStyle>>,
 }
 
 /// [PokeathlonStat official documentation](https://pokeapi.co/docs/v2#pokeathlonstat)
@@ -208,7 +216,7 @@ pub struct NaturePokeathlonStatAffect {
     /// The maximum amount of change to the referenced Pokéathlon stat.
     pub max_change: Option<i64>,
     /// The nature causing the change.
-    pub nature: Option<NamedApiResource>,
+    pub nature: Option<NamedApiResource<Nature>>,
 }
 
 /// [Pokemon official documentation](https://pokeapi.co/docs/v2#pokemon)
@@ -231,7 +239,7 @@ pub struct Pokemon {
     /// A list of abilities this Pokémon could potentially have.
     pub abilities: Option<Vec<PokemonAbility>>,
     /// A list of forms this Pokémon can take on.
-    pub forms: Option<Vec<NamedApiResource>>,
+    pub forms: Option<Vec<NamedApiResource<PokemonForm>>>,
     /// A list of game indices relevent to Pokémon item by generation.
     pub game_indices: Option<Vec<VersionGameIndex>>,
     /// A list of items this Pokémon may be holding when encountered.
@@ -246,7 +254,7 @@ pub struct Pokemon {
     /// A visual representation of the various sprites can be found at [PokeAPI/sprites](https://github.com/PokeAPI/sprites).
     pub sprites: Option<PokemonSprites>,
     /// The species this Pokémon belongs to.
-    pub species: Option<NamedApiResource>,
+    pub species: Option<NamedApiResource<PokemonSpecies>>,
     /// A list of base stat values for this Pokémon.
     pub stats: Option<Vec<PokemonStat>>,
     /// A list of details showing types this Pokémon has.
@@ -261,7 +269,7 @@ pub struct PokemonAbility {
     /// The slot this ability occupies in this Pokémon species.
     pub slot: Option<i64>,
     /// The ability the Pokémon may have.
-    pub ability: Option<NamedApiResource>,
+    pub ability: Option<NamedApiResource<Ability>>,
 }
 
 /// [PokemonType official documentation](https://pokeapi.co/docs/v2#pokemontype)
@@ -271,14 +279,14 @@ pub struct PokemonType {
     pub slot: Option<i64>,
     /// The type the referenced Pokémon has.
     #[serde(rename = "type")]
-    pub type_: Option<NamedApiResource>,
+    pub type_: Option<NamedApiResource<Type>>,
 }
 
 /// [PokemonTypePast official documentation](https://pokeapi.co/docs/v2#pokemontypepast)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonTypePast {
     /// The last generation in which the referenced pokémon had the listed types.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// The types the referenced pokémon had up to and including the listed generation.
     pub types: Option<Vec<PokemonType>>,
 }
@@ -287,7 +295,7 @@ pub struct PokemonTypePast {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonHeldItem {
     /// The item the referenced Pokémon holds.
-    pub item: Option<NamedApiResource>,
+    pub item: Option<NamedApiResource<Item>>,
     /// The details of the different versions in which the item is held.
     pub version_details: Option<Vec<PokemonHeldItemVersion>>,
 }
@@ -296,16 +304,17 @@ pub struct PokemonHeldItem {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonHeldItemVersion {
     /// The version in which the item is held.
-    pub version: Option<NamedApiResource>,
+    pub version: Option<NamedApiResource<Version>>,
     /// How often the item is held.
     pub rarity: Option<i64>,
 }
+
 /// [PokemonMove official documentation](https://pokeapi.co/docs/v2#pokemonmove)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonMove {
     /// The move the Pokémon can learn.
     #[serde(rename = "move")]
-    pub move_: Option<NamedApiResource>,
+    pub move_: Option<NamedApiResource<Move>>,
     /// The details of the version in which the Pokémon can learn the move.
     pub version_group_details: Option<Vec<PokemonMoveVersion>>,
 }
@@ -314,9 +323,9 @@ pub struct PokemonMove {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonMoveVersion {
     /// The method by which the move is learned.
-    pub move_learn_method: Option<NamedApiResource>,
+    pub move_learn_method: Option<NamedApiResource<MoveLearnMethod>>,
     /// The version group in which the move is learned.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
     /// The minimum level to learn the move.
     pub level_learned_at: Option<i64>,
 }
@@ -325,7 +334,7 @@ pub struct PokemonMoveVersion {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct PokemonStat {
     /// The stat the Pokémon has.
-    pub stat: Option<NamedApiResource>,
+    pub stat: Option<NamedApiResource<Stat>>,
     /// The effort points (EV) the Pokémon has in the stat.
     pub effort: Option<i64>,
     /// The base value of the stat.
@@ -754,7 +763,7 @@ pub struct GenerationVIIISprites {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct LocationAreaEncounter {
     /// The location area the referenced Pokémon can be encountered in.
-    pub location_area: Option<NamedApiResource>,
+    pub location_area: Option<NamedApiResource<LocationArea>>,
     /// A list of versions and encounters with the referenced Pokémon that might happen.
     pub version_details: Option<Vec<VersionEncounterDetail>>,
 }
@@ -769,7 +778,7 @@ pub struct PokemonColor {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of the Pokémon species that have this color.
-    pub pokemon_species: Option<Vec<NamedApiResource>>,
+    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
 }
 
 /// [PokemonForm official documentation](https://pokeapi.co/docs/v2#pokemonform)
@@ -793,13 +802,13 @@ pub struct PokemonForm {
     /// The name of this form.
     pub form_name: Option<String>,
     /// The Pokémon that can take on this form.
-    pub pokemon: Option<NamedApiResource>,
+    pub pokemon: Option<NamedApiResource<Pokemon>>,
     /// A list of details showing types this Pokémon form has.
     pub types: Option<Vec<PokemonFormType>>,
     /// A set of sprites used to depict this Pokémon form in the game.
     pub sprites: Option<PokemonFormSprites>,
     /// The version group this Pokémon form was introduced in.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
     /// The form specific full name of this Pokémon form, or empty if the form does not have a specific name.
     pub names: Option<Vec<Name>>,
     /// The form specific form name of this Pokémon form, or empty if the form does not have a specific name.
@@ -813,7 +822,7 @@ pub struct PokemonFormType {
     pub slot: Option<i64>,
     /// The type the referenced Form has.
     #[serde(rename = "type")]
-    pub type_: Option<NamedApiResource>,
+    pub type_: Option<NamedApiResource<Type>>,
 }
 
 /// [PokemonFormSprites official documentation](https://pokeapi.co/docs/v2#pokemonformsprites)
@@ -847,7 +856,7 @@ pub struct PokemonHabitat {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of the Pokémon species that can be found in this habitat.
-    pub pokemon_species: Option<Vec<NamedApiResource>>,
+    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
 }
 
 /// [PokemonShape official documentation](https://pokeapi.co/docs/v2#pokemonshape)
@@ -862,7 +871,7 @@ pub struct PokemonShape {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of the Pokémon species that have this shape.
-    pub pokemon_species: Option<Vec<NamedApiResource>>,
+    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
 }
 
 /// [AwesomeName official documentation](https://pokeapi.co/docs/v2#awesomename)
@@ -871,7 +880,7 @@ pub struct AwesomeName {
     /// The localized "scientific" name for an API resource in a specific language.
     pub awesome_name: Option<String>,
     /// The language this "scientific" name is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [PokemonSpecies official documentation](https://pokeapi.co/docs/v2#pokemonspecies)
@@ -904,23 +913,23 @@ pub struct PokemonSpecies {
     /// Whether or not this Pokémon has multiple forms and can switch between them.
     pub forms_switchable: Option<bool>,
     /// The rate at which this Pokémon species gains levels.
-    pub growth_rate: Option<NamedApiResource>,
+    pub growth_rate: Option<NamedApiResource<GrowthRate>>,
     /// A list of Pokedexes and the indexes reserved within them for this Pokémon species.
     pub pokemon_numbers: Option<Vec<PokemonSpeciesDexEntry>>,
     /// A list of egg groups this Pokémon species is a member of.
-    pub egg_groups: Option<Vec<NamedApiResource>>,
+    pub egg_groups: Option<Vec<NamedApiResource<EggGroup>>>,
     /// The color of this Pokémon for Pokédex search.
-    pub color: Option<NamedApiResource>,
+    pub color: Option<NamedApiResource<PokemonColor>>,
     /// The shape of this Pokémon for Pokédex search.
-    pub shape: Option<NamedApiResource>,
+    pub shape: Option<NamedApiResource<PokemonShape>>,
     /// The Pokémon species that evolves into this Pokemon_species.
-    pub evolves_from_species: Option<NamedApiResource>,
+    pub evolves_from_species: Option<NamedApiResource<PokemonSpecies>>,
     /// The evolution chain this Pokémon species is a member of.
     pub evolution_chain: Option<ApiResource>,
     /// The habitat this Pokémon species can be encountered in.
-    pub habitat: Option<NamedApiResource>,
+    pub habitat: Option<NamedApiResource<PokemonHabitat>>,
     /// The generation this Pokémon species was introduced in.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of encounters that can be had with this Pokémon species in pal park.
@@ -941,7 +950,7 @@ pub struct Genus {
     /// The localized genus for the referenced Pokémon species.
     pub genus: Option<String>,
     /// The language this genus is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [PokemonSpeciesDexEntry official documentation](https://pokeapi.co/docs/v2#pokemonspeciesdexentry)
@@ -950,7 +959,7 @@ pub struct PokemonSpeciesDexEntry {
     /// The index number within the Pokédex.
     pub entry_number: Option<i64>,
     /// The Pokédex the referenced Pokémon species can be found in.
-    pub pokedex: Option<NamedApiResource>,
+    pub pokedex: Option<NamedApiResource<Language>>,
 }
 
 /// [PalParkEncounterArea official documentation](https://pokeapi.co/docs/v2#palparkencounterarea)
@@ -961,7 +970,7 @@ pub struct PalParkEncounterArea {
     /// The base rate for encountering the referenced Pokémon in this pal park area.
     pub rate: Option<i64>,
     /// The pal park area where this encounter happens.
-    pub area: Option<NamedApiResource>,
+    pub area: Option<NamedApiResource<PalParkArea>>,
 }
 
 /// [PokemonSpeciesVariety official documentation](https://pokeapi.co/docs/v2#pokemonspeciesvariety)
@@ -970,7 +979,7 @@ pub struct PokemonSpeciesVariety {
     /// Whether this variety is the default variety.
     pub is_default: Option<bool>,
     /// The Pokémon variety.
-    pub pokemon: Option<NamedApiResource>,
+    pub pokemon: Option<NamedApiResource<Pokemon>>,
 }
 
 /// [Stat official documentation](https://pokeapi.co/docs/v2#stat)
@@ -991,7 +1000,7 @@ pub struct Stat {
     /// A list of characteristics that are set on a Pokémon when its highest base stat is this stat.
     pub characteristics: Option<Vec<ApiResource>>,
     /// The class of damage this stat is directly related to.
-    pub move_damage_class: Option<NamedApiResource>,
+    pub move_damage_class: Option<NamedApiResource<MoveDamageClass>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }
@@ -1012,16 +1021,16 @@ pub struct MoveStatAffect {
     pub change: Option<i64>,
     /// The move causing the change.
     #[serde(rename = "move")]
-    pub move_: Option<NamedApiResource>,
+    pub move_: Option<NamedApiResource<Move>>,
 }
 
 /// [NatureStatAffectSets official documentation](https://pokeapi.co/docs/v2#naturestataffectsets)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct NatureStatAffectSets {
     /// A list of natures and how they change the referenced stat.
-    pub increase: Option<Vec<NamedApiResource>>,
+    pub increase: Option<Vec<NamedApiResource<Nature>>>,
     /// A list of nature sand how they change the referenced stat.
-    pub decrease: Option<Vec<NamedApiResource>>,
+    pub decrease: Option<Vec<NamedApiResource<Nature>>>,
 }
 
 /// [Type official documentation](https://pokeapi.co/docs/v2#type)
@@ -1038,15 +1047,15 @@ pub struct Type {
     /// A list of game indices relevent to this item by generation.
     pub game_indices: Option<Vec<GenerationGameIndex>>,
     /// The generation this type was introduced in.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// The class of damage inflicted by this type.
-    pub move_damage_class: Option<NamedApiResource>,
+    pub move_damage_class: Option<NamedApiResource<MoveDamageClass>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of details of Pokémon that have this type.
     pub pokemon: Option<Vec<TypePokemon>>,
     /// A list of moves that have this type.
-    pub moves: Option<Vec<NamedApiResource>>,
+    pub moves: Option<Vec<NamedApiResource<Move>>>,
 }
 
 /// [TypePokemon official documentation](https://pokeapi.co/docs/v2#typepokemon)
@@ -1055,31 +1064,31 @@ pub struct TypePokemon {
     /// The order the Pokémon's types are listed in.
     pub slot: Option<i64>,
     /// The Pokémon that has the referenced type.
-    pub pokemon: Option<NamedApiResource>,
+    pub pokemon: Option<NamedApiResource<Pokemon>>,
 }
 
 /// [TypeRelations official documentation](https://pokeapi.co/docs/v2#typerelations)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct TypeRelations {
     /// A list of types this type has no effect on.
-    pub no_damage_to: Option<Vec<NamedApiResource>>,
+    pub no_damage_to: Option<Vec<NamedApiResource<Type>>>,
     /// A list of types this type is not very effect against.
-    pub half_damage_to: Option<Vec<NamedApiResource>>,
+    pub half_damage_to: Option<Vec<NamedApiResource<Type>>>,
     /// A list of types this type is very effect against.
-    pub double_damage_to: Option<Vec<NamedApiResource>>,
+    pub double_damage_to: Option<Vec<NamedApiResource<Type>>>,
     /// A list of types that have no effect on this type.
-    pub no_damage_from: Option<Vec<NamedApiResource>>,
+    pub no_damage_from: Option<Vec<NamedApiResource<Type>>>,
     /// A list of types that are not very effective against this type.
-    pub half_damage_from: Option<Vec<NamedApiResource>>,
+    pub half_damage_from: Option<Vec<NamedApiResource<Type>>>,
     /// A list of types that are very effective against this type.
-    pub double_damage_from: Option<Vec<NamedApiResource>>,
+    pub double_damage_from: Option<Vec<NamedApiResource<Type>>>,
 }
 
 /// [TypeRelationsPast official documentation](https://pokeapi.co/docs/v2#typerelationspast)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct TypeRelationsPast {
     /// The last generation in which the referenced type had the listed damage relations.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// The damage relations the referenced type had up to and including the listed generation.
     pub damage_relations: Option<TypeRelations>,
 }

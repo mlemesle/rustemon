@@ -1,4 +1,5 @@
 /target
+/http-cacache
 Cargo.lock
 
 .vscode
