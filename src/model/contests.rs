@@ -1,6 +1,11 @@
 //! Contests group models
 
-use super::resource::{Effect, FlavorText, NamedApiResource};
+use super::{
+    berries::BerryFlavor,
+    moves::Move,
+    resource::{Effect, FlavorText, NamedApiResource},
+    utility::Language,
+};
 
 /// [ContestType official documentation] (https:///pokeapi.co/docs/v2#contesttype)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
@@ -10,7 +15,7 @@ pub struct ContestType {
     /// The name for this resource.
     pub name: Option<String>,
     /// The berry flavor that correlates with this contest type.
-    pub berry_flavor: Option<NamedApiResource>,
+    pub berry_flavor: Option<NamedApiResource<BerryFlavor>>,
     /// The name of this contest type listed in different languages.
     pub names: Option<Vec<ContestName>>,
 }
@@ -23,7 +28,7 @@ pub struct ContestName {
     /// The color associated with this contest's name.
     pub color: Option<String>,
     /// The language that this name is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [ContestEffect official documentation](https:///pokeapi.co/docs/v2#contesteffect)
@@ -51,5 +56,5 @@ pub struct SuperContestEffect {
     /// The flavor text of this super contest effect listed in different languages.
     pub flavor_text_entries: Option<Vec<FlavorText>>,
     /// A list of moves that have the effect when used in super contests.
-    pub moves: Option<Vec<NamedApiResource>>,
+    pub moves: Option<Vec<NamedApiResource<Move>>>,
 }

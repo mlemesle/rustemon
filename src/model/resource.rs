@@ -1,16 +1,29 @@
 //! Common models
 
+use std::marker::PhantomData;
+
+use reqwest::Url;
+use serde::de::DeserializeOwned;
+
+use crate::{client::RustemonClient, error::Error};
+
+use super::{
+    encounters::{EncounterConditionValue, EncounterMethod},
+    games::{Generation, Version, VersionGroup},
+    utility::Language,
+};
+
 /// [NamedApiResourceList official documentation](https:///pokeapi.co/docs/v2#namedapiresourcelist)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
-pub struct NamedApiResourceList {
+pub struct NamedApiResourceList<T> {
     /// The total number of resources available from this API.
     pub count: Option<i64>,
     /// The URL for the next page in the list.
     pub next: Option<String>,
     /// The URL for the previous page in the list.
-    pub previous: Option<::serde_json::Value>,
+    pub previous: Option<String>,
     /// A list of named API resources.
-    pub results: Option<Vec<NamedApiResource>>,
+    pub results: Option<Vec<NamedApiResource<T>>>,
 }
 
 /// [ApiResource official documentation](https://pokeapi.co/docs/v2#apiresource)
@@ -26,7 +39,7 @@ pub struct Description {
     /// The localized description for an API resource in a specific language.
     pub description: Option<String>,
     /// The language this name is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [Effect official documentation](https://pokeapi.co/docs/v2#effect)
@@ -35,7 +48,7 @@ pub struct Effect {
     /// The localized effect text for an API resource in a specific language.
     pub effect: Option<String>,
     /// The language this effect is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [Encounter official documentation](https://pokeapi.co/docs/v2#encounter)
@@ -46,11 +59,11 @@ pub struct Encounter {
     /// The highest level the Pokémon could be encountered at.
     pub max_level: Option<i64>,
     /// A list of condition values that must be in effect for this encounter to occur.
-    pub condition_values: Option<Vec<NamedApiResource>>,
+    pub condition_values: Option<Vec<NamedApiResource<EncounterConditionValue>>>,
     /// Percent chance that this encounter will occur.
     pub chance: Option<i64>,
     /// The method by which this encounter happens.
-    pub method: Option<NamedApiResource>,
+    pub method: Option<NamedApiResource<EncounterMethod>>,
 }
 
 /// [FlavorText official documentation](https://pokeapi.co/docs/v2#flavortext)
@@ -59,9 +72,9 @@ pub struct FlavorText {
     /// The localized flavor text for an API resource in a specific language.
     pub flavor_text: Option<String>,
     /// The language this name is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
     /// The game version this flavor text is extracted from.
-    pub version: Option<NamedApiResource>,
+    pub version: Option<NamedApiResource<Version>>,
 }
 
 /// [GenerationGameIndex official documentation](https://pokeapi.co/docs/v2#generationgameindex)
@@ -70,7 +83,7 @@ pub struct GenerationGameIndex {
     /// The internal id of an API resource within game data.
     pub game_index: Option<i64>,
     /// The generation relevent to this game index.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
 }
 
 /// [MachineVersionDetail official documentation](https://pokeapi.co/docs/v2#machineversiondetail)
@@ -79,7 +92,7 @@ pub struct MachineVersionDetail {
     /// The machine that teaches a move from an item.
     pub machine: Option<ApiResource>,
     /// The version group of this specific machine.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [Name official documentation](https://pokeapi.co/docs/v2#name)
@@ -88,16 +101,7 @@ pub struct Name {
     /// The localized name for an API resource in a specific language.
     pub name: Option<String>,
     /// The language this name is in.
-    pub language: Option<NamedApiResource>,
-}
-
-/// [NamedApiResource official documentation](https://pokeapi.co/docs/v2#namedapiresource)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
-pub struct NamedApiResource {
-    /// The name of the referenced resource.
-    pub name: Option<String>,
-    /// The URL of the referenced resource.
-    pub url: Option<String>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [VerboseEffect official documentation](https://pokeapi.co/docs/v2#verboseeffect)
@@ -108,14 +112,14 @@ pub struct VerboseEffect {
     /// The localized effect text in brief.
     pub short_effect: Option<String>,
     /// The language this effect is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
 }
 
 /// [VersionEncounterDetail official documentation](https://pokeapi.co/docs/v2#versionencounterdetail)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct VersionEncounterDetail {
     /// The game version this encounter happens in.
-    pub version: Option<NamedApiResource>,
+    pub version: Option<NamedApiResource<Version>>,
     /// The total percentage of all encounter potential.
     pub max_chance: Option<i64>,
     /// A list of encounters and their specifics.
@@ -128,7 +132,7 @@ pub struct VersionGameIndex {
     /// The internal id of an API resource within game data.
     pub game_index: Option<i64>,
     /// The version relevent to this game index.
-    pub version: Option<NamedApiResource>,
+    pub version: Option<NamedApiResource<Version>>,
 }
 
 /// [VersionGroupFlavorText official documentation](https://pokeapi.co/docs/v2#versiongroupflavortext)
@@ -137,7 +141,38 @@ pub struct VersionGroupFlavorText {
     /// The localized name for an API resource in a specific language.
     pub text: Option<String>,
     /// The language this name is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
     /// The version group which uses this flavor text.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
+}
+
+/// [NamedApiResource official documentation](https://pokeapi.co/docs/v2#namedapiresource)
+#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+pub struct NamedApiResource<T> {
+    /// The name of the referenced resource.
+    pub name: Option<String>,
+    /// The URL of the referenced resource.
+    pub url: Option<String>,
+    #[serde(skip)]
+    _marker: PhantomData<T>,
+}
+
+impl<T> NamedApiResource<T> {
+    /// Returns the resource pointed by the [NamedApiResource]. Follows its inner URL and gives back the result.
+    ///
+    /// # Arguments
+    ///
+    /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+    pub async fn follow(&self, rustemon_client: &RustemonClient) -> Result<T, Error>
+    where
+        T: DeserializeOwned,
+    {
+        match &self.url {
+            Some(url_str) => {
+                let url = Url::parse(url_str).unwrap();
+                rustemon_client.get_by_url::<T>(url).await
+            }
+            None => Err(Error::FollowEmptyURL),
+        }
+    }
 }

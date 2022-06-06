@@ -1,7 +1,5 @@
 #![doc = include_str!("../README.md")]
 
-pub mod blocking;
-
 pub mod berries;
 pub mod contests;
 pub mod encounters;
@@ -14,7 +12,10 @@ pub mod moves;
 pub mod pokemon;
 pub mod utility;
 
+pub mod client;
+pub mod error;
+
 mod endpoint;
-use endpoint::endpoint;
+pub(crate) use endpoint::endpoint;
 
 pub mod model;

@@ -1,10 +1,13 @@
 //! Moves group models
 
 use super::{
-    pokemon::AbilityEffectChange,
+    contests::ContestType,
+    games::{Generation, VersionGroup},
+    pokemon::{AbilityEffectChange, Pokemon, Stat, Type},
     resource::{
         ApiResource, Description, MachineVersionDetail, Name, NamedApiResource, VerboseEffect,
     },
+    utility::Language,
 };
 
 /// [Move official documentation](https://pokeapi.co/docs/v2#move)
@@ -28,21 +31,21 @@ pub struct Move {
     /// A detail of normal and super contest combos that require this move.
     pub contest_combos: Option<ContestComboSets>,
     /// The type of appeal this move gives a Pokémon when used in a contest.
-    pub contest_type: Option<NamedApiResource>,
+    pub contest_type: Option<NamedApiResource<ContestType>>,
     /// The effect the move has when used in a contest.
     pub contest_effect: Option<ApiResource>,
     /// The type of damage the move inflicts on the target, e.g. physical.
-    pub damage_class: Option<NamedApiResource>,
+    pub damage_class: Option<NamedApiResource<MoveDamageClass>>,
     /// The effect of this move listed in different languages.
     pub effect_entries: Option<Vec<VerboseEffect>>,
     /// The list of previous effects this move has had across version groups of the games.
     pub effect_changes: Option<Vec<AbilityEffectChange>>,
     /// List of Pokemon that can learn the move
-    pub learned_by_pokemon: Option<Vec<NamedApiResource>>,
+    pub learned_by_pokemon: Option<Vec<NamedApiResource<Pokemon>>>,
     /// The flavor text of this move listed in different languages.
     pub flavor_text_entries: Option<Vec<MoveFlavorText>>,
     /// The generation in which this move was introduced.
-    pub generation: Option<NamedApiResource>,
+    pub generation: Option<NamedApiResource<Generation>>,
     /// A list of the machines that teach this move.
     pub machines: Option<Vec<MachineVersionDetail>>,
     /// Metadata about this move.
@@ -56,10 +59,10 @@ pub struct Move {
     /// The effect the move has when used in a super contest.
     pub super_contest_effect: Option<ApiResource>,
     /// The type of target that will receive the effects of the attack.
-    pub target: Option<NamedApiResource>,
+    pub target: Option<NamedApiResource<MoveTarget>>,
     /// The elemental type of this move.
     #[serde(rename = "type")]
-    pub type_: Option<NamedApiResource>,
+    pub type_: Option<NamedApiResource<Type>>,
 }
 
 /// [ContestComboSets official documentation](https://pokeapi.co/docs/v2#contestcombosets)
@@ -76,9 +79,9 @@ pub struct ContestComboSets {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct ContestComboDetail {
     /// A list of moves to use before this move.
-    pub use_before: Option<Vec<NamedApiResource>>,
+    pub use_before: Option<Vec<NamedApiResource<Move>>>,
     /// A list of moves to use after this move.
-    pub use_after: Option<Vec<NamedApiResource>>,
+    pub use_after: Option<Vec<NamedApiResource<Move>>>,
 }
 
 /// [MoveFlavorText official documentation](https://pokeapi.co/docs/v2#moveflavortext)
@@ -87,18 +90,18 @@ pub struct MoveFlavorText {
     /// The localized flavor text for an api resource in a specific language.
     pub flavor_text: Option<String>,
     /// The language this name is in.
-    pub language: Option<NamedApiResource>,
+    pub language: Option<NamedApiResource<Language>>,
     /// The version group that uses this flavor text.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [MoveMetaData official documentation](https://pokeapi.co/docs/v2#movemetadata)
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct MoveMetaData {
     /// The status ailment this move inflicts on its target.
-    pub ailment: Option<NamedApiResource>,
+    pub ailment: Option<NamedApiResource<MoveAilment>>,
     /// The category of move this move falls under, e.g. damage or ailment.
-    pub category: Option<NamedApiResource>,
+    pub category: Option<NamedApiResource<MoveCategory>>,
     /// The minimum number of times this move hits. Null if it always only hits once.
     pub min_hits: Option<i64>,
     /// The maximum number of times this move hits. Null if it always only hits once.
@@ -127,7 +130,7 @@ pub struct MoveStatChange {
     /// The amount of change.
     pub change: Option<i64>,
     /// The stat being affected.
-    pub stat: Option<NamedApiResource>,
+    pub stat: Option<NamedApiResource<Stat>>,
 }
 
 /// [PastMoveStatValues official documentation](https://pokeapi.co/docs/v2#pastmovestatvalues)
@@ -145,9 +148,9 @@ pub struct PastMoveStatValues {
     pub effect_entries: Option<Vec<VerboseEffect>>,
     /// The elemental type of this move.
     #[serde(rename = "type")]
-    pub type_: Option<NamedApiResource>,
+    pub type_: Option<NamedApiResource<Type>>,
     /// The version group in which these move stat values were in effect.
-    pub version_group: Option<NamedApiResource>,
+    pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [MoveAilment official documentation](https://pokeapi.co/docs/v2#moveailment)
@@ -158,7 +161,7 @@ pub struct MoveAilment {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of moves that cause this ailment.
-    pub moves: Option<Vec<NamedApiResource>>,
+    pub moves: Option<Vec<NamedApiResource<Move>>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }
@@ -182,7 +185,7 @@ pub struct MoveCategory {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of moves that fall into this category.
-    pub moves: Option<Vec<NamedApiResource>>,
+    pub moves: Option<Vec<NamedApiResource<Move>>>,
     /// The description of this resource listed in different languages.
     pub descriptions: Option<Vec<Description>>,
 }
@@ -197,7 +200,7 @@ pub struct MoveDamageClass {
     /// The description of this resource listed in different languages.
     pub descriptions: Option<Vec<Description>>,
     /// A list of moves that fall into this damage class.
-    pub moves: Option<Vec<NamedApiResource>>,
+    pub moves: Option<Vec<NamedApiResource<Move>>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }
@@ -214,7 +217,7 @@ pub struct MoveLearnMethod {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of version groups where moves can be learned through this method.
-    pub version_groups: Option<Vec<NamedApiResource>>,
+    pub version_groups: Option<Vec<NamedApiResource<VersionGroup>>>,
 }
 
 /// [MoveTarget official documentation](https://pokeapi.co/docs/v2#movetarget)

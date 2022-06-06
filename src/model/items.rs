@@ -1,8 +1,12 @@
 //! Items group models
 
-use super::resource::{
-    ApiResource, Description, Effect, GenerationGameIndex, MachineVersionDetail, Name,
-    NamedApiResource, VerboseEffect, VersionGroupFlavorText,
+use super::{
+    games::Version,
+    pokemon::Pokemon,
+    resource::{
+        ApiResource, Description, Effect, GenerationGameIndex, MachineVersionDetail, Name,
+        NamedApiResource, VerboseEffect, VersionGroupFlavorText,
+    },
 };
 
 /// [Item official documentation](https://pokeapi.co/docs/v2#item)
@@ -15,13 +19,13 @@ pub struct Item {
     /// The price of this item in stores.
     pub cost: Option<i64>,
     /// The power of the move Fling when used with this item.
-    pub fling_power: Option<NamedApiResource>,
+    pub fling_power: Option<i64>,
     /// The effect of the move Fling when used with this item.
-    pub fling_effect: Option<NamedApiResource>,
+    pub fling_effect: Option<NamedApiResource<ItemFlingEffect>>,
     /// A list of attributes this item has.
-    pub attributes: Option<Vec<NamedApiResource>>,
+    pub attributes: Option<Vec<NamedApiResource<ItemAttribute>>>,
     /// The category of items this item falls into.
-    pub category: Option<NamedApiResource>,
+    pub category: Option<NamedApiResource<ItemCategory>>,
     /// The effect of this ability listed in different languages.
     pub effect_entries: Option<Vec<VerboseEffect>>,
     /// The flavor text of this ability listed in different languages.
@@ -51,7 +55,7 @@ pub struct ItemSprites {
 #[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
 pub struct ItemHolderPokemon {
     /// The Pokémon that holds this item.
-    pub pokemon: Option<NamedApiResource>,
+    pub pokemon: Option<NamedApiResource<Pokemon>>,
     /// The details for the version that this item is held in by the Pokémon.
     pub version_details: Option<Vec<ItemHolderPokemonVersionDetail>>,
 }
@@ -62,7 +66,7 @@ pub struct ItemHolderPokemonVersionDetail {
     /// How often this Pokémon holds this item in this version.
     pub rarity: Option<i64>,
     /// The version that this item is held in by the Pokémon.
-    pub version: Option<NamedApiResource>,
+    pub version: Option<NamedApiResource<Version>>,
 }
 
 /// [ItemAttribute official documentation](https://pokeapi.co/docs/v2#itemattribute)
@@ -73,7 +77,7 @@ pub struct ItemAttribute {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of items that have this attribute.
-    pub items: Option<Vec<NamedApiResource>>,
+    pub items: Option<Vec<NamedApiResource<Item>>>,
     /// The name of this item attribute listed in different languages.
     pub names: Option<Vec<Name>>,
     /// The description of this item attribute listed in different languages.
@@ -88,11 +92,11 @@ pub struct ItemCategory {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of items that are a part of this category.
-    pub items: Option<Vec<NamedApiResource>>,
+    pub items: Option<Vec<NamedApiResource<Item>>>,
     /// The name of this item category listed in different languages.
     pub names: Option<Vec<Name>>,
     /// The pocket items in this category would be put in.
-    pub pocket: Option<NamedApiResource>,
+    pub pocket: Option<NamedApiResource<ItemPocket>>,
 }
 
 /// [ItemFlingEffect official documentation](https://pokeapi.co/docs/v2#itemflingeffect)
@@ -105,7 +109,7 @@ pub struct ItemFlingEffect {
     /// The result of this fling effect listed in different languages.
     pub effect_entries: Option<Vec<Effect>>,
     /// A list of items that have this fling effect.
-    pub items: Option<Vec<NamedApiResource>>,
+    pub items: Option<Vec<NamedApiResource<Item>>>,
 }
 
 /// [ItemPocket official documentation](https://pokeapi.co/docs/v2#itempocket)
@@ -116,7 +120,7 @@ pub struct ItemPocket {
     /// The name for this resource.
     pub name: Option<String>,
     /// A list of item categories that are relevant to this item pocket.
-    pub categories: Option<Vec<NamedApiResource>>,
+    pub categories: Option<Vec<NamedApiResource<ItemCategory>>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }

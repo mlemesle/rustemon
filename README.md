@@ -51,18 +51,18 @@ For each endpoints, 4 functions are defined :
 By default, the endpoints are all async ! Which means you NEED to add a async runtime (such as tokio for example), in order for 
 the library to work.
 
-If you want a synchronous call to the PokeAPI, the `blocking` module is there for you.
-The same 4 functions are also available.
-If you intend to use the evolution_chain endpoint from the evolution group in a synchronous call :
-
-```rust
-rustemon::blocking::evolution::evolution_chain
-```
-
 ### Caching
 
-All the endpoints are cached automatically when the api's response is a success.
-The cache lives for 1 day. After that, the next successful call will refresh the cache for another day.
+All calls to the API are cached by a middleware attached to the [RustemonClient](src/client.rs) you need to instanciate in order
+to make calls to the PokeAPI.
+
+### Examples
+
+Examples and use cases are available in the `examples` folder. For instance, you can run the `async_follow` example using 
+
+```bash
+cargo run --example async_follow
+```
 
 ### License
 

@@ -25,7 +25,7 @@ pub struct EncounterCondition {
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
     /// A list of possible values for this encounter condition.
-    pub values: Option<Vec<NamedApiResource>>,
+    pub values: Option<Vec<NamedApiResource<EncounterConditionValue>>>,
 }
 
 /// [EncounterConditionValue](https:///pokeapi.co/docs/v2#encounterconditionvalue)
@@ -36,7 +36,7 @@ pub struct EncounterConditionValue {
     /// The name for this resource.
     pub name: Option<String>,
     /// The condition this encounter condition value pertains to.
-    pub condition: Option<NamedApiResource>,
+    pub condition: Option<NamedApiResource<EncounterCondition>>,
     /// The name of this resource listed in different languages.
     pub names: Option<Vec<Name>>,
 }
