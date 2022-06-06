@@ -13,7 +13,9 @@ pub mod pokemon;
 pub mod utility;
 
 pub mod client;
+pub mod error;
+
 mod endpoint;
-use endpoint::endpoint;
+pub(crate) use endpoint::endpoint;
 
 pub mod model;

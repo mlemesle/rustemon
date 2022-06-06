@@ -5,6 +5,8 @@ use reqwest::{Client, Url};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use serde::de::DeserializeOwned;
 
+use crate::error::Error;
+
 /// Custom client used to call Pokeapi.
 pub struct RustemonClient {
     client: ClientWithMiddleware,
@@ -34,7 +36,7 @@ impl RustemonClient {
     /// # Arguments
     ///
     /// `url` - The url to call in order to retrieves the json to deserialize.
-    pub(crate) async fn get_by_url<T>(&self, url: Url) -> anyhow::Result<T>
+    pub(crate) async fn get_by_url<T>(&self, url: Url) -> Result<T, Error>
     where
         T: DeserializeOwned,
     {

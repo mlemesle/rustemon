@@ -5,7 +5,7 @@ use std::marker::PhantomData;
 use reqwest::Url;
 use serde::de::DeserializeOwned;
 
-use crate::client::RustemonClient;
+use crate::{client::RustemonClient, error::Error};
 
 use super::{
     encounters::{EncounterConditionValue, EncounterMethod},
@@ -158,7 +158,12 @@ pub struct NamedApiResource<T> {
 }
 
 impl<T> NamedApiResource<T> {
-    pub async fn follow(&self, rustemon_client: &RustemonClient) -> Result<T, anyhow::Error>
+    /// Returns the resource pointed by the [NamedApiResource]. Follows its inner URL and gives back the result.
+    ///
+    /// # Arguments
+    ///
+    /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+    pub async fn follow(&self, rustemon_client: &RustemonClient) -> Result<T, Error>
     where
         T: DeserializeOwned,
     {
@@ -167,7 +172,7 @@ impl<T> NamedApiResource<T> {
                 let url = Url::parse(url_str).unwrap();
                 rustemon_client.get_by_url::<T>(url).await
             }
-            None => Err(anyhow::anyhow!("No URL to follow")),
+            None => Err(Error::FollowEmptyURL),
         }
     }
 }
