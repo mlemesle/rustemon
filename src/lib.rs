@@ -1,3 +1,4 @@
+#![recursion_limit = "256"]
 #![doc = include_str!("../README.md")]
 
 pub mod berries;
