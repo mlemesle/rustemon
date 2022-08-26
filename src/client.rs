@@ -19,19 +19,19 @@ impl RustemonClient {
     ///
     /// * `cache_mode` - The [CacheMode] to inject into the client.
     /// * `options` - The [CacheOptions] to inject into the client.
-    pub fn new(cache_path: String, cache_mode: CacheMode, options: Option<CacheOptions>) -> Self {
+    pub fn new(cache_mode: CacheMode, options: Option<CacheOptions>) -> Self {
         Self {
             client: ClientBuilder::new(Client::new())
                 .with(Cache(HttpCache {
                     mode: cache_mode,
-                    manager: CACacheManager { path: cache_path },
+                    manager: CACacheManager::default(),
                     options,
                 }))
                 .build(),
         }
     }
 
-    /// Returns a new instance of RustemonClient, 
+    /// Returns a new instance of RustemonClient,
     /// while passing an unchecked path String to CACacheManager
     ///
     /// # Arguments
