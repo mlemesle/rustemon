@@ -31,6 +31,30 @@ impl RustemonClient {
         }
     }
 
+    /// Returns a new instance of RustemonClient,
+    /// while passing an unchecked path String to CACacheManager
+    ///
+    /// # Arguments
+    ///
+    /// * `cache_path` - The String representing a path to pass to the cache manager.
+    /// * `cache_mode` - The [CacheMode] to inject into the client.
+    /// * `options` - The [CacheOptions] to inject into the client.
+    pub fn new_path_unchecked(
+        cache_path: String,
+        cache_mode: CacheMode,
+        options: Option<CacheOptions>,
+    ) -> Self {
+        Self {
+            client: ClientBuilder::new(Client::new())
+                .with(Cache(HttpCache {
+                    mode: cache_mode,
+                    manager: CACacheManager { path: cache_path },
+                    options,
+                }))
+                .build(),
+        }
+    }
+
     /// Returns the deserialized answer resulting from the call made to Pokeapi.
     ///
     /// # Arguments
