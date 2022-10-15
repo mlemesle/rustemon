@@ -915,7 +915,7 @@ pub struct PokemonSpecies {
     /// The rate at which this Pokémon species gains levels.
     pub growth_rate: Option<NamedApiResource<GrowthRate>>,
     /// A list of Pokedexes and the indexes reserved within them for this Pokémon species.
-    pub pokemon_numbers: Option<Vec<PokemonSpeciesDexEntry>>,
+    pub pokedex_numbers: Option<Vec<PokemonSpeciesDexEntry>>,
     /// A list of egg groups this Pokémon species is a member of.
     pub egg_groups: Option<Vec<NamedApiResource<EggGroup>>>,
     /// The color of this Pokémon for Pokédex search.
