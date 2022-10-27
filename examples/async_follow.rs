@@ -1,3 +1,5 @@
+use rustemon::Follow;
+
 #[tokio::main]
 async fn main() {
     let rustemon_client = rustemon::client::RustemonClient::default();
@@ -5,4 +7,12 @@ async fn main() {
     let species_resource = pokemon.unwrap().species.unwrap();
     let species = species_resource.follow(&rustemon_client).await;
     println!("{:#?}", species);
+
+    let evolution_chain = species
+        .unwrap()
+        .evolution_chain
+        .unwrap()
+        .follow(&rustemon_client)
+        .await;
+    println!("{:#?}", evolution_chain);
 }

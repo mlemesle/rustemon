@@ -2,19 +2,15 @@
 
 use std::marker::PhantomData;
 
-use reqwest::Url;
-use serde::de::DeserializeOwned;
-
-use crate::{client::RustemonClient, error::Error};
-
 use super::{
     encounters::{EncounterConditionValue, EncounterMethod},
     games::{Generation, Version, VersionGroup},
+    machines::Machine,
     utility::Language,
 };
 
 /// [NamedApiResourceList official documentation](https:///pokeapi.co/docs/v2#namedapiresourcelist)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct NamedApiResourceList<T> {
     /// The total number of resources available from this API.
     pub count: Option<i64>,
@@ -27,14 +23,16 @@ pub struct NamedApiResourceList<T> {
 }
 
 /// [ApiResource official documentation](https://pokeapi.co/docs/v2#apiresource)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
-pub struct ApiResource {
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+pub struct ApiResource<T> {
     /// The URL of the referenced resource.
     pub url: Option<String>,
+    #[serde(skip)]
+    _marker: PhantomData<T>,
 }
 
 /// [Description official documentation](https://pokeapi.co/docs/v2#description)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Description {
     /// The localized description for an API resource in a specific language.
     pub description: Option<String>,
@@ -43,7 +41,7 @@ pub struct Description {
 }
 
 /// [Effect official documentation](https://pokeapi.co/docs/v2#effect)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Effect {
     /// The localized effect text for an API resource in a specific language.
     pub effect: Option<String>,
@@ -52,7 +50,7 @@ pub struct Effect {
 }
 
 /// [Encounter official documentation](https://pokeapi.co/docs/v2#encounter)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Encounter {
     /// The lowest level the Pokémon could be encountered at.
     pub min_level: Option<i64>,
@@ -67,7 +65,7 @@ pub struct Encounter {
 }
 
 /// [FlavorText official documentation](https://pokeapi.co/docs/v2#flavortext)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct FlavorText {
     /// The localized flavor text for an API resource in a specific language.
     pub flavor_text: Option<String>,
@@ -78,7 +76,7 @@ pub struct FlavorText {
 }
 
 /// [GenerationGameIndex official documentation](https://pokeapi.co/docs/v2#generationgameindex)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct GenerationGameIndex {
     /// The internal id of an API resource within game data.
     pub game_index: Option<i64>,
@@ -87,16 +85,16 @@ pub struct GenerationGameIndex {
 }
 
 /// [MachineVersionDetail official documentation](https://pokeapi.co/docs/v2#machineversiondetail)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MachineVersionDetail {
     /// The machine that teaches a move from an item.
-    pub machine: Option<ApiResource>,
+    pub machine: Option<ApiResource<Machine>>,
     /// The version group of this specific machine.
     pub version_group: Option<NamedApiResource<VersionGroup>>,
 }
 
 /// [Name official documentation](https://pokeapi.co/docs/v2#name)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Name {
     /// The localized name for an API resource in a specific language.
     pub name: Option<String>,
@@ -105,7 +103,7 @@ pub struct Name {
 }
 
 /// [VerboseEffect official documentation](https://pokeapi.co/docs/v2#verboseeffect)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct VerboseEffect {
     /// The localized effect text for an API resource in a specific language.
     pub effect: Option<String>,
@@ -116,7 +114,7 @@ pub struct VerboseEffect {
 }
 
 /// [VersionEncounterDetail official documentation](https://pokeapi.co/docs/v2#versionencounterdetail)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct VersionEncounterDetail {
     /// The game version this encounter happens in.
     pub version: Option<NamedApiResource<Version>>,
@@ -127,7 +125,7 @@ pub struct VersionEncounterDetail {
 }
 
 /// [VersionGameIndex official documentation](https://pokeapi.co/docs/v2#versiongameindex)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct VersionGameIndex {
     /// The internal id of an API resource within game data.
     pub game_index: Option<i64>,
@@ -136,7 +134,7 @@ pub struct VersionGameIndex {
 }
 
 /// [VersionGroupFlavorText official documentation](https://pokeapi.co/docs/v2#versiongroupflavortext)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct VersionGroupFlavorText {
     /// The localized name for an API resource in a specific language.
     pub text: Option<String>,
@@ -147,7 +145,7 @@ pub struct VersionGroupFlavorText {
 }
 
 /// [NamedApiResource official documentation](https://pokeapi.co/docs/v2#namedapiresource)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct NamedApiResource<T> {
     /// The name of the referenced resource.
     pub name: Option<String>,
@@ -155,24 +153,4 @@ pub struct NamedApiResource<T> {
     pub url: Option<String>,
     #[serde(skip)]
     _marker: PhantomData<T>,
-}
-
-impl<T> NamedApiResource<T> {
-    /// Returns the resource pointed by the [NamedApiResource]. Follows its inner URL and gives back the result.
-    ///
-    /// # Arguments
-    ///
-    /// `rustemon_client` - The [RustemonClient] to use to access the resource.
-    pub async fn follow(&self, rustemon_client: &RustemonClient) -> Result<T, Error>
-    where
-        T: DeserializeOwned,
-    {
-        match &self.url {
-            Some(url_str) => {
-                let url = Url::parse(url_str).unwrap();
-                rustemon_client.get_by_url::<T>(url).await
-            }
-            None => Err(Error::FollowEmptyURL),
-        }
-    }
 }

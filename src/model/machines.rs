@@ -3,7 +3,7 @@
 use super::{games::VersionGroup, items::Item, moves::Move, resource::NamedApiResource};
 
 /// [Machine official documentation](https://pokeapi.co/docs/v2#machine)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Machine {
     /// The identifier for this resource.
     pub id: Option<i64>,

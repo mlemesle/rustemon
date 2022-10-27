@@ -8,7 +8,7 @@ use super::{
 };
 
 /// [Berry official documentation](https:///pokeapi.co/docs/v2#berry)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Berry {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -40,7 +40,7 @@ pub struct Berry {
 }
 
 /// [BerryFlavorMap official documentation](https:///pokeapi.co/docs/v2#berryflavormap)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct BerryFlavorMap {
     /// How powerful the referenced flavor is for this berry.
     pub potency: Option<i64>,
@@ -49,7 +49,7 @@ pub struct BerryFlavorMap {
 }
 
 /// [BerryFirmness official documentation](https:///pokeapi.co/docs/v2#berryfirmness)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct BerryFirmness {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -62,7 +62,7 @@ pub struct BerryFirmness {
 }
 
 /// [BerryFlavor official documentation](https:///pokeapi.co/docs/v2#berryflavor)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct BerryFlavor {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -77,7 +77,7 @@ pub struct BerryFlavor {
 }
 
 /// [FlavorBerryMap official documentation](https:///pokeapi.co/docs/v2#flavorberrymap)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct FlavorBerryMap {
     /// How powerful the referenced flavor is for this berry.
     pub potency: Option<i64>,

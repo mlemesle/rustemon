@@ -1,6 +1,7 @@
 //! Items group models
 
 use super::{
+    evolution::EvolutionChain,
     games::Version,
     pokemon::Pokemon,
     resource::{
@@ -10,7 +11,7 @@ use super::{
 };
 
 /// [Item official documentation](https://pokeapi.co/docs/v2#item)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Item {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -39,20 +40,20 @@ pub struct Item {
     /// A list of Pokémon that might be found in the wild holding this item.
     pub held_by_pokemon: Option<Vec<ItemHolderPokemon>>,
     /// An evolution chain this item requires to produce a bay during mating.
-    pub baby_trigger_for: Option<ApiResource>,
+    pub baby_trigger_for: Option<ApiResource<EvolutionChain>>,
     /// A list of the machines related to this item.
     pub machines: Option<Vec<MachineVersionDetail>>,
 }
 
 /// [ItemSprites official documentation](https://pokeapi.co/docs/v2#itemsprites)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemSprites {
     /// The default depiction of this item.
     pub default: Option<String>,
 }
 
 /// [ItemHolderPokemon official documentation](https://pokeapi.co/docs/v2#itemholderpokemon)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemHolderPokemon {
     /// The Pokémon that holds this item.
     pub pokemon: Option<NamedApiResource<Pokemon>>,
@@ -61,7 +62,7 @@ pub struct ItemHolderPokemon {
 }
 
 /// [ItemHolderPokemonVersionDetail official documentation](https://pokeapi.co/docs/v2#itemholderpokemonversiondetail)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemHolderPokemonVersionDetail {
     /// How often this Pokémon holds this item in this version.
     pub rarity: Option<i64>,
@@ -70,7 +71,7 @@ pub struct ItemHolderPokemonVersionDetail {
 }
 
 /// [ItemAttribute official documentation](https://pokeapi.co/docs/v2#itemattribute)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemAttribute {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -85,7 +86,7 @@ pub struct ItemAttribute {
 }
 
 /// [ItemCategory official documentation](https://pokeapi.co/docs/v2#itemcategory)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemCategory {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -100,7 +101,7 @@ pub struct ItemCategory {
 }
 
 /// [ItemFlingEffect official documentation](https://pokeapi.co/docs/v2#itemflingeffect)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemFlingEffect {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -113,7 +114,7 @@ pub struct ItemFlingEffect {
 }
 
 /// [ItemPocket official documentation](https://pokeapi.co/docs/v2#itempocket)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ItemPocket {
     /// The identifier for this resource.
     pub id: Option<i64>,

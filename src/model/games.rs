@@ -8,7 +8,7 @@ use super::{
 };
 
 /// [Generation official documentation]
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Generation {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -31,7 +31,7 @@ pub struct Generation {
 }
 
 /// [Pokedex official documentation](https:///pokeapi.co/docs/v2#pokedex)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Pokedex {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -52,7 +52,7 @@ pub struct Pokedex {
 }
 
 /// [PokemonEntry official documentation](https:///pokeapi.co/docs/v2#pokemonentry)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct PokemonEntry {
     /// The index of this Pokémon species entry within the Pokédex.
     pub entry_number: Option<i64>,
@@ -61,7 +61,7 @@ pub struct PokemonEntry {
 }
 
 /// [Version offcial documentation](https:///pokeapi.co/docs/v2#version)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Version {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -74,7 +74,7 @@ pub struct Version {
 }
 
 /// [VersionGroup official documentation](https:///pokeapi.co/docs/v2#versiongroup)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct VersionGroup {
     /// The identifier for this resource.
     pub id: Option<i64>,

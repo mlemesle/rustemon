@@ -1,7 +1,7 @@
 //! Moves group models
 
 use super::{
-    contests::ContestType,
+    contests::{ContestEffect, ContestType, SuperContestEffect},
     games::{Generation, VersionGroup},
     pokemon::{AbilityEffectChange, Pokemon, Stat, Type},
     resource::{
@@ -11,7 +11,7 @@ use super::{
 };
 
 /// [Move official documentation](https://pokeapi.co/docs/v2#move)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Move {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -33,7 +33,7 @@ pub struct Move {
     /// The type of appeal this move gives a Pokémon when used in a contest.
     pub contest_type: Option<NamedApiResource<ContestType>>,
     /// The effect the move has when used in a contest.
-    pub contest_effect: Option<ApiResource>,
+    pub contest_effect: Option<ApiResource<ContestEffect>>,
     /// The type of damage the move inflicts on the target, e.g. physical.
     pub damage_class: Option<NamedApiResource<MoveDamageClass>>,
     /// The effect of this move listed in different languages.
@@ -57,7 +57,7 @@ pub struct Move {
     /// A list of stats this moves effects and how much it effects them.
     pub stat_changes: Option<Vec<MoveStatChange>>,
     /// The effect the move has when used in a super contest.
-    pub super_contest_effect: Option<ApiResource>,
+    pub super_contest_effect: Option<ApiResource<SuperContestEffect>>,
     /// The type of target that will receive the effects of the attack.
     pub target: Option<NamedApiResource<MoveTarget>>,
     /// The elemental type of this move.
@@ -66,7 +66,7 @@ pub struct Move {
 }
 
 /// [ContestComboSets official documentation](https://pokeapi.co/docs/v2#contestcombosets)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ContestComboSets {
     /// A detail of moves this move can be used before or after, granting additional appeal points in contests.
     pub normal: Option<ContestComboDetail>,
@@ -76,7 +76,7 @@ pub struct ContestComboSets {
 }
 
 /// [ContestComboDetail official documentation](https://pokeapi.co/docs/v2#contestcombodetail)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ContestComboDetail {
     /// A list of moves to use before this move.
     pub use_before: Option<Vec<NamedApiResource<Move>>>,
@@ -85,7 +85,7 @@ pub struct ContestComboDetail {
 }
 
 /// [MoveFlavorText official documentation](https://pokeapi.co/docs/v2#moveflavortext)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveFlavorText {
     /// The localized flavor text for an api resource in a specific language.
     pub flavor_text: Option<String>,
@@ -96,7 +96,7 @@ pub struct MoveFlavorText {
 }
 
 /// [MoveMetaData official documentation](https://pokeapi.co/docs/v2#movemetadata)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveMetaData {
     /// The status ailment this move inflicts on its target.
     pub ailment: Option<NamedApiResource<MoveAilment>>,
@@ -125,7 +125,7 @@ pub struct MoveMetaData {
 }
 
 /// [MoveStatChange official documentation](https://pokeapi.co/docs/v2#movestatchange)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveStatChange {
     /// The amount of change.
     pub change: Option<i64>,
@@ -134,7 +134,7 @@ pub struct MoveStatChange {
 }
 
 /// [PastMoveStatValues official documentation](https://pokeapi.co/docs/v2#pastmovestatvalues)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct PastMoveStatValues {
     /// The percent value of how likely this move is to be successful.
     pub accuracy: Option<i64>,
@@ -154,7 +154,7 @@ pub struct PastMoveStatValues {
 }
 
 /// [MoveAilment official documentation](https://pokeapi.co/docs/v2#moveailment)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveAilment {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -167,7 +167,7 @@ pub struct MoveAilment {
 }
 
 /// [MoveBattleStyle official documentation](https://pokeapi.co/docs/v2#movebattlestyle)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveBattleStyle {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -178,7 +178,7 @@ pub struct MoveBattleStyle {
 }
 
 /// [MoveCategory official documentation](https://pokeapi.co/docs/v2#movecategory)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveCategory {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -191,7 +191,7 @@ pub struct MoveCategory {
 }
 
 /// [MoveDamageClass official documentation](https://pokeapi.co/docs/v2#movedamageclass)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveDamageClass {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -206,7 +206,7 @@ pub struct MoveDamageClass {
 }
 
 /// [MoveLearnMethod official documentation](https://pokeapi.co/docs/v2#movelearnmethod)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveLearnMethod {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -221,7 +221,7 @@ pub struct MoveLearnMethod {
 }
 
 /// [MoveTarget official documentation](https://pokeapi.co/docs/v2#movetarget)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct MoveTarget {
     /// The identifier for this resource.
     pub id: Option<i64>,

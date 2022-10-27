@@ -9,7 +9,7 @@ use super::{
 };
 
 /// [EvolutionChain official documentation](https:///pokeapi.co/docs/v2#evolutionchain)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EvolutionChain {
     /// The identifier for this resource.
     pub id: Option<i64>,
@@ -22,7 +22,7 @@ pub struct EvolutionChain {
 }
 
 /// [ChainLink official documentation](https:///pokeapi.co/docs/v2#chainlink)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ChainLink {
     /// Whether or not this link is for a baby Pokémon. This would only ever be true on the base link.
     pub is_baby: Option<bool>,
@@ -35,7 +35,7 @@ pub struct ChainLink {
 }
 
 /// [EvolutionDetail official documentation](https:///pokeapi.co/docs/v2#evolutiondetail)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EvolutionDetail {
     /// The item required to cause evolution this into Pokémon species.
     pub item: Option<NamedApiResource<Item>>,
@@ -82,7 +82,7 @@ pub struct EvolutionDetail {
 }
 
 /// [EvolutionTrigger official documentation](https:///pokeapi.co/docs/v2#evolutiontrigger)
-#[derive(Default, Debug, Clone, PartialEq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EvolutionTrigger {
     /// The identifier for this resource.
     pub id: Option<i64>,

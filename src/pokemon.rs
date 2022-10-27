@@ -53,6 +53,7 @@ pub mod pokeathlon_stat {
 /// See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Pokémon_(species)) for greater detail.
 ///
 /// Pokémon Location Areas are areas where Pokémon can be found.
+#[allow(clippy::module_inception)]
 pub mod pokemon {
     crate::endpoint!(crate::model::pokemon::Pokemon; for "pokemon"; with (encounters, Vec<crate::model::pokemon::LocationAreaEncounter>));
 }

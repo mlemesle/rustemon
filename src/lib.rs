@@ -19,4 +19,7 @@ pub mod error;
 mod endpoint;
 pub(crate) use endpoint::endpoint;
 
+mod follow;
+pub use follow::Follow;
+
 pub mod model;
