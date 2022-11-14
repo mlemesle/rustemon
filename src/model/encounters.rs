@@ -6,37 +6,37 @@ use super::resource::{Name, NamedApiResource};
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EncounterMethod {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The name for this resource.
-    pub name: Option<String>,
+    pub name: String,
     /// A good value for sorting.
-    pub order: Option<i64>,
+    pub order: i64,
     /// The name of this resource listed in different languages.
-    pub names: Option<Vec<Name>>,
+    pub names: Vec<Name>,
 }
 
 /// [EncounterCondition official documentation](https:///pokeapi.co/docs/v2#encountercondition)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EncounterCondition {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The name for this resource.
-    pub name: Option<String>,
+    pub name: String,
     /// The name of this resource listed in different languages.
-    pub names: Option<Vec<Name>>,
+    pub names: Vec<Name>,
     /// A list of possible values for this encounter condition.
-    pub values: Option<Vec<NamedApiResource<EncounterConditionValue>>>,
+    pub values: Vec<NamedApiResource<EncounterConditionValue>>,
 }
 
 /// [EncounterConditionValue](https:///pokeapi.co/docs/v2#encounterconditionvalue)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EncounterConditionValue {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The name for this resource.
-    pub name: Option<String>,
+    pub name: String,
     /// The condition this encounter condition value pertains to.
-    pub condition: Option<NamedApiResource<EncounterCondition>>,
+    pub condition: NamedApiResource<EncounterCondition>,
     /// The name of this resource listed in different languages.
-    pub names: Option<Vec<Name>>,
+    pub names: Vec<Name>,
 }

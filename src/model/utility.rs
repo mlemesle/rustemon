@@ -6,15 +6,15 @@ use super::resource::Name;
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Language {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The name for this resource.
-    pub name: Option<String>,
+    pub name: String,
     /// Whether or not the games are published in this language.
-    pub official: Option<bool>,
+    pub official: bool,
     /// The two-letter code of the country where this language is spoken. Note that it is not unique.
-    pub iso639: Option<String>,
+    pub iso639: String,
     /// The two-letter code of the language. Note that it is not unique.
-    pub iso3166: Option<String>,
+    pub iso3166: String,
     /// The name of this resource listed in different languages.
-    pub names: Option<Vec<Name>>,
+    pub names: Vec<Name>,
 }
