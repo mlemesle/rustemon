@@ -1,5 +1,5 @@
 use async_trait::async_trait;
-use reqwest::Url;
+use reqwest::IntoUrl;
 use serde::de::DeserializeOwned;
 
 use crate::{
@@ -23,16 +23,11 @@ where
 }
 
 async fn inner_follow<T: DeserializeOwned>(
-    to_url: Option<&String>,
+    into_url: impl IntoUrl,
     rustemon_client: &RustemonClient,
 ) -> Result<T, Error> {
-    match to_url {
-        Some(url_str) => {
-            let url = Url::parse(url_str).unwrap();
-            rustemon_client.get_by_url::<T>(url).await
-        }
-        None => Err(Error::FollowEmptyURL),
-    }
+    let url = into_url.into_url()?;
+    rustemon_client.get_by_url::<T>(url).await
 }
 
 #[async_trait]
@@ -41,7 +36,7 @@ where
     T: DeserializeOwned + Send + Sync,
 {
     async fn follow(&self, rustemon_client: &RustemonClient) -> Result<T, Error> {
-        inner_follow(self.url.as_ref(), rustemon_client).await
+        inner_follow(&self.url, rustemon_client).await
     }
 }
 
@@ -51,6 +46,6 @@ where
     T: DeserializeOwned + Send + Sync,
 {
     async fn follow(&self, rustemon_client: &RustemonClient) -> Result<T, Error> {
-        inner_follow(self.url.as_ref(), rustemon_client).await
+        inner_follow(&self.url, rustemon_client).await
     }
 }

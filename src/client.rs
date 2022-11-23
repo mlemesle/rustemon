@@ -1,11 +1,14 @@
 //! Defines the client used to access Pokeapi.
 
-use http_cache_reqwest::{CACacheManager, Cache, CacheMode, CacheOptions, HttpCache};
+use http_cache_reqwest::{CACacheManager, Cache, HttpCache};
 use reqwest::{Client, Url};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use serde::de::DeserializeOwned;
 
 use crate::error::Error;
+
+// Reexport to ease overloading.
+pub use http_cache_reqwest::{CacheMode, CacheOptions};
 
 /// Custom client used to call Pokeapi.
 pub struct RustemonClient {

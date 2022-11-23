@@ -12,26 +12,26 @@ use super::{
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EvolutionChain {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The item that a Pokémon would be holding when mating that would trigger the egg
     /// hatching a baby Pokémon rather than a basic Pokémon.
     pub baby_trigger_item: Option<NamedApiResource<Item>>,
     /// The base chain link object. Each link contains evolution details for a Pokémon in the chain.
     /// Each link references the next Pokémon in the natural evolution order.
-    pub chain: Option<ChainLink>,
+    pub chain: ChainLink,
 }
 
 /// [ChainLink official documentation](https:///pokeapi.co/docs/v2#chainlink)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct ChainLink {
     /// Whether or not this link is for a baby Pokémon. This would only ever be true on the base link.
-    pub is_baby: Option<bool>,
+    pub is_baby: bool,
     /// The Pokémon species at this point in the evolution chain.
-    pub species: Option<NamedApiResource<PokemonSpecies>>,
+    pub species: NamedApiResource<PokemonSpecies>,
     /// All details regarding the specific details of the referenced Pokémon species evolution.
-    pub evolution_details: Option<Vec<EvolutionDetail>>,
+    pub evolution_details: Vec<EvolutionDetail>,
     /// A List of chain objects.
-    pub evolves_to: Option<Vec<ChainLink>>,
+    pub evolves_to: Vec<ChainLink>,
 }
 
 /// [EvolutionDetail official documentation](https:///pokeapi.co/docs/v2#evolutiondetail)
@@ -40,7 +40,7 @@ pub struct EvolutionDetail {
     /// The item required to cause evolution this into Pokémon species.
     pub item: Option<NamedApiResource<Item>>,
     /// The type of event that triggers evolution into this Pokémon species.
-    pub trigger: Option<NamedApiResource<EvolutionTrigger>>,
+    pub trigger: NamedApiResource<EvolutionTrigger>,
     /// The id of the gender of the evolving Pokémon species must be in order to evolve into this Pokémon species.
     pub gender: Option<i64>,
     /// The item the evolving Pokémon species must be holding during the evolution trigger event
@@ -63,7 +63,7 @@ pub struct EvolutionDetail {
     /// The minimum required level of affection the evolving Pokémon species to evolve into this Pokémon species.
     pub min_affection: Option<i64>,
     /// Whether or not it must be raining in the overworld to cause evolution this Pokémon species.
-    pub needs_overworld_rain: Option<bool>,
+    pub needs_overworld_rain: bool,
     /// The Pokémon species that must be in the players party in order for the evolving Pokémon species
     /// to evolve into this Pokémon species.
     pub party_species: Option<NamedApiResource<PokemonSpecies>>,
@@ -74,22 +74,22 @@ pub struct EvolutionDetail {
     /// 1 means Attack > Defense. 0 means Attack = Defense. -1 means Attack < Defense.
     pub relative_physical_stats: Option<i64>,
     /// The required time of day. Day or night.
-    pub time_of_day: Option<String>,
+    pub time_of_day: String,
     /// Pokémon species for which this one must be traded.
     pub trade_species: Option<NamedApiResource<PokemonSpecies>>,
     /// Whether or not the 3DS needs to be turned upside-down as this Pokémon levels up.
-    pub turn_upside_down: Option<bool>,
+    pub turn_upside_down: bool,
 }
 
 /// [EvolutionTrigger official documentation](https:///pokeapi.co/docs/v2#evolutiontrigger)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct EvolutionTrigger {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The name for this resource.
-    pub name: Option<String>,
+    pub name: String,
     /// The name of this resource listed in different languages.
-    pub names: Option<Vec<Name>>,
+    pub names: Vec<Name>,
     /// A list of pokemon species that result from this evolution trigger.
-    pub pokemon_species: Option<Vec<NamedApiResource<PokemonSpecies>>>,
+    pub pokemon_species: Vec<NamedApiResource<PokemonSpecies>>,
 }

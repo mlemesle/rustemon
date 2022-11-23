@@ -7,14 +7,13 @@ async fn main() {
     let number_of_type = rustemon::pokemon::type_::get_page(&rustemon_client)
         .await
         .unwrap()
-        .count
-        .unwrap();
+        .count;
     let mut type_names: Vec<String> = vec![];
     while offset < number_of_type {
         match rustemon::pokemon::type_::get_page_with_param(offset, limit, &rustemon_client).await {
             Ok(page) => {
-                for name in page.results.unwrap() {
-                    type_names.push(name.name.unwrap());
+                for name in page.results {
+                    type_names.push(name.name);
                 }
                 offset += limit;
             }

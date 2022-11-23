@@ -6,12 +6,12 @@ use super::{games::VersionGroup, items::Item, moves::Move, resource::NamedApiRes
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 pub struct Machine {
     /// The identifier for this resource.
-    pub id: Option<i64>,
+    pub id: i64,
     /// The TM or HM item that corresponds to this machine.
-    pub item: Option<NamedApiResource<Item>>,
+    pub item: NamedApiResource<Item>,
     /// The move that is taught by this machine.
     #[serde(rename = "move")]
-    pub move_: Option<NamedApiResource<Move>>,
+    pub move_: NamedApiResource<Move>,
     /// The version group that this machine applies to.
-    pub version_group: Option<NamedApiResource<VersionGroup>>,
+    pub version_group: NamedApiResource<VersionGroup>,
 }
