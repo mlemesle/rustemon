@@ -961,7 +961,7 @@ pub struct PokemonSpecies {
     /// The Pokémon species that evolves into this Pokemon_species.
     pub evolves_from_species: Option<NamedApiResource<PokemonSpecies>>,
     /// The evolution chain this Pokémon species is a member of.
-    pub evolution_chain: ApiResource<EvolutionChain>,
+    pub evolution_chain: Option<ApiResource<EvolutionChain>>,
     /// The habitat this Pokémon species can be encountered in.
     pub habitat: Option<NamedApiResource<PokemonHabitat>>,
     /// The generation this Pokémon species was introduced in.
