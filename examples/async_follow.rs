@@ -11,6 +11,7 @@ async fn main() {
     let evolution_chain = species
         .unwrap()
         .evolution_chain
+        .unwrap()
         .follow(&rustemon_client)
         .await;
     println!("{:#?}", evolution_chain);
