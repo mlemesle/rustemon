@@ -44,21 +44,16 @@ macro_rules! endpoint {
         ///
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
         pub async fn get_all_pages(rustemon_client: &RustemonClient) -> Result<Vec<NamedApiResource<$type>>, Error> {
-            const LIMIT: i64 = 100;
+            let url = Url::parse(ENDPOINT).unwrap();
 
-            let mut page = get_page_with_param(0, LIMIT, rustemon_client).await?;
-
+            let mut page = rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await?;
             let mut all_pages = Vec::with_capacity(page.count as usize);
-            let page_count =  {
-                let remaining_pages = (page.count as f32) / (LIMIT as f32);
-                remaining_pages.ceil() as i64
-            };
 
             all_pages.append(&mut page.results);
 
-            for page_number in 1..page_count {
-                let offset = page_number * LIMIT;
-                let mut page = get_page_with_param(offset, LIMIT, rustemon_client).await?;
+            while let Some(ref next_page_url) = page.next {
+                let next_page_url = Url::parse(next_page_url).unwrap();
+                page = rustemon_client.get_by_url::<NamedApiResourceList<$type>>(next_page_url).await?;
 
                 all_pages.append(&mut page.results);
             }
