@@ -1,3 +1,5 @@
+//! Module containing all models returned by `PokeApi`.
+
 pub mod berries;
 pub mod contests;
 pub mod encounters;

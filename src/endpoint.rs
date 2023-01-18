@@ -77,6 +77,7 @@ macro_rules! endpoint {
         crate::endpoint!($type; for $name);
 
         $(
+            /// Give access to the sub endpoint.
             pub mod $sub {
 
                 use super::RustemonClient;

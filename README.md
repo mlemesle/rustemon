@@ -53,7 +53,7 @@ the library to work.
 
 ### Caching
 
-All calls to the API are cached by a middleware attached to the [RustemonClient](src/client.rs) you need to instanciate in order
+All calls to the API are cached by a middleware attached to the [RustemonClient](https://github.com/mlemesle/rustemon/src/client.rs) you need to instanciate in order
 to make calls to the PokeAPI.
 
 ### Examples
@@ -66,7 +66,7 @@ cargo run --example async_follow
 
 ### License
 
-The license of the library can be found [here](LICENSE).
+The license of the library can be found [here](https://github.com/mlemesle/rustemon/LICENSE).
   
 ### Contribution
 
