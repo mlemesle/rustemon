@@ -1,7 +1,7 @@
 //! Defines the client used to access Pokeapi.
 
 use http_cache_reqwest::{CACacheManager, Cache, HttpCache};
-use reqwest::{Client, Url};
+use reqwest::{Client, IntoUrl, Url};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use serde::de::DeserializeOwned;
 
@@ -10,52 +10,93 @@ use crate::error::Error;
 // Reexport to ease overloading.
 pub use http_cache_reqwest::{CacheMode, CacheOptions};
 
-/// Custom client used to call Pokeapi.
-pub struct RustemonClient {
-    client: ClientWithMiddleware,
+/// Environment to target while calling PokeApi.
+pub enum Environment {
+    Prod,
+    Staging,
+    Custom(Url),
 }
 
-impl RustemonClient {
-    /// Returns a new instance of RustemonClient.
-    ///
-    /// # Arguments
-    ///
-    /// * `cache_mode` - The [CacheMode] to inject into the client.
-    /// * `options` - The [CacheOptions] to inject into the client.
-    pub fn new(cache_mode: CacheMode, options: Option<CacheOptions>) -> Self {
+impl Default for Environment {
+    fn default() -> Self {
+        Self::Prod
+    }
+}
+
+impl From<Environment> for Url {
+    fn from(value: Environment) -> Self {
+        match value {
+            Environment::Prod => Url::parse("https://pokeapi.co/api/v2/").unwrap(),
+            Environment::Staging => Url::parse("https://staging.pokeapi.co/api/v2/").unwrap(),
+            Environment::Custom(url) => url,
+        }
+    }
+}
+
+pub struct RustemonClientBuilder {
+    cache: HttpCache<CACacheManager>,
+    environment: Environment,
+}
+
+impl RustemonClientBuilder {
+    pub fn new() -> Self {
         Self {
-            client: ClientBuilder::new(Client::new())
-                .with(Cache(HttpCache {
-                    mode: cache_mode,
-                    manager: CACacheManager::default(),
-                    options,
-                }))
-                .build(),
+            cache: HttpCache {
+                mode: CacheMode::Default,
+                manager: CACacheManager::default(),
+                options: None,
+            },
+            environment: Environment::default(),
         }
     }
 
-    /// Returns a new instance of RustemonClient,
-    /// while passing an unchecked path String to CACacheManager
-    ///
-    /// # Arguments
-    ///
-    /// * `cache_path` - The String representing a path to pass to the cache manager.
-    /// * `cache_mode` - The [CacheMode] to inject into the client.
-    /// * `options` - The [CacheOptions] to inject into the client.
-    pub fn new_path_unchecked(
-        cache_path: String,
-        cache_mode: CacheMode,
-        options: Option<CacheOptions>,
-    ) -> Self {
-        Self {
+    pub fn with_mode(mut self, cache_mode: CacheMode) -> Self {
+        self.cache.mode = cache_mode;
+        self
+    }
+
+    pub fn with_manager(mut self, manager: CACacheManager) -> Self {
+        self.cache.manager = manager;
+        self
+    }
+
+    pub fn with_options(mut self, options: CacheOptions) -> Self {
+        self.cache.options = Some(options);
+        self
+    }
+
+    pub fn with_environment(mut self, environment: Environment) -> Self {
+        self.environment = environment;
+        self
+    }
+
+    pub fn build(self) -> RustemonClient {
+        RustemonClient {
             client: ClientBuilder::new(Client::new())
-                .with(Cache(HttpCache {
-                    mode: cache_mode,
-                    manager: CACacheManager { path: cache_path },
-                    options,
-                }))
+                .with(Cache(self.cache))
                 .build(),
+            base: Url::from(self.environment),
         }
+    }
+}
+
+/// Custom client used to call Pokeapi.
+pub struct RustemonClient {
+    client: ClientWithMiddleware,
+    base: Url,
+}
+
+pub(crate) enum Id<'a> {
+    Int(i64),
+    Str(&'a str),
+}
+
+impl RustemonClient {
+    async fn inner_get<T>(&self, url: Url) -> Result<T, Error>
+    where
+        T: DeserializeOwned,
+    {
+        Ok(self.client.get(url).send().await?.json().await?)
     }
 
     /// Returns the deserialized answer resulting from the call made to Pokeapi.
@@ -63,12 +104,58 @@ impl RustemonClient {
     /// # Arguments
     ///
     /// `url` - The url to call in order to retrieves the json to deserialize.
-    pub(crate) async fn get_by_url<T>(&self, url: Url) -> Result<T, Error>
+    pub(crate) async fn get_by_endpoint<T>(&self, endpoint: &str) -> Result<T, Error>
     where
         T: DeserializeOwned,
     {
-        let json_answer = self.client.get(url).send().await?.json().await?;
-        Ok(json_answer)
+        let url = self
+            .base
+            .join(endpoint)
+            .map_err(|_| Error::UrlParse(format!("{}/{endpoint}", self.base)))?;
+        self.inner_get(url).await
+    }
+
+    pub(crate) async fn get_with_limit_and_offset<T>(
+        &self,
+        endpoint: &str,
+        limit: i64,
+        offset: i64,
+    ) -> Result<T, Error>
+    where
+        T: DeserializeOwned,
+    {
+        let mut url = self
+            .base
+            .join(endpoint)
+            .map_err(|_| Error::UrlParse(format!("{}/{endpoint}", self.base)))?;
+        url.set_query(Some(&format!("limit={limit}&offset={offset}")));
+        self.inner_get(url).await
+    }
+
+    pub(crate) async fn get_by_endpoint_and_id<'a, T>(
+        &self,
+        endpoint: &str,
+        id: Id<'a>,
+    ) -> Result<T, Error>
+    where
+        T: DeserializeOwned,
+    {
+        let inner_id = match id {
+            Id::Int(i) => i.to_string(),
+            Id::Str(s) => s.to_owned(),
+        };
+        let url = self
+            .base
+            .join(&format!("{endpoint}/{inner_id}"))
+            .map_err(|_| Error::UrlParse(format!("{}/{endpoint}/{inner_id}", self.base)))?;
+        self.inner_get(url).await
+    }
+
+    pub(crate) async fn get_by_url<T>(&self, url: impl IntoUrl) -> Result<T, Error>
+    where
+        T: DeserializeOwned,
+    {
+        self.inner_get(url.into_url()?).await
     }
 }
 
@@ -83,6 +170,7 @@ impl Default for RustemonClient {
                     options: None,
                 }))
                 .build(),
+            base: Url::from(Environment::default()),
         }
     }
 }
