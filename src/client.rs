@@ -42,9 +42,8 @@ pub struct RustemonClientBuilder {
     environment: Environment,
 }
 
-impl RustemonClientBuilder {
-    /// Creates a new builder, having default configuration.
-    pub fn new() -> Self {
+impl Default for RustemonClientBuilder {
+    fn default() -> Self {
         Self {
             cache: HttpCache {
                 mode: CacheMode::Default,
@@ -54,7 +53,9 @@ impl RustemonClientBuilder {
             environment: Environment::default(),
         }
     }
+}
 
+impl RustemonClientBuilder {
     /// Configure the CacheMode of the builder. See [CacheMode].
     pub fn with_mode(mut self, cache_mode: CacheMode) -> Self {
         self.cache.mode = cache_mode;
