@@ -2,7 +2,7 @@ macro_rules! endpoint {
     ($type:ty; for $name:literal) => {
         use reqwest::Url;
 
-        use crate::model::resource::NamedApiResourceList;
+        use crate::model::resource::{NamedApiResourceList, NamedApiResource};
         use crate::client::RustemonClient;
         use crate::error::Error;
 
@@ -36,6 +36,29 @@ macro_rules! endpoint {
             )
             .unwrap();
             rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await
+        }
+
+        /// Returns all pages from the given resource.
+        ///
+        /// # Arguments
+        ///
+        /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+        pub async fn get_all_pages(rustemon_client: &RustemonClient) -> Result<Vec<NamedApiResource<$type>>, Error> {
+            let url = Url::parse(ENDPOINT).unwrap();
+
+            let mut page = rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await?;
+            let mut all_pages = Vec::with_capacity(page.count as usize);
+
+            all_pages.append(&mut page.results);
+
+            while let Some(ref next_page_url) = page.next {
+                let next_page_url = Url::parse(next_page_url).unwrap();
+                page = rustemon_client.get_by_url::<NamedApiResourceList<$type>>(next_page_url).await?;
+
+                all_pages.append(&mut page.results);
+            }
+
+            Ok(all_pages)
         }
 
         /// Returns the resource, using its id.
