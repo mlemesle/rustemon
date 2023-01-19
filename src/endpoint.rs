@@ -3,10 +3,8 @@ macro_rules! endpoint {
         use reqwest::Url;
 
         use crate::model::resource::{NamedApiResourceList, NamedApiResource};
-        use crate::client::RustemonClient;
+        use crate::client::{RustemonClient, Id};
         use crate::error::Error;
-
-        const ENDPOINT: &str = concat!("https:///pokeapi.co/api/v2/", $name, "/");
 
         /// Returns the default page regarding the resource.
         ///
@@ -14,8 +12,7 @@ macro_rules! endpoint {
         ///
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
         pub async fn get_page(rustemon_client: &RustemonClient) -> Result<NamedApiResourceList<$type>, Error> {
-            let url = Url::parse(ENDPOINT).unwrap();
-            rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await
+            rustemon_client.get_by_endpoint::<NamedApiResourceList<$type>>($name).await
         }
 
         /// Returns the page targeted by the parameters.
@@ -30,12 +27,7 @@ macro_rules! endpoint {
             limit: i64,
             rustemon_client: &RustemonClient
         ) -> Result<NamedApiResourceList<$type>, Error> {
-            let url = Url::parse_with_params(
-                ENDPOINT,
-                &[("limit", limit.to_string()), ("offset", offset.to_string())],
-            )
-            .unwrap();
-            rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await
+            rustemon_client.get_with_limit_and_offset::<NamedApiResourceList<$type>>($name, limit, offset).await
         }
 
         /// Returns all pages from the given resource.
@@ -44,9 +36,7 @@ macro_rules! endpoint {
         ///
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
         pub async fn get_all_pages(rustemon_client: &RustemonClient) -> Result<Vec<NamedApiResource<$type>>, Error> {
-            let url = Url::parse(ENDPOINT).unwrap();
-
-            let mut page = rustemon_client.get_by_url::<NamedApiResourceList<$type>>(url).await?;
+            let mut page = get_page(rustemon_client).await?;
             let mut all_pages = Vec::with_capacity(page.count as usize);
 
             all_pages.append(&mut page.results);
@@ -68,8 +58,7 @@ macro_rules! endpoint {
         /// `id` - The unique ID of the resource to get.
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
         pub async fn get_by_id(id: i64, rustemon_client: &RustemonClient) -> Result<$type, Error> {
-            let url = Url::parse(ENDPOINT).unwrap().join(&id.to_string()).unwrap();
-            rustemon_client.get_by_url::<$type>(url).await
+            rustemon_client.get_by_endpoint_and_id::<$type>($name, Id::Int(id)).await
         }
 
         /// Returns the resource, using its name.
@@ -79,8 +68,7 @@ macro_rules! endpoint {
         /// `name` - The name of the resource to get.
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
         pub async fn get_by_name(name: &str, rustemon_client: &RustemonClient) -> Result<$type, Error> {
-            let url = Url::parse(ENDPOINT).unwrap().join(name).unwrap();
-            rustemon_client.get_by_url::<$type>(url).await
+            rustemon_client.get_by_endpoint_and_id::<$type>($name, Id::Str(name)).await
         }
     };
 
@@ -89,15 +77,13 @@ macro_rules! endpoint {
         crate::endpoint!($type; for $name);
 
         $(
+            /// Give access to the sub endpoint.
             pub mod $sub {
 
-                use reqwest::Url;
-                use crate::client::RustemonClient;
-                use crate::error::Error;
+                use super::RustemonClient;
+                use super::Error;
 
-                use super::ENDPOINT;
-
-                const SUB_ENDPOINT: &str = stringify!($sub);
+                const SUB_STR: &'static str = stringify!($sub);
 
                 /// Returns the resource, using its id.
                 ///
@@ -106,9 +92,8 @@ macro_rules! endpoint {
                 /// `id` - The unique ID of the resource to get.
                 /// `rustemon_client` - The [RustemonClient] to use to access the resource.
                 pub async fn get_by_id(id: i64, rustemon_client: &RustemonClient) -> Result<$sub_type, Error> {
-                    let sub_path = format!("{}/{}", id, SUB_ENDPOINT);
-                    let url = Url::parse(ENDPOINT).unwrap().join(&sub_path).unwrap();
-                    rustemon_client.get_by_url::<$sub_type>(url).await
+                    let sub_path = format!("{}/{}/{}", $name, id, SUB_STR);
+                    rustemon_client.get_by_endpoint::<$sub_type>(&sub_path).await
                 }
 
                 /// Returns the resource, using its name.
@@ -118,9 +103,8 @@ macro_rules! endpoint {
                 /// `name` - The name of the resource to get.
                 /// `rustemon_client` - The [RustemonClient] to use to access the resource.
                 pub async fn get_by_name(name: &'static str, rustemon_client: &RustemonClient) -> Result<$sub_type, Error> {
-                    let sub_path = format!("{}/{}", name, SUB_ENDPOINT);
-                    let url = Url::parse(ENDPOINT).unwrap().join(&sub_path).unwrap();
-                    rustemon_client.get_by_url::<$sub_type>(url).await
+                    let sub_path = format!("{}/{}/{}", $name, name, SUB_STR);
+                    rustemon_client.get_by_endpoint::<$sub_type>(&sub_path).await
                 }
             }
         )+
