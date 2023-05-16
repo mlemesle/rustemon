@@ -1,7 +1,5 @@
 macro_rules! endpoint {
     ($type:ty; for $name:literal) => {
-        use reqwest::Url;
-
         use crate::model::resource::{NamedApiResourceList, NamedApiResource};
         use crate::client::{RustemonClient, Id};
         use crate::error::Error;
@@ -36,17 +34,17 @@ macro_rules! endpoint {
         ///
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
         pub async fn get_all_pages(rustemon_client: &RustemonClient) -> Result<Vec<NamedApiResource<$type>>, Error> {
-            let mut page = get_page(rustemon_client).await?;
-            let mut all_pages = Vec::with_capacity(page.count as usize);
+            let mut first_page = get_page(rustemon_client).await?;
+            let first_page_entries_count = first_page.results.len() as i64;
 
-            all_pages.append(&mut page.results);
+            let total_entries_count = first_page.count;
+            let other_entries_count = total_entries_count - first_page_entries_count;
 
-            while let Some(ref next_page_url) = page.next {
-                let next_page_url = Url::parse(next_page_url).unwrap();
-                page = rustemon_client.get_by_url::<NamedApiResourceList<$type>>(next_page_url).await?;
+            let mut all_pages = Vec::with_capacity(total_entries_count as usize);
+            all_pages.append(&mut first_page.results);
 
-                all_pages.append(&mut page.results);
-            }
+            let mut other_entries = get_page_with_param(first_page_entries_count, other_entries_count, &rustemon_client).await?;
+            all_pages.append(&mut other_entries.results);
 
             Ok(all_pages)
         }
