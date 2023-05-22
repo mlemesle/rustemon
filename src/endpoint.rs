@@ -43,7 +43,7 @@ macro_rules! endpoint {
             let mut all_entries = Vec::with_capacity(total_entries_count as usize);
             all_entries.append(&mut first_page.results);
 
-            let mut other_entries = get_page_with_param(first_page_entries_count, other_entries_count, &rustemon_client).await?;
+            let mut other_entries = get_page_with_param(first_page_entries_count, other_entries_count, rustemon_client).await?;
             all_entries.append(&mut other_entries.results);
 
             Ok(all_entries)
