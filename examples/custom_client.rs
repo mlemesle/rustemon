@@ -1,7 +1,8 @@
 use std::time::Duration;
 
-use http_cache_reqwest::{CACacheManager, CacheMode, CacheOptions};
-use rustemon::client::{Environment, RustemonClientBuilder};
+use rustemon::client::{
+    CACacheManager, CacheMode, CacheOptions, Environment, RustemonClientBuilder,
+};
 
 #[tokio::main]
 async fn main() {

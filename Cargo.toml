@@ -13,14 +13,13 @@ version = "3.2.0"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-async-trait = "0.1.68"
-http-cache-reqwest = "0.9.0"
-log = "0.4.17"
+async-trait = "0.1.73"
+http-cache-reqwest = "0.11.1"
 reqwest = {version = "0.11.18", features = ["json"]}
-reqwest-middleware = "0.2.2"
-serde = {version = "1.0.163", features = ["derive"]}
-serde_json = "1.0.96"
-thiserror = "1.0.40"
+reqwest-middleware = "0.2.3"
+serde = {version = "1.0.185", features = ["derive"]}
+serde_json = "1.0.105"
+thiserror = "1.0.47"
 
 [dev-dependencies]
 tokio = {version = "1", features = ["full"]}

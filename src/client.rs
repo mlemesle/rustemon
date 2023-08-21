@@ -1,6 +1,6 @@
 //! Defines the client used to access Pokeapi.
 
-use http_cache_reqwest::{Cache, HttpCache};
+use http_cache_reqwest::{Cache, HttpCache, HttpCacheOptions};
 use reqwest::{Client, IntoUrl, Url};
 use reqwest_middleware::{ClientBuilder, ClientWithMiddleware};
 use serde::de::DeserializeOwned;
@@ -55,7 +55,7 @@ impl Default for RustemonClientBuilder {
             cache: HttpCache {
                 mode: CacheMode::Default,
                 manager: CACacheManager::default(),
-                options: None,
+                options: HttpCacheOptions::default(),
             },
             environment: Environment::default(),
         }
@@ -77,7 +77,7 @@ impl RustemonClientBuilder {
 
     /// Configure the cache options of the builder. See [CacheOptions].
     pub fn with_options(&mut self, options: CacheOptions) -> &mut Self {
-        self.cache.options = Some(options);
+        self.cache.options.cache_options = Some(options);
         self
     }
 
@@ -186,7 +186,7 @@ impl Default for RustemonClient {
                 .with(Cache(HttpCache {
                     mode: CacheMode::Default,
                     manager: CACacheManager::default(),
-                    options: None,
+                    options: HttpCacheOptions::default(),
                 }))
                 .build(),
             base: Url::try_from(Environment::default()).unwrap(),
