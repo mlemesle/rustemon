@@ -99,6 +99,7 @@ impl RustemonClientBuilder {
 }
 
 /// Custom client used to call Pokeapi.
+#[derive(Debug)]
 pub struct RustemonClient {
     client: ClientWithMiddleware,
     base: Url,

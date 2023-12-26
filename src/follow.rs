@@ -13,7 +13,7 @@ pub trait Follow<T>
 where
     T: DeserializeOwned + Send + Sync,
 {
-    /// Returns the resource pointed by the [NamedApiResource]. Follows its inner URL and gives back the result.
+    /// Returns the resource pointed by the resource. Follows its inner URL and gives back the result.
     ///
     /// # Arguments
     ///
