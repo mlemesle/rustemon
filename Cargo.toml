@@ -8,18 +8,18 @@ license = "MIT"
 name = "rustemon"
 readme = "README.md"
 repository = "https://github.com/mlemesle/rustemon"
-version = "3.2.1"
+version = "3.3.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-async-trait = "0.1.73"
-http-cache-reqwest = "0.11.1"
-reqwest = {version = "0.11.18", features = ["json"]}
-reqwest-middleware = "0.2.3"
-serde = {version = "1.0.185", features = ["derive"]}
-serde_json = "1.0.105"
-thiserror = "1.0.47"
+async-trait = "0.1.75"
+http-cache-reqwest = "0.12.0"
+reqwest = {version = "0.11.23", features = ["json"]}
+reqwest-middleware = "0.2.4"
+serde = {version = "1.0.193", features = ["derive"]}
+serde_json = "1.0.108"
+thiserror = "1.0.52"
 
 [dev-dependencies]
 tokio = {version = "1", features = ["full"]}

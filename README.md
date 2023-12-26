@@ -1,4 +1,7 @@
-# Rustemon
+# Rustemon [![Latest Version]][crates.io]
+
+[Latest Version]: https://img.shields.io/crates/v/rustemon.svg
+[crates.io]: https://crates.io/crates/rustemon
 
 This library is a wrapper for the awesome [PokeApi](https://pokeapi.co), which provides all the informations you need about Pokémons !
 
@@ -9,7 +12,7 @@ Fully written in Rust, this library covers the whole PokeApi REST api v2.
 Adds the following in the dependencies of your Cargo.toml :
 
 ```toml
-rustemon = "3.2.1" 
+rustemon = "3.3.0" 
 ```
 
 ### How to use it ?
@@ -48,7 +51,7 @@ For each endpoints, 4 functions are defined :
 * get_by_id : calls the endpoint using the id of the targeted resource,
 * get_by_name : calls the endpoint using the name of the targeted resource.
 
-By default, the endpoints are all async ! Which means you NEED to add a async runtime (such as tokio for example), in order for 
+The endpoints are all async ! Which means you NEED to add a async runtime (such as tokio for example), in order for 
 the library to work.
 
 ### Caching
