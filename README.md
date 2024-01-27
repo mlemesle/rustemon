@@ -21,6 +21,21 @@ As you noticed in [the documentation of PokeApi](https://pokeapi.co/docs/v2), ev
 
 The library kept this group oriented architecture !
 
+### Features
+
+This crate provides two features to enable different cache mechanisms :
+* `filesystem-cache` -> A configurable cache stored in files.
+* `in-memory-cache` -> A configurable in-memory cache.
+
+`filesystem-cache` is enabled by default.
+Be careful, those features are mutually exclusive !!
+If you want to use the `in-memory-cache` feature, you can proceed as follow:
+
+```toml
+[dependencies]
+rustemon = { version = "*", default-features = false, features = ["in-memory-cache"] } 
+```
+
 ##### Models
 
 All the models are located into the following module :
