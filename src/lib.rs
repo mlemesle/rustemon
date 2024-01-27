@@ -2,6 +2,9 @@
 #![doc = include_str!("../README.md")]
 #![deny(missing_docs)]
 
+#[cfg(all(feature = "filesystem-cache", feature = "in-memory-cache"))]
+compile_error!("feature \"filesystem-cache\" and feature \"in-memory-cache\" cannot be enabled at the same time");
+
 pub mod berries;
 pub mod contests;
 pub mod encounters;
