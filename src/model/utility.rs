@@ -3,7 +3,7 @@
 use super::resource::Name;
 
 /// [Language official documentation](https://pokeapi.co/docs/v2#language)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct Language {
     /// The identifier for this resource.
     pub id: i64,

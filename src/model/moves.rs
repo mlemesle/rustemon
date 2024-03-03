@@ -11,7 +11,7 @@ use super::{
 };
 
 /// [Move official documentation](https://pokeapi.co/docs/v2#move)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct Move {
     /// The identifier for this resource.
     pub id: i64,
@@ -66,7 +66,7 @@ pub struct Move {
 }
 
 /// [ContestComboSets official documentation](https://pokeapi.co/docs/v2#contestcombosets)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct ContestComboSets {
     /// A detail of moves this move can be used before or after, granting additional appeal points in contests.
     pub normal: ContestComboDetail,
@@ -76,7 +76,7 @@ pub struct ContestComboSets {
 }
 
 /// [ContestComboDetail official documentation](https://pokeapi.co/docs/v2#contestcombodetail)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct ContestComboDetail {
     /// A list of moves to use before this move.
     pub use_before: Option<Vec<NamedApiResource<Move>>>,
@@ -85,7 +85,7 @@ pub struct ContestComboDetail {
 }
 
 /// [MoveFlavorText official documentation](https://pokeapi.co/docs/v2#moveflavortext)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveFlavorText {
     /// The localized flavor text for an api resource in a specific language.
     pub flavor_text: String,
@@ -96,7 +96,7 @@ pub struct MoveFlavorText {
 }
 
 /// [MoveMetaData official documentation](https://pokeapi.co/docs/v2#movemetadata)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveMetaData {
     /// The status ailment this move inflicts on its target.
     pub ailment: NamedApiResource<MoveAilment>,
@@ -125,7 +125,7 @@ pub struct MoveMetaData {
 }
 
 /// [MoveStatChange official documentation](https://pokeapi.co/docs/v2#movestatchange)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveStatChange {
     /// The amount of change.
     pub change: i64,
@@ -134,7 +134,7 @@ pub struct MoveStatChange {
 }
 
 /// [PastMoveStatValues official documentation](https://pokeapi.co/docs/v2#pastmovestatvalues)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct PastMoveStatValues {
     /// The percent value of how likely this move is to be successful.
     pub accuracy: Option<i64>,
@@ -154,7 +154,7 @@ pub struct PastMoveStatValues {
 }
 
 /// [MoveAilment official documentation](https://pokeapi.co/docs/v2#moveailment)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveAilment {
     /// The identifier for this resource.
     pub id: i64,
@@ -167,7 +167,7 @@ pub struct MoveAilment {
 }
 
 /// [MoveBattleStyle official documentation](https://pokeapi.co/docs/v2#movebattlestyle)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveBattleStyle {
     /// The identifier for this resource.
     pub id: i64,
@@ -178,7 +178,7 @@ pub struct MoveBattleStyle {
 }
 
 /// [MoveCategory official documentation](https://pokeapi.co/docs/v2#movecategory)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveCategory {
     /// The identifier for this resource.
     pub id: i64,
@@ -191,7 +191,7 @@ pub struct MoveCategory {
 }
 
 /// [MoveDamageClass official documentation](https://pokeapi.co/docs/v2#movedamageclass)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveDamageClass {
     /// The identifier for this resource.
     pub id: i64,
@@ -206,7 +206,7 @@ pub struct MoveDamageClass {
 }
 
 /// [MoveLearnMethod official documentation](https://pokeapi.co/docs/v2#movelearnmethod)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveLearnMethod {
     /// The identifier for this resource.
     pub id: i64,
@@ -221,7 +221,7 @@ pub struct MoveLearnMethod {
 }
 
 /// [MoveTarget official documentation](https://pokeapi.co/docs/v2#movetarget)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
 pub struct MoveTarget {
     /// The identifier for this resource.
     pub id: i64,
