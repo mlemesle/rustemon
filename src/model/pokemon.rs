@@ -15,7 +15,8 @@ use super::{
 };
 
 /// [Ability official documentation](https://pokeapi.co/docs/v2#ability)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Ability {
     /// The identifier for this resource.
     pub id: i64,
@@ -38,7 +39,8 @@ pub struct Ability {
 }
 
 /// [AbilityEffectChange official documentation](https://pokeapi.co/docs/v2#abilityeffectchange)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct AbilityEffectChange {
     /// The previous effect of this ability listed in different languages.
     pub effect_entries: Vec<Effect>,
@@ -47,7 +49,8 @@ pub struct AbilityEffectChange {
 }
 
 /// [AbilityFlavorText official documentation](https://pokeapi.co/docs/v2#abilityflavortext)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct AbilityFlavorText {
     /// The localized name for an API resource in a specific language.
     pub flavor_text: String,
@@ -58,7 +61,8 @@ pub struct AbilityFlavorText {
 }
 
 /// [AbilityPokemon official documentation](https://pokeapi.co/docs/v2#abilitypokemon)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct AbilityPokemon {
     /// Whether or not this a hidden ability for the referenced Pokémon.
     pub is_hidden: bool,
@@ -70,7 +74,8 @@ pub struct AbilityPokemon {
 }
 
 /// [Characteristic official documentation](https://pokeapi.co/docs/v2#characteristic)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Characteristic {
     /// The identifier for this resource.
     pub id: i64,
@@ -86,7 +91,8 @@ pub struct Characteristic {
 }
 
 /// [EggGroup official documentation](https://pokeapi.co/docs/v2#egggroup)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct EggGroup {
     /// The identifier for this resource.
     pub id: i64,
@@ -99,7 +105,8 @@ pub struct EggGroup {
 }
 
 /// [Gender official documentation](https://pokeapi.co/docs/v2#gender)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Gender {
     /// The identifier for this resource.
     pub id: i64,
@@ -112,7 +119,8 @@ pub struct Gender {
 }
 
 /// [PokemonSpeciesGender official documentation](https://pokeapi.co/docs/v2#pokemonspeciesgender)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonSpeciesGender {
     /// The chance of this Pokémon being female, in eighths; or -1 for genderless.
     pub rate: i64,
@@ -121,7 +129,8 @@ pub struct PokemonSpeciesGender {
 }
 
 /// [GrowthRate official documentation](https://pokeapi.co/docs/v2#growthrate)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GrowthRate {
     /// The identifier for this resource.
     pub id: i64,
@@ -138,7 +147,8 @@ pub struct GrowthRate {
 }
 
 /// [GrowthRateExperienceLevel official documentation](https://pokeapi.co/docs/v2#growthrateexperiencelevel)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GrowthRateExperienceLevel {
     /// The level gained.
     pub level: i64,
@@ -147,7 +157,8 @@ pub struct GrowthRateExperienceLevel {
 }
 
 /// [Nature official documentation](https://pokeapi.co/docs/v2#nature)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Nature {
     /// The identifier for this resource.
     pub id: i64,
@@ -170,7 +181,8 @@ pub struct Nature {
 }
 
 /// [NatureStatChange official documentation](https://pokeapi.co/docs/v2#naturestatchange)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct NatureStatChange {
     /// The amount of change.
     pub max_change: i64,
@@ -179,7 +191,8 @@ pub struct NatureStatChange {
 }
 
 /// [MoveBattleStylePreference official documentation](https://pokeapi.co/docs/v2#movebattlestylepreference)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct MoveBattleStylePreference {
     /// Chance of using the move, in percent, if HP is under one half.
     pub low_hp_preference: i64,
@@ -190,7 +203,8 @@ pub struct MoveBattleStylePreference {
 }
 
 /// [PokeathlonStat official documentation](https://pokeapi.co/docs/v2#pokeathlonstat)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokeathlonStat {
     /// The identifier for this resource.
     pub id: i64,
@@ -203,7 +217,8 @@ pub struct PokeathlonStat {
 }
 
 /// [NaturePokeathlonStatAffectSets official documentation](https://pokeapi.co/docs/v2#naturepokeathlonstataffectsets)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct NaturePokeathlonStatAffectSets {
     /// A list of natures and how they change the referenced Pokéathlon stat.
     pub increase: Vec<NaturePokeathlonStatAffect>,
@@ -212,7 +227,8 @@ pub struct NaturePokeathlonStatAffectSets {
 }
 
 /// [NaturePokeathlonStatAffect official documentation](https://pokeapi.co/docs/v2#naturepokeathlonstataffect)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct NaturePokeathlonStatAffect {
     /// The maximum amount of change to the referenced Pokéathlon stat.
     pub max_change: i64,
@@ -221,7 +237,8 @@ pub struct NaturePokeathlonStatAffect {
 }
 
 /// [Pokemon official documentation](https://pokeapi.co/docs/v2#pokemon)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Pokemon {
     /// The identifier for this resource.
     pub id: i64,
@@ -263,7 +280,8 @@ pub struct Pokemon {
 }
 
 /// [PokemonAbility official documentation](https://pokeapi.co/docs/v2#pokemonability)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonAbility {
     /// Whether or not this is a hidden ability.
     pub is_hidden: bool,
@@ -274,7 +292,8 @@ pub struct PokemonAbility {
 }
 
 /// [PokemonType official documentation](https://pokeapi.co/docs/v2#pokemontype)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonType {
     /// The order the Pokémon's types are listed in.
     pub slot: i64,
@@ -284,7 +303,8 @@ pub struct PokemonType {
 }
 
 /// [PokemonTypePast official documentation](https://pokeapi.co/docs/v2#pokemontypepast)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonTypePast {
     /// The last generation in which the referenced pokémon had the listed types.
     pub generation: NamedApiResource<Generation>,
@@ -293,7 +313,8 @@ pub struct PokemonTypePast {
 }
 
 /// [PokemonHeldItem official documentation](https://pokeapi.co/docs/v2#pokemonhelditem)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonHeldItem {
     /// The item the referenced Pokémon holds.
     pub item: NamedApiResource<Item>,
@@ -302,7 +323,8 @@ pub struct PokemonHeldItem {
 }
 
 /// [PokemonHeldItemVersion official documentation](https://pokeapi.co/docs/v2#pokemonhelditemversion)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonHeldItemVersion {
     /// The version in which the item is held.
     pub version: NamedApiResource<Version>,
@@ -311,7 +333,8 @@ pub struct PokemonHeldItemVersion {
 }
 
 /// [PokemonMove official documentation](https://pokeapi.co/docs/v2#pokemonmove)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonMove {
     /// The move the Pokémon can learn.
     #[serde(rename = "move")]
@@ -321,7 +344,8 @@ pub struct PokemonMove {
 }
 
 /// [PokemonMoveVersion official documentation](https://pokeapi.co/docs/v2#pokemonmoveversion)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonMoveVersion {
     /// The method by which the move is learned.
     pub move_learn_method: NamedApiResource<MoveLearnMethod>,
@@ -332,7 +356,8 @@ pub struct PokemonMoveVersion {
 }
 
 /// [PokemonStat official documentation](https://pokeapi.co/docs/v2#pokemonstat)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonStat {
     /// The stat the Pokémon has.
     pub stat: NamedApiResource<Stat>,
@@ -343,7 +368,8 @@ pub struct PokemonStat {
 }
 
 /// [PokemonSprites official documentation](https://pokeapi.co/docs/v2#pokemonsprites)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonSprites {
     /// The default depiction of this Pokémon from the front in battle.
     pub front_default: Option<String>,
@@ -368,7 +394,8 @@ pub struct PokemonSprites {
 }
 
 /// References sprites that doesn't come from game.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct OtherSprites {
     /// Dream world sprites of this Pokémon.
     pub dream_world: DreamWorldSprites,
@@ -380,7 +407,8 @@ pub struct OtherSprites {
 }
 
 /// References the dream world sprites of a Pokémon.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct DreamWorldSprites {
     /// The default despiction of this Pokémon from dream world.
     pub front_default: Option<String>,
@@ -389,7 +417,8 @@ pub struct DreamWorldSprites {
 }
 
 /// References the home sprites of a Pokémon.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct HomeSprites {
     /// The default despiction of this Pokémon from dream world.
     pub front_default: Option<String>,
@@ -402,14 +431,16 @@ pub struct HomeSprites {
 }
 
 /// References the official artwork of a Pokémon.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct OfficialArtworkSprites {
     /// The default despiction of this Pokémon form the official artwork.
     pub front_default: Option<String>,
 }
 
 /// Sprites of a Pokémon, per generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct VersionsSprites {
     /// Sprites for the first generation.
     #[serde(rename = "generation-i")]
@@ -438,7 +469,8 @@ pub struct VersionsSprites {
 }
 
 /// Sprites for the first generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationISprites {
     /// Sprites for Pokémon Red & Pokémon Blue.
     #[serde(rename = "red-blue")]
@@ -448,7 +480,8 @@ pub struct GenerationISprites {
 }
 
 /// Sprites for Pokémon Red & Pokémon Blue.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct RedBlueSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -465,7 +498,8 @@ pub struct RedBlueSprites {
 }
 
 /// Sprites for Pokémon Yellow.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct YellowSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -482,7 +516,8 @@ pub struct YellowSprites {
 }
 
 /// Sprites for the second generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationIISprites {
     /// Sprites for Pokémon Crystal.
     pub crystal: CrystalSprites,
@@ -493,7 +528,8 @@ pub struct GenerationIISprites {
 }
 
 /// Sprites for Pokémon Crystal.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct CrystalSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -514,7 +550,8 @@ pub struct CrystalSprites {
 }
 
 /// Sprites for Pokémon Gold.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GoldSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -529,7 +566,8 @@ pub struct GoldSprites {
 }
 
 /// Sprites for Pokémon Silver.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct SilverSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -544,7 +582,8 @@ pub struct SilverSprites {
 }
 
 /// Sprites for the third generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationIIISprites {
     /// Sprites for Pokémon Emerald.
     pub emerald: EmeraldSprites,
@@ -557,7 +596,8 @@ pub struct GenerationIIISprites {
 }
 
 /// Sprites for Pokémon Emerald.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct EmeraldSprites {
     /// The default front sprite of a Pokémon.
     pub front_default: Option<String>,
@@ -566,7 +606,8 @@ pub struct EmeraldSprites {
 }
 
 /// Sprites for Pokémon FireRed & Pokémon LeafGreen.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct FireredLeafgreenSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -579,7 +620,8 @@ pub struct FireredLeafgreenSprites {
 }
 
 /// Sprites for Pokémon Ruby & Pokémon Sapphire.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct RubySapphireSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -592,7 +634,8 @@ pub struct RubySapphireSprites {
 }
 
 /// Sprites for the fourth generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationIVSprites {
     /// Sprites for Pokémon Diamond & Pokémon Pearl.
     #[serde(rename = "diamond-pearl")]
@@ -605,7 +648,8 @@ pub struct GenerationIVSprites {
 }
 
 /// Sprites for Pokémon Diamond & Pokémon Pearl.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct DiamondPearlSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -626,7 +670,8 @@ pub struct DiamondPearlSprites {
 }
 
 /// Sprites for Pokémon Platinum.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PlatinumSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -647,7 +692,8 @@ pub struct PlatinumSprites {
 }
 
 /// Sprites for Pokémon HeartGold & Pokémon SoulSilver.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct HeartgoldSoulsilverSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -668,7 +714,8 @@ pub struct HeartgoldSoulsilverSprites {
 }
 
 /// Sprites for the fifth generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationVSprites {
     /// Sprites for Pokémon Black & Pokémon White.
     #[serde(rename = "black-white")]
@@ -676,7 +723,8 @@ pub struct GenerationVSprites {
 }
 
 /// Sprites for Pokémon Black & Pokémon White.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct BlackWhiteSprites {
     /// The animated sprites for a Pokémon.
     pub animated: BlackWhiteAnimatedSprites,
@@ -699,7 +747,8 @@ pub struct BlackWhiteSprites {
 }
 
 /// The animated sprites for a Pokémon.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct BlackWhiteAnimatedSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -720,7 +769,8 @@ pub struct BlackWhiteAnimatedSprites {
 }
 
 /// Sprites for the sixth generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationVISprites {
     /// Sprites for Pokémon OmegaRuby & Pokémon AlphaSapphire.
     #[serde(rename = "omegaruby-alphasapphire")]
@@ -731,7 +781,8 @@ pub struct GenerationVISprites {
 }
 
 /// Sprites for Pokémon OmegaRuby & Pokémon AlphaSapphire.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct OmegarubyAlphasapphireSprites {
     /// The default front sprite of a Pokémon.
     pub front_default: Option<String>,
@@ -744,7 +795,8 @@ pub struct OmegarubyAlphasapphireSprites {
 }
 
 /// Sprites for Pokémon X & Pokémon Y.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct XYSprites {
     /// The default front sprite of a Pokémon.
     pub front_default: Option<String>,
@@ -757,7 +809,8 @@ pub struct XYSprites {
 }
 
 /// Sprites for the seventh generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationVIISprites {
     /// The icons sprites of a Pokémon.
     pub icons: IconsSprites,
@@ -767,7 +820,8 @@ pub struct GenerationVIISprites {
 }
 
 /// The icons sprites of a Pokémon.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct IconsSprites {
     /// The default front sprite of a Pokémon.
     pub front_default: Option<String>,
@@ -776,7 +830,8 @@ pub struct IconsSprites {
 }
 
 /// Sprites for Pokémon UltraSun & Pokémon UltraMoon.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct UltrasunUltramoonSprites {
     /// The default front sprite of a Pokémon.
     pub front_default: Option<String>,
@@ -789,14 +844,16 @@ pub struct UltrasunUltramoonSprites {
 }
 
 /// Sprites for the eighth generation.
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct GenerationVIIISprites {
     /// The icons sprites of a Pokémon.
     pub icons: IconsSprites,
 }
 
 /// [LocationAreaEncounter official documentation](https://pokeapi.co/docs/v2#locationareaencounter)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct LocationAreaEncounter {
     /// The location area the referenced Pokémon can be encountered in.
     pub location_area: NamedApiResource<LocationArea>,
@@ -805,7 +862,8 @@ pub struct LocationAreaEncounter {
 }
 
 /// [PokemonColor official documentation](https://pokeapi.co/docs/v2#pokemoncolor)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonColor {
     /// The identifier for this resource.
     pub id: i64,
@@ -818,7 +876,8 @@ pub struct PokemonColor {
 }
 
 /// [PokemonForm official documentation](https://pokeapi.co/docs/v2#pokemonform)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonForm {
     /// The identifier for this resource.
     pub id: i64,
@@ -852,7 +911,8 @@ pub struct PokemonForm {
 }
 
 /// [PokemonFormType official documentation](https://pokeapi.co/docs/v2#pokemonformtype)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonFormType {
     /// The order the Pokémon's types are listed in.
     pub slot: i64,
@@ -862,7 +922,8 @@ pub struct PokemonFormType {
 }
 
 /// [PokemonFormSprites official documentation](https://pokeapi.co/docs/v2#pokemonformsprites)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonFormSprites {
     /// The default back sprite of a Pokémon.
     pub back_default: Option<String>,
@@ -883,7 +944,8 @@ pub struct PokemonFormSprites {
 }
 
 /// [PokemonHabitat official documentation](https://pokeapi.co/docs/v2#pokemonhabitat)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonHabitat {
     /// The identifier for this resource.
     pub id: i64,
@@ -896,7 +958,8 @@ pub struct PokemonHabitat {
 }
 
 /// [PokemonShape official documentation](https://pokeapi.co/docs/v2#pokemonshape)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonShape {
     /// The identifier for this resource.
     pub id: i64,
@@ -911,7 +974,8 @@ pub struct PokemonShape {
 }
 
 /// [AwesomeName official documentation](https://pokeapi.co/docs/v2#awesomename)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct AwesomeName {
     /// The localized "scientific" name for an API resource in a specific language.
     pub awesome_name: String,
@@ -920,7 +984,8 @@ pub struct AwesomeName {
 }
 
 /// [PokemonSpecies official documentation](https://pokeapi.co/docs/v2#pokemonspecies)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonSpecies {
     /// The identifier for this resource.
     pub id: i64,
@@ -981,7 +1046,8 @@ pub struct PokemonSpecies {
 }
 
 /// [Genus official documentation](https://pokeapi.co/docs/v2#genus)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Genus {
     /// The localized genus for the referenced Pokémon species.
     pub genus: String,
@@ -990,7 +1056,8 @@ pub struct Genus {
 }
 
 /// [PokemonSpeciesDexEntry official documentation](https://pokeapi.co/docs/v2#pokemonspeciesdexentry)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonSpeciesDexEntry {
     /// The index number within the Pokédex.
     pub entry_number: i64,
@@ -999,7 +1066,8 @@ pub struct PokemonSpeciesDexEntry {
 }
 
 /// [PalParkEncounterArea official documentation](https://pokeapi.co/docs/v2#palparkencounterarea)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PalParkEncounterArea {
     /// The base score given to the player when the referenced Pokémon is caught during a pal park run.
     pub base_score: i64,
@@ -1010,7 +1078,8 @@ pub struct PalParkEncounterArea {
 }
 
 /// [PokemonSpeciesVariety official documentation](https://pokeapi.co/docs/v2#pokemonspeciesvariety)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct PokemonSpeciesVariety {
     /// Whether this variety is the default variety.
     pub is_default: bool,
@@ -1019,7 +1088,8 @@ pub struct PokemonSpeciesVariety {
 }
 
 /// [Stat official documentation](https://pokeapi.co/docs/v2#stat)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Stat {
     /// The identifier for this resource.
     pub id: i64,
@@ -1042,7 +1112,8 @@ pub struct Stat {
 }
 
 /// [MoveStatAffectSets official documentation](https://pokeapi.co/docs/v2#movestataffectsets)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct MoveStatAffectSets {
     /// A list of moves and how they change the referenced stat.
     pub increase: Vec<MoveStatAffect>,
@@ -1051,7 +1122,8 @@ pub struct MoveStatAffectSets {
 }
 
 /// [MoveStatAffect official documentation](https://pokeapi.co/docs/v2#movestataffect)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct MoveStatAffect {
     /// The maximum amount of change to the referenced stat.
     pub change: i64,
@@ -1061,7 +1133,8 @@ pub struct MoveStatAffect {
 }
 
 /// [NatureStatAffectSets official documentation](https://pokeapi.co/docs/v2#naturestataffectsets)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct NatureStatAffectSets {
     /// A list of natures and how they change the referenced stat.
     pub increase: Vec<NamedApiResource<Nature>>,
@@ -1070,7 +1143,8 @@ pub struct NatureStatAffectSets {
 }
 
 /// [Type official documentation](https://pokeapi.co/docs/v2#type)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct Type {
     /// The identifier for this resource.
     pub id: i64,
@@ -1095,7 +1169,8 @@ pub struct Type {
 }
 
 /// [TypePokemon official documentation](https://pokeapi.co/docs/v2#typepokemon)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct TypePokemon {
     /// The order the Pokémon's types are listed in.
     pub slot: i64,
@@ -1104,7 +1179,8 @@ pub struct TypePokemon {
 }
 
 /// [TypeRelations official documentation](https://pokeapi.co/docs/v2#typerelations)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct TypeRelations {
     /// A list of types this type has no effect on.
     pub no_damage_to: Vec<NamedApiResource<Type>>,
@@ -1121,7 +1197,8 @@ pub struct TypeRelations {
 }
 
 /// [TypeRelationsPast official documentation](https://pokeapi.co/docs/v2#typerelationspast)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize, serde::Serialize)]
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(serialize, derive(serde::Serialize))]
 pub struct TypeRelationsPast {
     /// The last generation in which the referenced type had the listed damage relations.
     pub generation: NamedApiResource<Generation>,
