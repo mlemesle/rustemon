@@ -9,6 +9,7 @@ use super::{
 
 /// [ContestType official documentation] (https:///pokeapi.co/docs/v2#contesttype)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestType {
     /// The identifier for this resource.
     pub id: i64,
@@ -22,6 +23,7 @@ pub struct ContestType {
 
 /// [ContestName official documentation](https:///pokeapi.co/docs/v2#contestname)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestName {
     /// The name for this contest.
     pub name: Option<String>,
@@ -33,6 +35,7 @@ pub struct ContestName {
 
 /// [ContestEffect official documentation](https:///pokeapi.co/docs/v2#contesteffect)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestEffect {
     /// The identifier for this resource.
     pub id: i64,
@@ -48,6 +51,7 @@ pub struct ContestEffect {
 
 /// [SuperContestEffect official documentation](https:///pokeapi.co/docs/v2#supercontesteffect)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct SuperContestEffect {
     /// The identifier for this resource.
     pub id: i64,
