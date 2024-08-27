@@ -8,7 +8,7 @@ license = "MIT"
 name = "rustemon"
 readme = "README.md"
 repository = "https://github.com/mlemesle/rustemon"
-version = "3.4.1"
+version = "3.5.0"
 
 [features]
 default = ["filesystem-cache"]
