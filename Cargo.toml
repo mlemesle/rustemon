@@ -17,15 +17,16 @@ in-memory-cache = ["http-cache-reqwest/manager-moka"]
 serialize = []
 
 [dependencies]
-async-trait = "0.1.80"
+async-trait = "0.1.81"
 http-cache-reqwest = { version = "0.14.0", default-features = false }
-reqwest = { version = "0.12.4", features = ["json"] }
-reqwest-middleware = "0.3.0"
-serde = { version = "1.0.199", features = ["derive"] }
-thiserror = "1.0.59"
+reqwest = { version = "0.12.7", features = ["json"] }
+reqwest-middleware = "0.3.3"
+serde = { version = "1.0.209", features = ["derive"] }
+thiserror = "1.0.63"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
+toml = "0.8.19"
 
 [[example]]
 name = "custom_filesystem_client"
@@ -34,3 +35,7 @@ required-features = ["filesystem-cache"]
 [[example]]
 name = "custom_in_memory_client"
 required-features = ["in-memory-cache"]
+
+[[example]]
+name = "toml_serialize"
+required-features = ["serialize"]
