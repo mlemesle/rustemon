@@ -12,6 +12,7 @@ use super::{
 
 /// [Item official documentation](https://pokeapi.co/docs/v2#item)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Item {
     /// The identifier for this resource.
     pub id: i64,
@@ -47,6 +48,7 @@ pub struct Item {
 
 /// [ItemSprites official documentation](https://pokeapi.co/docs/v2#itemsprites)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemSprites {
     /// The default depiction of this item.
     pub default: Option<String>,
@@ -54,6 +56,7 @@ pub struct ItemSprites {
 
 /// [ItemHolderPokemon official documentation](https://pokeapi.co/docs/v2#itemholderpokemon)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemHolderPokemon {
     /// The Pokémon that holds this item.
     pub pokemon: NamedApiResource<Pokemon>,
@@ -63,6 +66,7 @@ pub struct ItemHolderPokemon {
 
 /// [ItemHolderPokemonVersionDetail official documentation](https://pokeapi.co/docs/v2#itemholderpokemonversiondetail)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemHolderPokemonVersionDetail {
     /// How often this Pokémon holds this item in this version.
     pub rarity: i64,
@@ -72,6 +76,7 @@ pub struct ItemHolderPokemonVersionDetail {
 
 /// [ItemAttribute official documentation](https://pokeapi.co/docs/v2#itemattribute)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemAttribute {
     /// The identifier for this resource.
     pub id: i64,
@@ -87,6 +92,7 @@ pub struct ItemAttribute {
 
 /// [ItemCategory official documentation](https://pokeapi.co/docs/v2#itemcategory)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemCategory {
     /// The identifier for this resource.
     pub id: i64,
@@ -102,6 +108,7 @@ pub struct ItemCategory {
 
 /// [ItemFlingEffect official documentation](https://pokeapi.co/docs/v2#itemflingeffect)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemFlingEffect {
     /// The identifier for this resource.
     pub id: i64,
@@ -115,6 +122,7 @@ pub struct ItemFlingEffect {
 
 /// [ItemPocket official documentation](https://pokeapi.co/docs/v2#itempocket)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ItemPocket {
     /// The identifier for this resource.
     pub id: i64,

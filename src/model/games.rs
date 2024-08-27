@@ -9,6 +9,7 @@ use super::{
 
 /// [Generation official documentation]
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Generation {
     /// The identifier for this resource.
     pub id: i64,
@@ -32,6 +33,7 @@ pub struct Generation {
 
 /// [Pokedex official documentation](https:///pokeapi.co/docs/v2#pokedex)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Pokedex {
     /// The identifier for this resource.
     pub id: i64,
@@ -53,6 +55,7 @@ pub struct Pokedex {
 
 /// [PokemonEntry official documentation](https:///pokeapi.co/docs/v2#pokemonentry)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct PokemonEntry {
     /// The index of this Pokémon species entry within the Pokédex.
     pub entry_number: i64,
@@ -62,6 +65,7 @@ pub struct PokemonEntry {
 
 /// [Version offcial documentation](https:///pokeapi.co/docs/v2#version)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Version {
     /// The identifier for this resource.
     pub id: i64,
@@ -75,6 +79,7 @@ pub struct Version {
 
 /// [VersionGroup official documentation](https:///pokeapi.co/docs/v2#versiongroup)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct VersionGroup {
     /// The identifier for this resource.
     pub id: i64,

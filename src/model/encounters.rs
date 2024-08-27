@@ -4,6 +4,7 @@ use super::resource::{Name, NamedApiResource};
 
 /// [EncounterMethod official documentation](https:///pokeapi.co/docs/v2#encountermethod)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct EncounterMethod {
     /// The identifier for this resource.
     pub id: i64,
@@ -17,6 +18,7 @@ pub struct EncounterMethod {
 
 /// [EncounterCondition official documentation](https:///pokeapi.co/docs/v2#encountercondition)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct EncounterCondition {
     /// The identifier for this resource.
     pub id: i64,
@@ -30,6 +32,7 @@ pub struct EncounterCondition {
 
 /// [EncounterConditionValue](https:///pokeapi.co/docs/v2#encounterconditionvalue)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct EncounterConditionValue {
     /// The identifier for this resource.
     pub id: i64,

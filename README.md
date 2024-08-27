@@ -36,6 +36,9 @@ If you want to use the `in-memory-cache` feature, you can proceed as follow:
 rustemon = { version = "*", default-features = false, features = ["in-memory-cache"] } 
 ```
 
+Also, to support easier export to other tooling and libraries, the `serialize` feature enables PokeApi structs to be compiled with `serde::Serialize`.
+This feature is disabled by default.
+
 ##### Models
 
 All the models are located into the following module :

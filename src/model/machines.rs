@@ -4,6 +4,7 @@ use super::{games::VersionGroup, items::Item, moves::Move, resource::NamedApiRes
 
 /// [Machine official documentation](https://pokeapi.co/docs/v2#machine)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Machine {
     /// The identifier for this resource.
     pub id: i64,
