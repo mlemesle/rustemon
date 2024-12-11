@@ -12,7 +12,7 @@ Fully written in Rust, this library covers the whole PokeApi REST api v2.
 Adds the following in the dependencies of your Cargo.toml :
 
 ```toml
-rustemon = "3.5.0" 
+rustemon = "4.0.0" 
 ```
 
 ### How to use it ?
@@ -23,21 +23,13 @@ The library kept this group oriented architecture !
 
 ### Features
 
-This crate provides two features to enable different cache mechanisms :
-* `filesystem-cache` -> A configurable cache stored in files.
-* `in-memory-cache` -> A configurable in-memory cache.
-
-`filesystem-cache` is enabled by default.
-Be careful, those features are mutually exclusive !!
-If you want to use the `in-memory-cache` feature, you can proceed as follow:
+To support easier export to other tooling and libraries, the `serialize` feature enables PokeApi structs to be compiled with `serde::Serialize`.
+This feature is disabled by default.
 
 ```toml
 [dependencies]
-rustemon = { version = "*", default-features = false, features = ["in-memory-cache"] } 
+rustemon = { version = "*", features = ["serialize"] } 
 ```
-
-Also, to support easier export to other tooling and libraries, the `serialize` feature enables PokeApi structs to be compiled with `serde::Serialize`.
-This feature is disabled by default.
 
 ##### Models
 

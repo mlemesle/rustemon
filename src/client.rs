@@ -10,11 +10,7 @@ use crate::error::Error;
 // Reexport to ease overloading.
 pub use http_cache_reqwest::{CacheMode, CacheOptions};
 
-#[cfg(feature = "filesystem-cache")]
-pub use http_cache_reqwest::CACacheManager;
-
-#[cfg(feature = "in-memory-cache")]
-pub use http_cache_reqwest::MokaManager;
+pub use http_cache_reqwest::{CACacheManager, MokaManager};
 
 /// Environment to target while calling PokeApi.
 #[derive(Clone)]
@@ -57,7 +53,6 @@ pub struct RustemonClientBuilder<T: CacheManager> {
     environment: Environment,
 }
 
-#[cfg(feature = "filesystem-cache")]
 impl Default for RustemonClientBuilder<CACacheManager> {
     fn default() -> Self {
         Self {
@@ -71,7 +66,6 @@ impl Default for RustemonClientBuilder<CACacheManager> {
     }
 }
 
-#[cfg(feature = "in-memory-cache")]
 impl Default for RustemonClientBuilder<MokaManager> {
     fn default() -> Self {
         Self {
@@ -205,11 +199,7 @@ impl RustemonClient {
 impl Default for RustemonClient {
     /// Returns a RustemonClient with default configuration.
     fn default() -> Self {
-        #[cfg(feature = "filesystem-cache")]
         let manager = CACacheManager::default();
-
-        #[cfg(feature = "in-memory-cache")]
-        let manager = MokaManager::default();
 
         Self {
             client: ClientBuilder::new(Client::new())

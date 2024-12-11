@@ -8,33 +8,22 @@ license = "MIT"
 name = "rustemon"
 readme = "README.md"
 repository = "https://github.com/mlemesle/rustemon"
-version = "3.5.0"
+version = "4.0.0"
 
 [features]
-default = ["filesystem-cache"]
-filesystem-cache = ["http-cache-reqwest/manager-cacache"]
-in-memory-cache = ["http-cache-reqwest/manager-moka"]
 serialize = []
 
 [dependencies]
-async-trait = "0.1.81"
-http-cache-reqwest = { version = "0.14.0", default-features = false }
-reqwest = { version = "0.12.7", features = ["json"] }
-reqwest-middleware = "0.3.3"
-serde = { version = "1.0.209", features = ["derive"] }
-thiserror = "1.0.63"
+async-trait = "0.1.83"
+http-cache-reqwest = { version = "0.15.0", features = ["manager-moka"] }
+reqwest = { version = "0.12.9", features = ["json"] }
+reqwest-middleware = "0.4.0"
+serde = { version = "1.0.216", features = ["derive"] }
+thiserror = "2.0.6"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }
-toml = "0.8.19"
-
-[[example]]
-name = "custom_filesystem_client"
-required-features = ["filesystem-cache"]
-
-[[example]]
-name = "custom_in_memory_client"
-required-features = ["in-memory-cache"]
+toml = "0.8"
 
 [[example]]
 name = "toml_serialize"
