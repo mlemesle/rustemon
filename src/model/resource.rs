@@ -162,7 +162,7 @@ pub struct VersionGroupFlavorText {
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct NamedApiResource<T> {
     /// The name of the referenced resource.
-    pub name: String,
+    pub name: Option<String>,
     /// The URL of the referenced resource.
     pub url: String,
     #[serde(skip)]
