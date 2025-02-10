@@ -9,19 +9,23 @@ use super::{
     utility::Language,
 };
 
-/// [NamedApiResourceList official documentation](https:///pokeapi.co/docs/v2#namedapiresourcelist)
+/// MaybeNamedApiResourceList has no official documentation
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
-pub struct NamedApiResourceList<T> {
+pub struct MaybeNamedApiResourceList<R> {
     /// The total number of resources available from this API.
     pub count: i64,
     /// The URL for the next page in the list.
     pub next: Option<String>,
     /// The URL for the previous page in the list.
     pub previous: Option<String>,
-    /// A list of named API resources.
-    pub results: Vec<NamedApiResource<T>>,
+    /// A list of (possibly) named API resources.
+    pub results: Vec<R>,
 }
+/// [NamedApiResourceList official documentation](https:///pokeapi.co/docs/v2#namedapiresourcelist)
+pub type NamedApiResourceList<T> = MaybeNamedApiResourceList<NamedApiResource<T>>;
+/// UnnamedApiResourceList has no official documentation
+pub type UnnamedApiResourceList<T> = MaybeNamedApiResourceList<UnnamedApiResource<T>>;
 
 /// [ApiResource official documentation](https://pokeapi.co/docs/v2#apiresource)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
@@ -162,7 +166,16 @@ pub struct VersionGroupFlavorText {
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct NamedApiResource<T> {
     /// The name of the referenced resource.
-    pub name: Option<String>,
+    pub name: String,
+    /// The URL of the referenced resource.
+    pub url: String,
+    #[serde(skip)]
+    _marker: PhantomData<T>,
+}
+/// UnnamedApiResource has no official documentation
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct UnnamedApiResource<T> {
     /// The URL of the referenced resource.
     pub url: String,
     #[serde(skip)]

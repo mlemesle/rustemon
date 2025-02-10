@@ -1,6 +1,17 @@
 macro_rules! endpoint {
+    (unnamed $type:ty; for $name:literal) => {
+        use crate::model::resource::{UnnamedApiResourceList, UnnamedApiResource};
+        type ActualApiResourceList<T> = UnnamedApiResourceList<T>;
+        type ActualApiResource<T> = UnnamedApiResource<T>;
+        crate::endpoint!(inner $type; for $name);
+    };
     ($type:ty; for $name:literal) => {
         use crate::model::resource::{NamedApiResourceList, NamedApiResource};
+        type ActualApiResourceList<T> = NamedApiResourceList<T>;
+        type ActualApiResource<T> = NamedApiResource<T>;
+        crate::endpoint!(inner $type; for $name);
+    };
+    (inner $type:ty; for $name:literal) => {
         use crate::client::{RustemonClient, Id};
         use crate::error::Error;
 
@@ -9,8 +20,8 @@ macro_rules! endpoint {
         /// # Arguments
         ///
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
-        pub async fn get_page(rustemon_client: &RustemonClient) -> Result<NamedApiResourceList<$type>, Error> {
-            rustemon_client.get_by_endpoint::<NamedApiResourceList<$type>>($name).await
+        pub async fn get_page(rustemon_client: &RustemonClient) -> Result<ActualApiResourceList<$type>, Error> {
+            rustemon_client.get_by_endpoint::<ActualApiResourceList<$type>>($name).await
         }
 
         /// Returns the page targeted by the parameters.
@@ -24,8 +35,8 @@ macro_rules! endpoint {
             offset: i64,
             limit: i64,
             rustemon_client: &RustemonClient
-        ) -> Result<NamedApiResourceList<$type>, Error> {
-            rustemon_client.get_with_limit_and_offset::<NamedApiResourceList<$type>>($name, limit, offset).await
+        ) -> Result<ActualApiResourceList<$type>, Error> {
+            rustemon_client.get_with_limit_and_offset::<ActualApiResourceList<$type>>($name, limit, offset).await
         }
 
         /// Returns all entries from the given resource.
@@ -33,7 +44,7 @@ macro_rules! endpoint {
         /// # Arguments
         ///
         /// `rustemon_client` - The [RustemonClient] to use to access the resource.
-        pub async fn get_all_entries(rustemon_client: &RustemonClient) -> Result<Vec<NamedApiResource<$type>>, Error> {
+        pub async fn get_all_entries(rustemon_client: &RustemonClient) -> Result<Vec<ActualApiResource<$type>>, Error> {
             let mut first_page = get_page(rustemon_client).await?;
             let first_page_entries_count = first_page.results.len() as i64;
 
