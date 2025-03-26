@@ -8,10 +8,10 @@ pub mod contest_type {
 
 /// Contest effects refer to the effects of moves when used in contests.
 pub mod contest_effect {
-    crate::endpoint!(crate::model::contests::ContestEffect; for "contest-effect");
+    crate::endpoint!(unnamed crate::model::contests::ContestEffect; for "contest-effect");
 }
 
 /// Super contest effects refer to the effects of moves when used in super contests.
 pub mod super_contest_effect {
-    crate::endpoint!(crate::model::contests::SuperContestEffect; for "super-contest-effect");
+    crate::endpoint!(unnamed crate::model::contests::SuperContestEffect; for "super-contest-effect");
 }

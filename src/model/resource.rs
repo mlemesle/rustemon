@@ -9,6 +9,18 @@ use super::{
     utility::Language,
 };
 
+/// [NamedApiResource official documentation](https://pokeapi.co/docs/v2#namedapiresource)
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct NamedApiResource<T> {
+    /// The name of the referenced resource.
+    pub name: String,
+    /// The URL of the referenced resource.
+    pub url: String,
+    #[serde(skip)]
+    _marker: PhantomData<T>,
+}
+
 /// [NamedApiResourceList official documentation](https:///pokeapi.co/docs/v2#namedapiresourcelist)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
@@ -19,8 +31,22 @@ pub struct NamedApiResourceList<T> {
     pub next: Option<String>,
     /// The URL for the previous page in the list.
     pub previous: Option<String>,
-    /// A list of named API resources.
+    /// A list of  named API resources.
     pub results: Vec<NamedApiResource<T>>,
+}
+
+/// [ApiResourceList official documentation](https:///pokeapi.co/docs/v2#apiresourcelist)
+#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct ApiResourceList<T> {
+    /// The total number of resources available from this API.
+    pub count: i64,
+    /// The URL for the next page in the list.
+    pub next: Option<String>,
+    /// The URL for the previous page in the list.
+    pub previous: Option<String>,
+    /// A list of  named API resources.
+    pub results: Vec<ApiResource<T>>,
 }
 
 /// [ApiResource official documentation](https://pokeapi.co/docs/v2#apiresource)
@@ -155,16 +181,4 @@ pub struct VersionGroupFlavorText {
     pub language: NamedApiResource<Language>,
     /// The version group which uses this flavor text.
     pub version_group: NamedApiResource<VersionGroup>,
-}
-
-/// [NamedApiResource official documentation](https://pokeapi.co/docs/v2#namedapiresource)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
-#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
-pub struct NamedApiResource<T> {
-    /// The name of the referenced resource.
-    pub name: String,
-    /// The URL of the referenced resource.
-    pub url: String,
-    #[serde(skip)]
-    _marker: PhantomData<T>,
 }

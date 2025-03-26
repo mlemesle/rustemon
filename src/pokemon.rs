@@ -11,7 +11,7 @@ pub mod ability {
 /// A Pokémon's Characteristic is determined by the remainder of its highest IV divided by 5 (gene_modulo).
 /// Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Characteristic) for greater detail.
 pub mod characteristic {
-    crate::endpoint!(crate::model::pokemon::Characteristic; for "characteristic");
+    crate::endpoint!(unnamed crate::model::pokemon::Characteristic; for "characteristic");
 }
 
 /// Egg Groups are categories which determine which Pokémon are able to interbreed.
