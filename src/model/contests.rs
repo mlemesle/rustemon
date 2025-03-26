@@ -7,7 +7,7 @@ use super::{
     utility::Language,
 };
 
-/// [ContestType official documentation] (https:///pokeapi.co/docs/v2#contesttype)
+/// [`ContestType` official documentation] (<https:///pokeapi.co/docs/v2#contesttype>)
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestType {

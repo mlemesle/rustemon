@@ -4,7 +4,7 @@ async fn main() {
     let location =
         rustemon::locations::location::get_by_name("cerulean-city", &rustemon_client).await;
     match location {
-        Ok(l) => println!("{:#?}", l),
-        Err(err) => println!("An error occured : {}", err),
+        Ok(l) => println!("{l:#?}"),
+        Err(err) => println!("An error occured : {err}"),
     }
 }

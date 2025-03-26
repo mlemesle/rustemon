@@ -1,6 +1,7 @@
 //! Pokemon endpoints group
 
 /// Abilities provide passive effects for Pokémon in battle or in the overworld.
+///
 /// Pokémon have multiple possible abilities but can have only one ability at a time.
 /// Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Ability) for greater detail.
 pub mod ability {
@@ -8,13 +9,15 @@ pub mod ability {
 }
 
 /// Characteristics indicate which stat contains a Pokémon's highest IV.
-/// A Pokémon's Characteristic is determined by the remainder of its highest IV divided by 5 (gene_modulo).
+///
+/// A Pokémon's Characteristic is determined by the remainder of its highest IV divided by 5 (`gene_modulo`).
 /// Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Characteristic) for greater detail.
 pub mod characteristic {
     crate::endpoint!(unnamed crate::model::pokemon::Characteristic; for "characteristic");
 }
 
 /// Egg Groups are categories which determine which Pokémon are able to interbreed.
+///
 /// Pokémon may belong to either one or two Egg Groups.
 /// Check out [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Egg_Group) for greater detail.
 pub mod egg_group {
@@ -40,6 +43,7 @@ pub mod nature {
 }
 
 /// Pokeathlon Stats are different attributes of a Pokémon's performance in Pokéathlons.
+///
 /// In Pokéathlons, competitions happen on different courses; one for each of the different Pokéathlon stats.
 /// See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/Pokéathlon) for greater detail.
 pub mod pokeathlon_stat {
@@ -47,6 +51,7 @@ pub mod pokeathlon_stat {
 }
 
 /// Pokémon are the creatures that inhabit the world of the Pokémon games.
+///
 /// They can be caught using Pokéballs and trained by battling with other Pokémon.
 /// Each Pokémon belongs to a specific species but may take on a variant which makes it differ
 /// from other Pokémon of the same species, such as base stats, available abilities and typings.
@@ -66,6 +71,7 @@ pub mod pokemon_color {
 }
 
 /// Some Pokémon may appear in one of multiple, visually different forms. These differences are purely cosmetic.
+///
 /// For variations within a Pokémon species, which do differ in more than just visuals,
 /// the 'Pokémon' entity is used to represent such a variety.
 pub mod pokemon_form {

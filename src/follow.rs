@@ -17,7 +17,7 @@ where
     ///
     /// # Arguments
     ///
-    /// `rustemon_client` - The [RustemonClient] to use to access the resource.
+    /// `rustemon_client` - The [`RustemonClient`] to use to access the resource.
     fn follow(&self, rustemon_client: &RustemonClient) -> impl Future<Output = Result<T, Error>>;
 }
 

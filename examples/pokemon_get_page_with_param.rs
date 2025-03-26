@@ -5,7 +5,7 @@ async fn main() {
     let pokemon_page =
         rustemon::pokemon::pokemon::get_page_with_param(12, 5, &rustemon_client).await;
     match pokemon_page {
-        Ok(page) => println!("{:#?}", page),
-        Err(err) => println!("The following error occured : {}", err),
+        Ok(page) => println!("{page:#?}"),
+        Err(err) => println!("The following error occured : {err}"),
     }
 }

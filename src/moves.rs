@@ -1,6 +1,7 @@
 //! Moves endpoints group
 
 /// Moves are the skills of Pokémon in battle. In battle, a Pokémon uses one move each turn.
+///
 /// Some moves (including those learned by Hidden Machine) can be used outside of battle as well,
 /// usually for the purpose of removing obstacles or exploring new areas.
 pub mod move_ {
@@ -8,6 +9,7 @@ pub mod move_ {
 }
 
 /// Move Ailments are status conditions caused by moves used during battle.
+///
 /// See [Bulbapedia](http://bulbapedia.bulbagarden.net/wiki/http://bulbapedia.bulbagarden.net/wiki/Status_condition) for greater detail.
 pub mod move_ailment {
     crate::endpoint!(crate::model::moves::MoveAilment; for "move-ailment");

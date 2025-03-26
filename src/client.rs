@@ -12,14 +12,14 @@ pub use http_cache_reqwest::{CacheMode, CacheOptions};
 
 pub use http_cache_reqwest::{CACacheManager, MokaManager};
 
-/// Environment to target while calling PokeApi.
+/// Environment to target while calling `PokeApi`.
 #[derive(Clone)]
 pub enum Environment {
     /// Targets the production environment.
     Production,
     /// Targets the stating environment.
     Staging,
-    /// Targets a custom environment of PokeApi, a local deployment through Docker for example.
+    /// Targets a custom environment of `PokeApi`, a local deployment through Docker for example.
     Custom(String),
 }
 
@@ -34,14 +34,14 @@ impl TryFrom<Environment> for Url {
 
     fn try_from(value: Environment) -> Result<Self, Self::Error> {
         match value {
-            Environment::Production => Ok(Url::parse("https://pokeapi.co/api/v2/").unwrap()),
-            Environment::Staging => Ok(Url::parse("https://staging.pokeapi.co/api/v2/").unwrap()),
+            Environment::Production => Ok(Self::parse("https://pokeapi.co/api/v2/").unwrap()),
+            Environment::Staging => Ok(Self::parse("https://staging.pokeapi.co/api/v2/").unwrap()),
             Environment::Custom(mut s) => {
                 if !s.ends_with('/') {
                     s.push('/');
                 }
 
-                Url::parse(&s).map_err(|_| Error::UrlParse(s))
+                Self::parse(&s).map_err(|_| Error::UrlParse(s))
             }
         }
     }
@@ -80,20 +80,20 @@ impl Default for RustemonClientBuilder<MokaManager> {
 }
 
 impl<T: CacheManager> RustemonClientBuilder<T> {
-    /// Configure the CacheMode of the builder. See [CacheMode].
-    pub fn with_mode(mut self, cache_mode: CacheMode) -> Self {
+    /// Configure the `CacheMode` of the builder. See [`CacheMode`].
+    pub const fn with_mode(mut self, cache_mode: CacheMode) -> Self {
         self.cache.mode = cache_mode;
         self
     }
 
-    /// Configure the manager of the builder. See [CacheManager].
+    /// Configure the manager of the builder. See [`CacheManager`].
     pub fn with_manager(mut self, manager: T) -> Self {
         self.cache.manager = manager;
         self
     }
 
-    /// Configure the cache options of the builder. See [CacheOptions].
-    pub fn with_options(mut self, options: CacheOptions) -> Self {
+    /// Configure the cache options of the builder. See [`CacheOptions`].
+    pub const fn with_options(mut self, options: CacheOptions) -> Self {
         self.cache.options.cache_options = Some(options);
         self
     }
@@ -104,13 +104,13 @@ impl<T: CacheManager> RustemonClientBuilder<T> {
         self
     }
 
-    /// Consumes the builder in order to create a [RustemonClient].
+    /// Consumes the builder in order to create a [`RustemonClient`].
     pub fn try_build(self) -> Result<RustemonClient, Error> {
         Ok(RustemonClient {
             client: ClientBuilder::new(Client::new())
                 .with(Cache(self.cache))
                 .build(),
-            base: Url::try_from(self.environment.clone())?,
+            base: Url::try_from(self.environment)?,
         })
     }
 }
@@ -187,7 +187,7 @@ impl RustemonClient {
         self.inner_get(url).await
     }
 
-    /// Make a call through the client from a given [IntoUrl].
+    /// Make a call through the client from a given [`IntoUrl`].
     pub(crate) async fn get_by_url<T>(&self, url: impl IntoUrl) -> Result<T, Error>
     where
         T: DeserializeOwned,
@@ -197,7 +197,7 @@ impl RustemonClient {
 }
 
 impl Default for RustemonClient {
-    /// Returns a RustemonClient with default configuration.
+    /// Returns a `RustemonClient` with default configuration.
     fn default() -> Self {
         let manager = CACacheManager::default();
 

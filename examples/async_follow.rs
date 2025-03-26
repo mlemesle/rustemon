@@ -6,7 +6,7 @@ async fn main() {
     let pokemon = rustemon::pokemon::pokemon::get_by_name("charizard", &rustemon_client).await;
     let species_resource = pokemon.unwrap().species;
     let species = species_resource.follow(&rustemon_client).await;
-    println!("{:#?}", species);
+    println!("{species:#?}");
 
     let evolution_chain = species
         .unwrap()
@@ -14,5 +14,5 @@ async fn main() {
         .unwrap()
         .follow(&rustemon_client)
         .await;
-    println!("{:#?}", evolution_chain);
+    println!("{evolution_chain:#?}");
 }

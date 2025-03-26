@@ -587,7 +587,7 @@ pub struct SilverSprites {
 pub struct GenerationIIISprites {
     /// Sprites for Pokémon Emerald.
     pub emerald: EmeraldSprites,
-    /// Sprites for Pokémon FireRed & Pokémon LeafGreen.
+    /// Sprites for Pokémon `FireRed` & Pokémon `LeafGreen`.
     #[serde(rename = "firered-leafgreen")]
     pub firered_leafgreen: FireredLeafgreenSprites,
     /// Sprites for Pokémon Ruby & Pokémon Sapphire.
@@ -605,7 +605,7 @@ pub struct EmeraldSprites {
     pub front_shiny: Option<String>,
 }
 
-/// Sprites for Pokémon FireRed & Pokémon LeafGreen.
+/// Sprites for Pokémon `FireRed` & Pokémon `LeafGreen`.
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct FireredLeafgreenSprites {
@@ -642,7 +642,7 @@ pub struct GenerationIVSprites {
     pub diamond_pearl: DiamondPearlSprites,
     /// Sprites for Pokémon Platinum.
     pub platinum: PlatinumSprites,
-    /// Sprites for Pokémon HeartGold & Pokémon SoulSilver.
+    /// Sprites for Pokémon `HeartGold` & Pokémon `SoulSilver`.
     #[serde(rename = "heartgold-soulsilver")]
     pub heartgold_soulsilver: HeartgoldSoulsilverSprites,
 }
@@ -691,7 +691,7 @@ pub struct PlatinumSprites {
     pub front_shiny_female: Option<String>,
 }
 
-/// Sprites for Pokémon HeartGold & Pokémon SoulSilver.
+/// Sprites for Pokémon `HeartGold` & Pokémon `SoulSilver`.
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct HeartgoldSoulsilverSprites {
@@ -772,7 +772,7 @@ pub struct BlackWhiteAnimatedSprites {
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct GenerationVISprites {
-    /// Sprites for Pokémon OmegaRuby & Pokémon AlphaSapphire.
+    /// Sprites for Pokémon `OmegaRuby` & Pokémon `AlphaSapphire`.
     #[serde(rename = "omegaruby-alphasapphire")]
     pub omegaruby_alphasapphire: OmegarubyAlphasapphireSprites,
     /// Sprites for Pokémon X & Pokémon Y.
@@ -780,7 +780,7 @@ pub struct GenerationVISprites {
     pub x_y: XYSprites,
 }
 
-/// Sprites for Pokémon OmegaRuby & Pokémon AlphaSapphire.
+/// Sprites for Pokémon `OmegaRuby` & Pokémon `AlphaSapphire`.
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct OmegarubyAlphasapphireSprites {
@@ -814,7 +814,7 @@ pub struct XYSprites {
 pub struct GenerationVIISprites {
     /// The icons sprites of a Pokémon.
     pub icons: IconsSprites,
-    /// Sprites for Pokémon UltraSun & Pokémon UltraMoon.
+    /// Sprites for Pokémon `UltraSun` & Pokémon `UltraMoon`.
     #[serde(rename = "ultra-sun-ultra-moon")]
     pub ultrasun_ultramoon: UltrasunUltramoonSprites,
 }
@@ -829,7 +829,7 @@ pub struct IconsSprites {
     pub front_female: Option<String>,
 }
 
-/// Sprites for Pokémon UltraSun & Pokémon UltraMoon.
+/// Sprites for Pokémon `UltraSun` & Pokémon `UltraMoon`.
 #[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct UltrasunUltramoonSprites {
@@ -1006,7 +1006,7 @@ pub struct PokemonSpecies {
     pub is_legendary: bool,
     /// Whether or not this is a mythical Pokémon.
     pub is_mythical: bool,
-    /// Initial hatch counter: one must walk 255 × (hatch_counter + 1) steps before this Pokémon's egg hatches,
+    /// Initial hatch counter: one must walk 255 × (`hatch_counter` + 1) steps before this Pokémon's egg hatches,
     /// unless utilizing bonuses like Flame Body's.
     pub hatch_counter: Option<i64>,
     /// Whether or not this Pokémon has visual gender differences.
@@ -1023,7 +1023,7 @@ pub struct PokemonSpecies {
     pub color: NamedApiResource<PokemonColor>,
     /// The shape of this Pokémon for Pokédex search.
     pub shape: Option<NamedApiResource<PokemonShape>>,
-    /// The Pokémon species that evolves into this Pokemon_species.
+    /// The Pokémon species that evolves into this `Pokemon_species`.
     pub evolves_from_species: Option<NamedApiResource<PokemonSpecies>>,
     /// The evolution chain this Pokémon species is a member of.
     pub evolution_chain: Option<ApiResource<EvolutionChain>>,

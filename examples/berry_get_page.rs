@@ -4,7 +4,7 @@ async fn main() {
     let rustemon_client = rustemon::client::RustemonClient::default();
     let berry_page = rustemon::berries::berry::get_page(&rustemon_client).await;
     match berry_page {
-        Ok(page) => println!("{:#?}", page),
-        Err(err) => println!("The following error occured : {}", err),
+        Ok(page) => println!("{page:#?}"),
+        Err(err) => println!("The following error occured : {err}"),
     }
 }
