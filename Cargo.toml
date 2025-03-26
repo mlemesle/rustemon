@@ -1,7 +1,7 @@
 [package]
 description = "Library wrapping the awesome PokeAPI"
 documentation = "https://docs.rs/rustemon/latest/rustemon/"
-edition = "2021"
+edition = "2024"
 homepage = "https://github.com/mlemesle/rustemon"
 keywords = ["pokeapi", "pokemon", "wrapper", "http", "rest"]
 license = "MIT"

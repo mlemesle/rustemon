@@ -168,22 +168,22 @@ impl RustemonClient {
     }
 
     /// Make a call though the client to the given `endpoint`, targetting a specific resource described by [Id].
-    pub(crate) async fn get_by_endpoint_and_id<'a, T>(
+    pub(crate) async fn get_by_endpoint_and_id<T>(
         &self,
         endpoint: &str,
-        id: Id<'a>,
+        id: Id<'_>,
     ) -> Result<T, Error>
     where
         T: DeserializeOwned,
     {
-        let inner_id = match id {
-            Id::Int(i) => i.to_string(),
-            Id::Str(s) => s.to_owned(),
+        let endpoint_id = match id {
+            Id::Int(i) => format!("{endpoint}/{i}"),
+            Id::Str(s) => format!("{endpoint}/{s}"),
         };
         let url = self
             .base
-            .join(&format!("{endpoint}/{inner_id}"))
-            .map_err(|_| Error::UrlParse(format!("{}/{endpoint}/{inner_id}", self.base)))?;
+            .join(&endpoint_id)
+            .map_err(|_| Error::UrlParse(format!("{}/{endpoint_id}", self.base)))?;
         self.inner_get(url).await
     }
 
