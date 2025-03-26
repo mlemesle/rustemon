@@ -8,7 +8,7 @@ license = "MIT"
 name = "rustemon"
 readme = "README.md"
 repository = "https://github.com/mlemesle/rustemon"
-version = "4.0.0"
+version = "4.1.0"
 
 [features]
 serialize = []
