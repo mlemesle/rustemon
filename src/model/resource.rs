@@ -10,7 +10,7 @@ use super::{
 };
 
 /// [NamedApiResource official documentation](https://pokeapi.co/docs/v2#namedapiresource)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct NamedApiResource<T> {
     /// The name of the referenced resource.
@@ -22,7 +22,7 @@ pub struct NamedApiResource<T> {
 }
 
 /// [NamedApiResourceList official documentation](https:///pokeapi.co/docs/v2#namedapiresourcelist)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct NamedApiResourceList<T> {
     /// The total number of resources available from this API.
@@ -35,8 +35,18 @@ pub struct NamedApiResourceList<T> {
     pub results: Vec<NamedApiResource<T>>,
 }
 
+/// [ApiResource official documentation](https://pokeapi.co/docs/v2#apiresource)
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct ApiResource<T> {
+    /// The URL of the referenced resource.
+    pub url: String,
+    #[serde(skip)]
+    _marker: PhantomData<T>,
+}
+
 /// [ApiResourceList official documentation](https:///pokeapi.co/docs/v2#apiresourcelist)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ApiResourceList<T> {
     /// The total number of resources available from this API.
@@ -49,18 +59,8 @@ pub struct ApiResourceList<T> {
     pub results: Vec<ApiResource<T>>,
 }
 
-/// [ApiResource official documentation](https://pokeapi.co/docs/v2#apiresource)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
-#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
-pub struct ApiResource<T> {
-    /// The URL of the referenced resource.
-    pub url: String,
-    #[serde(skip)]
-    _marker: PhantomData<T>,
-}
-
 /// [Description official documentation](https://pokeapi.co/docs/v2#description)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Description {
     /// The localized description for an API resource in a specific language.
@@ -70,7 +70,7 @@ pub struct Description {
 }
 
 /// [Effect official documentation](https://pokeapi.co/docs/v2#effect)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Effect {
     /// The localized effect text for an API resource in a specific language.
@@ -80,7 +80,7 @@ pub struct Effect {
 }
 
 /// [Encounter official documentation](https://pokeapi.co/docs/v2#encounter)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Encounter {
     /// The lowest level the Pokémon could be encountered at.
@@ -96,7 +96,7 @@ pub struct Encounter {
 }
 
 /// [FlavorText official documentation](https://pokeapi.co/docs/v2#flavortext)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct FlavorText {
     /// The localized flavor text for an API resource in a specific language.
@@ -108,7 +108,7 @@ pub struct FlavorText {
 }
 
 /// [GenerationGameIndex official documentation](https://pokeapi.co/docs/v2#generationgameindex)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct GenerationGameIndex {
     /// The internal id of an API resource within game data.
@@ -118,7 +118,7 @@ pub struct GenerationGameIndex {
 }
 
 /// [MachineVersionDetail official documentation](https://pokeapi.co/docs/v2#machineversiondetail)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct MachineVersionDetail {
     /// The machine that teaches a move from an item.
@@ -128,7 +128,7 @@ pub struct MachineVersionDetail {
 }
 
 /// [Name official documentation](https://pokeapi.co/docs/v2#name)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Name {
     /// The localized name for an API resource in a specific language.
@@ -138,7 +138,7 @@ pub struct Name {
 }
 
 /// [VerboseEffect official documentation](https://pokeapi.co/docs/v2#verboseeffect)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct VerboseEffect {
     /// The localized effect text for an API resource in a specific language.
@@ -150,7 +150,7 @@ pub struct VerboseEffect {
 }
 
 /// [VersionEncounterDetail official documentation](https://pokeapi.co/docs/v2#versionencounterdetail)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct VersionEncounterDetail {
     /// The game version this encounter happens in.
@@ -162,7 +162,7 @@ pub struct VersionEncounterDetail {
 }
 
 /// [VersionGameIndex official documentation](https://pokeapi.co/docs/v2#versiongameindex)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct VersionGameIndex {
     /// The internal id of an API resource within game data.
@@ -172,7 +172,7 @@ pub struct VersionGameIndex {
 }
 
 /// [VersionGroupFlavorText official documentation](https://pokeapi.co/docs/v2#versiongroupflavortext)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct VersionGroupFlavorText {
     /// The localized name for an API resource in a specific language.

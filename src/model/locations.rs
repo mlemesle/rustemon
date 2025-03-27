@@ -8,7 +8,7 @@ use super::{
 };
 
 /// [Location official documentation](https://pokeapi.co/docs/v2#location)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Location {
     /// The identifier for this resource.
@@ -26,7 +26,7 @@ pub struct Location {
 }
 
 /// [LocationArea official documentation](https://pokeapi.co/docs/v2#locationarea)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct LocationArea {
     /// The identifier for this resource.
@@ -48,7 +48,7 @@ pub struct LocationArea {
 }
 
 /// [EncounterMethodRate official documentation](https://pokeapi.co/docs/v2#encountermethodrate)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct EncounterMethodRate {
     /// The method in which Pokémon may be encountered in an area.
@@ -58,7 +58,7 @@ pub struct EncounterMethodRate {
 }
 
 /// [EncounterVersionDetails official documentation](https://pokeapi.co/docs/v2#encounterversiondetails)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct EncounterVersionDetails {
     /// The chance of an encounter to occur.
@@ -68,7 +68,7 @@ pub struct EncounterVersionDetails {
 }
 
 /// [PokemonEncounter official documentation](https://pokeapi.co/docs/v2#pokemonencounter)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct PokemonEncounter {
     /// The Pokémon being encountered.
@@ -78,7 +78,7 @@ pub struct PokemonEncounter {
 }
 
 /// [PalParkArea official documentation](https://pokeapi.co/docs/v2#palparkarea)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct PalParkArea {
     /// The identifier for this resource.
@@ -92,7 +92,7 @@ pub struct PalParkArea {
 }
 
 /// [PalParkEncounterSpecies official documentation](https://pokeapi.co/docs/v2#palparkencounterspecies)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct PalParkEncounterSpecies {
     /// The base score given to the player when this Pokémon is caught during a pal park run.
@@ -104,7 +104,7 @@ pub struct PalParkEncounterSpecies {
 }
 
 /// [Region official documentation](https://pokeapi.co/docs/v2#region)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct Region {
     /// The identifier for this resource.

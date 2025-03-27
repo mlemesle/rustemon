@@ -8,7 +8,7 @@ use super::{
 };
 
 /// [`ContestType` official documentation] (<https:///pokeapi.co/docs/v2#contesttype>)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestType {
     /// The identifier for this resource.
@@ -22,7 +22,7 @@ pub struct ContestType {
 }
 
 /// [ContestName official documentation](https:///pokeapi.co/docs/v2#contestname)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestName {
     /// The name for this contest.
@@ -34,7 +34,7 @@ pub struct ContestName {
 }
 
 /// [ContestEffect official documentation](https:///pokeapi.co/docs/v2#contesteffect)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct ContestEffect {
     /// The identifier for this resource.
@@ -50,7 +50,7 @@ pub struct ContestEffect {
 }
 
 /// [SuperContestEffect official documentation](https:///pokeapi.co/docs/v2#supercontesteffect)
-#[derive(Default, Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct SuperContestEffect {
     /// The identifier for this resource.
