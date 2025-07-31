@@ -1,5 +1,5 @@
 #![recursion_limit = "256"]
-#![doc = include_str!("../README.md")]
+#![doc = include_str!("../../README.md")]
 #![deny(missing_docs)]
 
 pub mod berries;
@@ -24,3 +24,5 @@ mod follow;
 pub use follow::Follow;
 
 pub mod model;
+#[cfg(feature = "static-resources")]
+pub mod static_resources;

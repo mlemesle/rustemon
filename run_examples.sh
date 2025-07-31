@@ -6,8 +6,11 @@ run_example() {
     *_serialize)
       additional_features="--features serialize"
     ;;
+    *_static_resources)
+      additional_features="--features static-resources"
+    ;;
   esac
-  
+
   if cargo run --example $1 $additional_features &> /dev/null; then
     echo -e "\e[32m ${1} ok.\e[0m";
   else
@@ -15,7 +18,7 @@ run_example() {
   fi
 }
 
-for file in ./examples/*
+for file in ./rustemon/examples/*
   do
     name=$(basename $file)
     base=${name%.rs}
