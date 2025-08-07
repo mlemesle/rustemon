@@ -1,0 +1,7 @@
+//! Static resources covering all endpoints.
+{% for payload in payloads %}
+/// Get a statically defined [`{{ payload.0 | split(pat="_") | join(sep=" ") | title | split(pat=" ") | join(sep="") }}`].
+pub fn get{{ payload.0 }}() -> {{ payload.1 }} {
+    serde_json::from_str(r#"{{ payload.2 }}"#).unwrap()
+}
+{% endfor %}

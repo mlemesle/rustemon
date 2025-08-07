@@ -1,29 +1,15 @@
-[package]
+[workspace]
+members = ["rustemon", "rustemon-static-test"]
+resolver = "2"
+
+[workspace.package]
+authors = ["Martin Lemesle"]
 description = "Library wrapping the awesome PokeAPI"
 documentation = "https://docs.rs/rustemon/latest/rustemon/"
 edition = "2024"
 homepage = "https://github.com/mlemesle/rustemon"
 keywords = ["pokeapi", "pokemon", "wrapper", "http", "rest"]
 license = "MIT"
-name = "rustemon"
 readme = "README.md"
 repository = "https://github.com/mlemesle/rustemon"
 version = "4.2.0"
-
-[features]
-serialize = []
-
-[dependencies]
-http-cache-reqwest = { version = "0.15.1", features = ["manager-moka"] }
-reqwest = { version = "0.12.15", features = ["json"] }
-reqwest-middleware = "0.4.1"
-serde = { version = "1.0.219", features = ["derive"] }
-thiserror = "2.0.12"
-
-[dev-dependencies]
-tokio = { version = "1", features = ["full"] }
-toml = "0.8"
-
-[[example]]
-name = "toml_serialize"
-required-features = ["serialize"]

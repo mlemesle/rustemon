@@ -1,0 +1,53 @@
+use rustemon::static_resources;
+
+#[tokio::main]
+async fn main() {
+    static_resources::get_berry();
+    static_resources::get_berry_firmness();
+    static_resources::get_berry_flavor();
+    static_resources::get_contest_type();
+    static_resources::get_contest_effect();
+    static_resources::get_super_contest_effect();
+    static_resources::get_encounter_method();
+    static_resources::get_encounter_condition();
+    static_resources::get_encounter_condition_value();
+    static_resources::get_evolution_chain();
+    static_resources::get_evolution_trigger();
+    static_resources::get_generation();
+    static_resources::get_pokedex();
+    static_resources::get_version();
+    static_resources::get_version_group();
+    static_resources::get_item();
+    static_resources::get_item_attribute();
+    static_resources::get_item_category();
+    static_resources::get_item_fling_effect();
+    static_resources::get_item_pocket();
+    static_resources::get_location();
+    static_resources::get_location_area();
+    static_resources::get_pal_park_area();
+    static_resources::get_region();
+    static_resources::get_machine();
+    static_resources::get_move();
+    static_resources::get_move_ailment();
+    static_resources::get_move_battle_style();
+    static_resources::get_move_category();
+    static_resources::get_move_damage_class();
+    static_resources::get_move_learn_method();
+    static_resources::get_move_target();
+    static_resources::get_ability();
+    static_resources::get_characteristic();
+    static_resources::get_egg_group();
+    static_resources::get_gender();
+    static_resources::get_growth_rate();
+    static_resources::get_nature();
+    static_resources::get_pokeathlon_stat();
+    static_resources::get_pokemon();
+    static_resources::get_pokemon_color();
+    static_resources::get_pokemon_form();
+    static_resources::get_pokemon_habitat();
+    static_resources::get_pokemon_shape();
+    static_resources::get_pokemon_species();
+    static_resources::get_stat();
+    static_resources::get_type();
+    println!("{:?}", static_resources::get_language());
+}
