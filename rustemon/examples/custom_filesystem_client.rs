@@ -6,9 +6,10 @@ use rustemon::client::{
 
 #[tokio::main]
 async fn main() {
+    let manager = CACacheManager::new("./my-cache".into(), true);
     let rustemon_client = RustemonClientBuilder::default()
         .with_mode(CacheMode::NoStore)
-        .with_manager(CACacheManager::default())
+        .with_manager(manager)
         .with_options(CacheOptions {
             shared: true,
             cache_heuristic: 0.2,

@@ -17,11 +17,11 @@ serialize = []
 static-resources = ["dep:serde_json"]
 
 [dependencies]
-http-cache-reqwest = { version = "0.15.1", features = ["manager-moka"] }
-reqwest = { version = "0.12.15", features = ["json"] }
-reqwest-middleware = "0.4.1"
-serde = { version = "1.0.219", features = ["derive"] }
-serde_json = { version = "1.0.141", optional = true }
+http-cache-reqwest = { version = "0.16.0", features = ["manager-moka"] }
+reqwest = { version = "0.12.22", features = ["json"] }
+reqwest-middleware = "0.4.2"
+serde = { workspace = true, features = ["derive"] }
+serde_json = { workspace = true, optional = true }
 thiserror = "2.0.12"
 
 [dev-dependencies]

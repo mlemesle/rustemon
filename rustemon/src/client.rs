@@ -55,10 +55,11 @@ pub struct RustemonClientBuilder<T: CacheManager> {
 
 impl Default for RustemonClientBuilder<CACacheManager> {
     fn default() -> Self {
+        let manager = CACacheManager::new("./rustemon-cache".into(), false);
         Self {
             cache: HttpCache {
                 mode: CacheMode::Default,
-                manager: CACacheManager::default(),
+                manager,
                 options: HttpCacheOptions::default(),
             },
             environment: Environment::default(),
@@ -199,7 +200,7 @@ impl RustemonClient {
 impl Default for RustemonClient {
     /// Returns a `RustemonClient` with default configuration.
     fn default() -> Self {
-        let manager = CACacheManager::default();
+        let manager = CACacheManager::new("./rustemon-cache".into(), false);
 
         Self {
             client: ClientBuilder::new(Client::new())
