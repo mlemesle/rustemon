@@ -12,7 +12,7 @@ Fully written in Rust, this library covers the whole `PokeApi` REST api v2.
 Adds the following in the dependencies of your Cargo.toml :
 
 ```toml
-rustemon = "4.2.0"
+rustemon = "4.3.0"
 ```
 
 ### How to use it ?
@@ -30,6 +30,8 @@ This feature is disabled by default.
 [dependencies]
 rustemon = { version = "*", features = ["serialize"] }
 ```
+
+You can also use the `static-resources` feature, that allow you to easily instanciate models using data statically pulled from the PokeAPI.
 
 ##### Models
 

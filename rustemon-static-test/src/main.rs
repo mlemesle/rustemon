@@ -1,8 +1,4 @@
-use std::{
-    any::{self, Any},
-    fs::OpenOptions,
-    io::BufWriter,
-};
+use std::{any, fs::OpenOptions, io::BufWriter};
 
 use anyhow::anyhow;
 use rustemon::{
@@ -12,10 +8,7 @@ use rustemon::{
 use serde::Serialize;
 use tera::{Context, Tera};
 
-async fn get_json_body<
-    T: Serialize + Any,
-    Fut: Future<Output = Result<T, rustemon::error::Error>>,
->(
+async fn get_json_body<T: Serialize, Fut: Future<Output = Result<T, rustemon::error::Error>>>(
     supplier: impl FnOnce() -> Fut,
 ) -> anyhow::Result<(String, String, String)> {
     let value = supplier().await?;
