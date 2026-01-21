@@ -2,7 +2,7 @@
 
 use super::{
     items::Item,
-    locations::Location,
+    locations::{Location, Region},
     moves::Move,
     pokemon::{PokemonSpecies, Type},
     resource::{Name, NamedApiResource},
@@ -65,6 +65,8 @@ pub struct EvolutionDetail {
     pub min_beauty: Option<i64>,
     /// The minimum required level of affection the evolving Pokémon species to evolve into this Pokémon species.
     pub min_affection: Option<i64>,
+    /// Whether or not multiplayer link play is needed to evolve into this Pokémon species (e.g. Union Circle).
+    pub needs_multiplayer: bool,
     /// Whether or not it must be raining in the overworld to cause evolution this Pokémon species.
     pub needs_overworld_rain: bool,
     /// The Pokémon species that must be in the players party in order for the evolving Pokémon species
@@ -82,6 +84,20 @@ pub struct EvolutionDetail {
     pub trade_species: Option<NamedApiResource<PokemonSpecies>>,
     /// Whether or not the 3DS needs to be turned upside-down as this Pokémon levels up.
     pub turn_upside_down: bool,
+    /// The required region in which this evolution can occur.
+    pub region: Option<NamedApiResource<Region>>,
+    /// The required form for which this evolution can occur.
+    pub base_form: Option<NamedApiResource<PokemonSpecies>>,
+    /// The move that must be used by the evolving Pokémon species during the evolution trigger event
+    /// in order to evolve into this Pokémon species.
+    pub used_move: Option<NamedApiResource<Move>>,
+    /// The minimum number of times a move must be used in order to evolve into this Pokémon species.
+    pub min_move_count: Option<i64>,
+    /// The minimum number of steps that must be taken in order to evolve into this Pokémon species.
+    pub min_steps: Option<i64>,
+    /// The minimum amount of damage taken during the evolution trigger event in order to
+    /// evolve into this Pokémon species.
+    pub min_damage_taken: Option<i64>,
 }
 
 /// [EvolutionTrigger official documentation](https:///pokeapi.co/docs/v2#evolutiontrigger)
