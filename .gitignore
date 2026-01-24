@@ -1,5 +1,6 @@
 /target
 /http-cacache
+/rustemon-cache
 Cargo.lock
 
 .vscode

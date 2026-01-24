@@ -13,9 +13,9 @@ repository.workspace = true
 version.workspace = true
 
 [dependencies]
-anyhow = "1.0.98"
-rustemon = { version = "4.2.0", path = "../rustemon", features = ["serialize"] }
+anyhow = "1.0.100"
+rustemon = { version = "4.3.0", path = "../rustemon", features = ["serialize"] }
 serde.workspace = true
 serde_json.workspace = true
-tera = "1.20.0"
-tokio = { version = "1.47.0", features = ["rt-multi-thread", "macros"] }
+tera = "1.20.1"
+tokio = { version = "1.49.0", features = ["rt-multi-thread", "macros"] }

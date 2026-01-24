@@ -18,11 +18,11 @@ static-resources = ["dep:serde_json"]
 
 [dependencies]
 http-cache-reqwest = { version = "0.16.0", features = ["manager-moka"] }
-reqwest = { version = "0.12.22", features = ["json"] }
+reqwest = { version = "0.12.28", features = ["json"] }
 reqwest-middleware = "0.4.2"
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true, optional = true }
-thiserror = "2.0.12"
+thiserror = "2.0.18"
 
 [dev-dependencies]
 tokio = { version = "1", features = ["full"] }

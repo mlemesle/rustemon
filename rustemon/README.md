@@ -12,7 +12,7 @@ Fully written in Rust, this library covers the whole `PokeApi` REST api v2.
 Adds the following in the dependencies of your Cargo.toml :
 
 ```toml
-rustemon = "4.3.0"
+rustemon = "4.4.0"
 ```
 
 ### How to use it ?

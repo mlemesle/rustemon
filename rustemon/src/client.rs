@@ -13,20 +13,15 @@ pub use http_cache_reqwest::{CacheMode, CacheOptions};
 pub use http_cache_reqwest::{CACacheManager, MokaManager};
 
 /// Environment to target while calling `PokeApi`.
-#[derive(Clone)]
+#[derive(Clone, Default)]
 pub enum Environment {
     /// Targets the production environment.
+    #[default]
     Production,
     /// Targets the stating environment.
     Staging,
     /// Targets a custom environment of `PokeApi`, a local deployment through Docker for example.
     Custom(String),
-}
-
-impl Default for Environment {
-    fn default() -> Self {
-        Self::Production
-    }
 }
 
 impl TryFrom<Environment> for Url {
