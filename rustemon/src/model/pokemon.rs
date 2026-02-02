@@ -268,6 +268,8 @@ pub struct Pokemon {
     pub moves: Vec<PokemonMove>,
     /// A list of details showing abilities this pokémon had in previous generations
     pub past_abilities: Vec<PokemonAbilityPast>,
+    /// A list of details showing stats this pokémon had in previous generations
+    pub past_stats: Vec<PokemonStatPast>,
     /// A list of details showing types this pokémon had in previous generations.
     pub past_types: Vec<PokemonTypePast>,
     /// A set of sprites used to depict this Pokémon in the game.
@@ -381,6 +383,16 @@ pub struct PokemonStat {
     pub effort: i64,
     /// The base value of the stat.
     pub base_stat: i64,
+}
+
+/// [PokemonStatPast official documentation](https://pokeapi.co/docs/v2#pokemonstatpast)
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct PokemonStatPast {
+    /// The last generation in which the referenced pokémon had the listed stats.
+    pub generation: NamedApiResource<Generation>,
+    /// The stat the Pokémon had up to and including the listed generation.
+    pub stats: Vec<PokemonStat>,
 }
 
 /// [PokemonSprites official documentation](https://pokeapi.co/docs/v2#pokemonsprites)
