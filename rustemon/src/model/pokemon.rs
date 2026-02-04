@@ -3,7 +3,7 @@
 use super::{
     berries::BerryFlavor,
     evolution::EvolutionChain,
-    games::{Generation, Version, VersionGroup},
+    games::{Generation, Pokedex, Version, VersionGroup},
     items::Item,
     locations::{LocationArea, PalParkArea},
     moves::{Move, MoveBattleStyle, MoveDamageClass, MoveLearnMethod},
@@ -1075,7 +1075,7 @@ pub struct PokemonSpeciesDexEntry {
     /// The index number within the Pokédex.
     pub entry_number: i64,
     /// The Pokédex the referenced Pokémon species can be found in.
-    pub pokedex: NamedApiResource<Language>,
+    pub pokedex: NamedApiResource<Pokedex>,
 }
 
 /// [PalParkEncounterArea official documentation](https://pokeapi.co/docs/v2#palparkencounterarea)
