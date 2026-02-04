@@ -1012,7 +1012,7 @@ pub struct PokemonSpecies {
     /// The base capture rate; up to 255. The higher the number, the easier the catch.
     pub capture_rate: i64,
     /// The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.
-    pub base_hapiness: Option<i64>,
+    pub base_happiness: Option<i64>,
     /// Whether or not this is a baby Pokémon.
     pub is_baby: bool,
     /// Whether or not this is a legendary Pokémon.
