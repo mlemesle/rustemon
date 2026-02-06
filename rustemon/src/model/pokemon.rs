@@ -266,6 +266,10 @@ pub struct Pokemon {
     pub location_area_encounters: String,
     /// A list of moves along with learn methods and level details pertaining to specific version groups.
     pub moves: Vec<PokemonMove>,
+    /// A list of details showing abilities this pokémon had in previous generations
+    pub past_abilities: Vec<PokemonAbilityPast>,
+    /// A list of details showing stats this pokémon had in previous generations
+    pub past_stats: Vec<PokemonStatPast>,
     /// A list of details showing types this pokémon had in previous generations.
     pub past_types: Vec<PokemonTypePast>,
     /// A set of sprites used to depict this Pokémon in the game.
@@ -291,7 +295,18 @@ pub struct PokemonAbility {
     /// The slot this ability occupies in this Pokémon species.
     pub slot: i64,
     /// The ability the Pokémon may have.
-    pub ability: NamedApiResource<Ability>,
+    pub ability: Option<NamedApiResource<Ability>>,
+}
+
+/// [PokemonAbilityPast official documentation](https://pokeapi.co/docs/v2#pokemonabilitypast)
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct PokemonAbilityPast {
+    /// The last generation in which the referenced pokémon had the listed abilities.
+    pub generation: NamedApiResource<Generation>,
+    /// The abilities the referenced pokémon had up to and including the listed generation.
+    /// If null, the slot was previously empty.
+    pub abilities: Vec<PokemonAbility>,
 }
 
 /// [PokemonType official documentation](https://pokeapi.co/docs/v2#pokemontype)
@@ -368,6 +383,16 @@ pub struct PokemonStat {
     pub effort: i64,
     /// The base value of the stat.
     pub base_stat: i64,
+}
+
+/// [PokemonStatPast official documentation](https://pokeapi.co/docs/v2#pokemonstatpast)
+#[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
+#[cfg_attr(feature = "serialize", derive(serde::Serialize))]
+pub struct PokemonStatPast {
+    /// The last generation in which the referenced pokémon had the listed stats.
+    pub generation: NamedApiResource<Generation>,
+    /// The stat the Pokémon had up to and including the listed generation.
+    pub stats: Vec<PokemonStat>,
 }
 
 /// [PokemonSprites official documentation](https://pokeapi.co/docs/v2#pokemonsprites)
