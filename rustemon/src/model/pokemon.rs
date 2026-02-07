@@ -3,7 +3,7 @@
 use super::{
     berries::BerryFlavor,
     evolution::EvolutionChain,
-    games::{Generation, Version, VersionGroup},
+    games::{Generation, Pokedex, Version, VersionGroup},
     items::Item,
     locations::{LocationArea, PalParkArea},
     moves::{Move, MoveBattleStyle, MoveDamageClass, MoveLearnMethod},
@@ -1037,7 +1037,7 @@ pub struct PokemonSpecies {
     /// The base capture rate; up to 255. The higher the number, the easier the catch.
     pub capture_rate: i64,
     /// The happiness when caught by a normal Pokéball; up to 255. The higher the number, the happier the Pokémon.
-    pub base_hapiness: Option<i64>,
+    pub base_happiness: Option<i64>,
     /// Whether or not this is a baby Pokémon.
     pub is_baby: bool,
     /// Whether or not this is a legendary Pokémon.
@@ -1100,7 +1100,7 @@ pub struct PokemonSpeciesDexEntry {
     /// The index number within the Pokédex.
     pub entry_number: i64,
     /// The Pokédex the referenced Pokémon species can be found in.
-    pub pokedex: NamedApiResource<Language>,
+    pub pokedex: NamedApiResource<Pokedex>,
 }
 
 /// [PalParkEncounterArea official documentation](https://pokeapi.co/docs/v2#palparkencounterarea)
