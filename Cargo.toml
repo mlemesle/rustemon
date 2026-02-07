@@ -12,7 +12,7 @@ keywords = ["pokeapi", "pokemon", "wrapper", "http", "rest"]
 license = "MIT"
 readme = "rustemon/README.md"
 repository = "https://github.com/mlemesle/rustemon"
-version = "4.4.0"
+version = "4.5.0"
 
 [workspace.dependencies]
 serde = "1.0.228"
