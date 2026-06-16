@@ -65,6 +65,8 @@ pub struct EvolutionDetail {
     pub min_beauty: Option<i64>,
     /// The minimum required level of affection the evolving Pokémon species to evolve into this Pokémon species.
     pub min_affection: Option<i64>,
+    /// Whether or not you need to be near a Moss Rock or Icy Rock to evolve into this Pokémon species.
+    pub near_special_rock: bool,
     /// Whether or not multiplayer link play is needed to evolve into this Pokémon species (e.g. Union Circle).
     pub needs_multiplayer: bool,
     /// Whether or not it must be raining in the overworld to cause evolution this Pokémon species.
