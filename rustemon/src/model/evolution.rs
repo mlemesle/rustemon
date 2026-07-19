@@ -1,10 +1,11 @@
 //! Evolution group models
 
 use super::{
+    games::VersionGroup,
     items::Item,
     locations::{Location, Region},
     moves::Move,
-    pokemon::{PokemonSpecies, Type},
+    pokemon::{Pokemon, PokemonSpecies, Type},
     resource::{Name, NamedApiResource},
 };
 
@@ -40,6 +41,13 @@ pub struct ChainLink {
 #[derive(Debug, Clone, PartialEq, Eq, serde::Deserialize)]
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct EvolutionDetail {
+    /// The version group in which the evolution was introduced.
+    pub version_group: NamedApiResource<VersionGroup>,
+    /// Whether the evolution is considered as the expected evolution in a main series game. Each
+    /// unique Pokémon variety of a line capable of evolution should have exactly one 'default'
+    /// evolution. For example, the Meowth species has three default evolutions as there are three
+    /// distinct varieties it can evolve into: Persian, Alolan Persian, and Perrserker.
+    pub is_default: bool,
     /// The item required to cause evolution this into Pokémon species.
     pub item: Option<NamedApiResource<Item>>,
     /// The type of event that triggers evolution into this Pokémon species.
@@ -65,6 +73,8 @@ pub struct EvolutionDetail {
     pub min_beauty: Option<i64>,
     /// The minimum required level of affection the evolving Pokémon species to evolve into this Pokémon species.
     pub min_affection: Option<i64>,
+    /// Whether or not you need to be near a Moss Rock or Icy Rock to evolve into this Pokémon species.
+    pub near_special_rock: bool,
     /// Whether or not multiplayer link play is needed to evolve into this Pokémon species (e.g. Union Circle).
     pub needs_multiplayer: bool,
     /// Whether or not it must be raining in the overworld to cause evolution this Pokémon species.
@@ -87,7 +97,9 @@ pub struct EvolutionDetail {
     /// The required region in which this evolution can occur.
     pub region: Option<NamedApiResource<Region>>,
     /// The required form for which this evolution can occur.
-    pub base_form: Option<NamedApiResource<PokemonSpecies>>,
+    pub base_form: Option<NamedApiResource<Pokemon>>,
+    /// The form to which this evolution occurs.
+    pub evolved_form: Option<NamedApiResource<Pokemon>>,
     /// The move that must be used by the evolving Pokémon species during the evolution trigger event
     /// in order to evolve into this Pokémon species.
     pub used_move: Option<NamedApiResource<Move>>,
