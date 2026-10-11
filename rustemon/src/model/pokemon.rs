@@ -825,7 +825,7 @@ pub struct BlackWhiteAnimatedSprites {
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct GenerationVISprites {
     /// Sprites for Pokémon `OmegaRuby` & Pokémon `AlphaSapphire`.
-    #[serde(rename = "omegaruby-alphasapphire")]
+    #[serde(rename = "omega-ruby-alpha-sapphire")]
     pub omegaruby_alphasapphire: OmegarubyAlphasapphireSprites,
     /// Sprites for Pokémon X & Pokémon Y.
     #[serde(rename = "x-y")]
