@@ -865,7 +865,7 @@ pub struct XYSprites {
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct GenerationVIISprites {
     /// The icons sprites of a Pokémon.
-    pub icons: IconsSprites,
+    pub icons: Option<IconsSprites>,
     /// Sprites for Pokémon `UltraSun` & Pokémon `UltraMoon`.
     #[serde(rename = "ultra-sun-ultra-moon")]
     pub ultrasun_ultramoon: UltrasunUltramoonSprites,
@@ -900,7 +900,7 @@ pub struct UltrasunUltramoonSprites {
 #[cfg_attr(feature = "serialize", derive(serde::Serialize))]
 pub struct GenerationVIIISprites {
     /// The icons sprites of a Pokémon.
-    pub icons: IconsSprites,
+    pub icons: Option<IconsSprites>,
 }
 
 /// [PokemonCries official documentation](https://pokeapi.co/docs/v2#pokemoncries)
