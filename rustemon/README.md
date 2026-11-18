@@ -38,13 +38,13 @@ You can also use the `static-resources` feature, that allow you to easily instan
 All the models are located into the following module :
 
 ```rust
-rustemon::model
+use rustemon::model;
 ```
 
 For example, if you want the type `Pokemon` located in the group `pokemon`, it is located here :
 
 ```rust
-rustemon::model::pokemon::Pokemon
+use rustemon::model::pokemon::Pokemon;
 ```
 
 ##### Endpoints
@@ -53,7 +53,7 @@ The endpoints follow the same naming rule, for example, if you want to call the 
 endpoint from the evolution group :
 
 ```rust
-rustemon::evolution::evolution_chain
+use rustemon::evolution::evolution_chain;
 ```
 
 For each endpoints, 4 functions are defined :

@@ -371,6 +371,9 @@ pub struct PokemonMoveVersion {
     pub version_group: NamedApiResource<VersionGroup>,
     /// The minimum level to learn the move.
     pub level_learned_at: i64,
+    /// The level at which move styles unlock in Pokémon Legends: Arceus or Plus Moves unlock in Pokémon Legends: Z-A.
+    /// Null when no natural unlock level is recorded.
+    pub enhancement_level: Option<i64>,
 }
 
 /// [PokemonStat official documentation](https://pokeapi.co/docs/v2#pokemonstat)
